@@ -1,0 +1,168 @@
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100vh;
+    background-color: #222 !important;
+}
+
+.header {
+    background-image: url('../img/bgfaded.jpg');
+    background-size: cover;
+    height: 480px;
+    text-align: center;
+}
+
+.headline {
+    padding-top: 210px;
+    color: #d1d6c6;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 2px #444;
+}
+
+.register {
+    color: #444;
+    background-color: #d1d6c6;
+    text-transform: uppercase;
+    border-radius: 3px;
+    margin: 20px auto;
+    width: 270px;
+    height: 50px;
+    font-size: 15px;
+    padding: 14px;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.register:hover {
+    cursor: pointer;
+}
+
+.home-nav {
+    color: white;
+    text-align: center;
+}
+
+.container {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+.logo {
+    height: 30px;
+}
+
+.nav-right {
+    float: right;
+    padding: 0 !important;
+    margin-top: 15px !important;
+    font-size: 16px;
+    list-style-type: none;
+    margin-right: 40px !important;
+}
+
+a {
+    color: white !important;
+}
+
+a:hover {
+    color: #fa7902 !important;
+}
+
+li {
+    display: inline-block;
+    margin-left: 40px;
+    vertical-align: middle;
+}
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(70,70,70,0.9);
+    -webkit-animation: fadein 0.5s;
+    -moz-animation: fadein 0.5s;
+    -ms-animation: fadein 0.5s;
+    -o-animation: fadein 0.5s;
+    animation: fadein 0.5s;
+}
+
+.modal-content {
+    background-color: #333 !important;
+    color: black;
+    margin: 1% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 0px !important;
+    width: 30%;
+    box-shadow: none !important;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @-moz-keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @-webkit-keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @-ms-keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @-o-keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
