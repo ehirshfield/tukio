@@ -9,6 +9,8 @@ class Signup extends React.Component {
         return (
             <div className="row">
                 <div className="input-container">
+                    <div id="modal-title">Sign Up for tukio</div>
+                    <hr/>
                     <SignupForm userSignupRequest={userSignupRequest} />
                 </div>
             </div>

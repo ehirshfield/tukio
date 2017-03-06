@@ -3,7 +3,8 @@ html, body {
     padding: 0 !important;
     height: 100vh;
     background-color: #222 !important;
-    background-image:url(http://theartmad.com/wp-content/uploads/Dark-Grey-Texture-Wallpaper-5.jpg)
+    background-image:url('../img/background-texture.jpg');
+    color: #d1d6c6;
 }
 
 .header {
@@ -66,7 +67,7 @@ html, body {
 }
 
 a {
-    color: white !important;
+    color: #d1d6c6 !important;
 }
 
 a:hover {
@@ -77,6 +78,10 @@ li {
     display: inline-block;
     margin-left: 40px;
     vertical-align: middle;
+    border: 2px solid #d1d6c6;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: 14px;
 }
 
 
@@ -104,6 +109,11 @@ li {
     animation: blowUpModal .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 
+#modal-title {
+    text-align: center;
+    color: #d1d6c6;
+    font-size: 2rem;
+}
 
 .close {
     color: #aaa;

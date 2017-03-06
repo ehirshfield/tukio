@@ -38,7 +38,6 @@ class SignupForm extends React.Component {
             this.props.userSignupRequest(this.state).then(
                 () => {
                     this.context.router.push('/login')
-                    // where it redirects are success on sign up
                 },
                 (err) => this.setState({ errors: err.response.data, isLoading: false })
             )
@@ -48,14 +47,14 @@ class SignupForm extends React.Component {
         const { errors } = this.state;
         return (
             <form onSubmit={this.onSubmit}>
-                <TextField
+                {/*<TextField
                     type="text"
                     error={errors.username}
                     label="Username"
                     onChange={this.onChange}
                     value={this.state.username}
                     name="username"
-                />
+                />*/}
 
                 <TextField
                     type="text"
@@ -75,14 +74,14 @@ class SignupForm extends React.Component {
                     name="password"
                 />
 
-                <TextField
+                {/*<TextField
                     type="password"
                     error={errors.password2}
                     label="Confirm Password"
                     onChange={this.onChange}
                     value={this.state.password2}
                     name="password2"
-                />
+                />*/}
                 <div className="form-group">
                     <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">Sign up
                     </button>
