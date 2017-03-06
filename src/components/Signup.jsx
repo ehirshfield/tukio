@@ -10,8 +10,10 @@ class Signup extends React.Component {
             <div className="row">
                 <div className="input-container">
                     <div id="modal-title">Sign Up for tukio</div>
-                    <hr/>
-                    <SignupForm userSignupRequest={userSignupRequest} />
+                    <hr />
+                    <SignupForm
+                        userSignupRequest={userSignupRequest}
+                    />
                 </div>
             </div>
 
@@ -20,7 +22,7 @@ class Signup extends React.Component {
 };
 
 Signup.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired
+    userSignupRequest: React.PropTypes.func.isRequired,
 }
 
 export default connect(null, { userSignupRequest })(Signup);
