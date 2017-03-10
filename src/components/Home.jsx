@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
+import concerts from '../../public/assets/img/concerts.jpg';
+import festivals from '../../public/assets/img/festivals.jpg';
 
 class Home extends React.Component {
   displayModal() {
@@ -36,7 +38,9 @@ class Home extends React.Component {
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
         <div className="home-nav">
-          Find events
+          <h3>Find your community</h3>
+          <img className="festivals" src={festivals} />
+          <img className="concert" src={concerts} />
           </div>
 
 

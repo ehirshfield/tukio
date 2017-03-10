@@ -26,7 +26,6 @@ function validateInput(data, otherValidations) {
     })
 }
 
-
 router.post('/', (req, res) => {
 
     validateInput(req.body, commonValidations).then(({ errors, isValid }) => {
