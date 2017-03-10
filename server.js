@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
-import users from './controllers/users';
+import users from './controllers/user_controller.js';
+import test from './controllers/test_controller.js'
 // import mongo from 'mongodb';
 // import mongoose from 'mongoose';
 // mongoose.connect('mongodb://localhost/mern');
@@ -29,6 +30,7 @@ app.get('*', (request, response) => {
 });
 
 app.use('/api/users', users);
+app.use('/api/test', test);
 
 app.listen(PORT);
-console.log("Server started at port " + PORT)
+console.log("Server started at port " + PORT);

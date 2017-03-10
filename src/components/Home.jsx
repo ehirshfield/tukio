@@ -62,40 +62,56 @@ class Home extends React.Component {
           <div className="headline">Bringing event-goers together</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
+        {/*section for selecting events to search*/}
         <div className="home-nav row">
           Search events
           </div>
           <div className="search-options row">
-            <div>
-              <input type="checkbox" id="concerts-box" value="concerts_checkbox"/>
-              <label for="concerts-box">Concerts</label>
+            <div className="col-md-3">
+              Interests
             </div>
-            <div>
-              <input type="checkbox" id="Festivals-box" value="festivals_checkbox"/>
-              <label for="festivals-box">Festivals</label>
-            </div>
-            <div>
-              <input type="checkbox" id="comedy-box" value="comedy_checkbox"/>
-              <label for="comedy-box">Comedy</label>
-            </div>
-          </div>
-          <div className="row">
-            <form>
-              <div className="form-group">
-                <label for="address">Address</label>
-                <input type="text" className="form-control" id="search-address" placeholder="Enter you search address"/>
+            <div className="col-md-7">
+              <div>
+                <input type="checkbox" id="concerts-box" value="concerts_checkbox"/>
+                <label for="concerts-box">Concerts</label>
               </div>
-            </form>
-          </div>
-          <div className="row">
-            <form>
-              <div className="form-group">
-                <label for="radius">Search Radius (miles)</label>
-                <input type="text" className="form-control" id="search-Radius" placeholder="miles"/>
+              <div>
+                <input type="checkbox" id="Festivals-box" value="festivals_checkbox"/>
+                <label for="festivals-box">Festivals</label>
               </div>
-            </form>
+              <div>
+                <input type="checkbox" id="comedy-box" value="comedy_checkbox"/>
+                <label for="comedy-box">Comedy</label>
+              </div>
+            </div>
           </div>
+          {/*section for entering address to search*/}
+          <div className="row">
+            <div className="col-md-3"></div>
+            <div className="col-md-7"> 
+              <form>
+                <div className="form-group">
+                  <label for="address">Address</label>
+                  <input type="text" className="form-control" id="search-address" placeholder="Enter you search address"/>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-3"></div>
+            <div className="col-md-7">
+              <form>
+                <div className="form-group">
+                  <label for="radius">Search Radius (miles)</label>
+                  <input type="text" className="form-control" id="search-Radius" placeholder="miles"/>
+                </div>
+              </form>
+            </div>
+          </div>
+
           <div className="search-button" onClick={this.searchEvents}>Search Events</div>
+          {/*section for display search results*/}
           <div className="home-nav row">
           Search results
           </div>
@@ -108,6 +124,7 @@ class Home extends React.Component {
                 <div src={loading} alt="loading..."/>
             }            
           </div>
+          {/*place holder for displaying map*/}
           <div className = "mapAPI">
             Map goes here
           </div>
