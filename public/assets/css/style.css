@@ -24,10 +24,11 @@ html, body {
     text-shadow: 2px 2px 2px #444;
 }
 
-.register {
+.register, .search-button {
     color: #444;
     background-color: #d1d6c6;
     text-transform: uppercase;
+    text-align: center;
     border-radius: 3px;
     margin: 20px auto;
     width: 270px;
@@ -38,8 +39,12 @@ html, body {
     box-sizing: border-box;
 }
 
-.register:hover {
+.register, .search-button:hover {
     cursor: pointer;
+}
+
+.search-options {
+    color: red;
 }
 
 .home-nav {
