@@ -24,7 +24,7 @@ html, body {
     text-shadow: 2px 2px 2px #444;
 }
 
-.register {
+.register, .search-button {
     color: #444;
     background-color: #d1d6c6;
     text-transform: uppercase;
@@ -38,8 +38,14 @@ html, body {
     box-sizing: border-box;
 }
 
-.register:hover {
+.register, .search-button:hover {
     cursor: pointer;
+}
+
+.search-options {
+    color: red;
+    margin: 50px;
+    
 }
 
 .home-nav {

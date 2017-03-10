@@ -15,7 +15,7 @@ import users from './controllers/users';
 //   console.log("Mongoose connection successful.");
 // });
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const app = express();
 
 app.use(bodyParser.json());
@@ -30,5 +30,5 @@ app.get('*', (request, response) => {
 
 app.use('/api/users', users);
 
-app.listen(port);
-console.log("Server started")
+app.listen(PORT);
+console.log("Server started at port " + PORT)
