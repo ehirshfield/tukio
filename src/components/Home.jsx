@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
+import axios from 'axios';
 
-const EVENTFUL_API = "XXXX";
+const apiKey = "mR4ZKTx6dQWXmsTw";
 
 class Home extends React.Component {
   	constructor(props) {
@@ -12,13 +13,16 @@ class Home extends React.Component {
 
 		// the starting state of the `Home` Component
 		this.state = {
-			searchResults: []
+			searchResults: [],
+      searchRadius: "",
+      searchAddress: ""
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
 		this.searchEvents = this.searchEvents.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
 	}
-  
+
   displayModal() {
     let modal = document.getElementById('signupModal');
     let btn = document.querySelector("register");
@@ -37,22 +41,51 @@ class Home extends React.Component {
   }
 
   // Function here to take input parameters and query eventful API
-  searchEvents() {
-		// start ajax request
-		return axios.get(EVENTFUL_API).then((response) => {
-			if (response && response.data && response.data.data && response.data.data.eventful_url) {
-				this.setState({
-					searchResults: response.data.data.eventful_url
-				});
-			}
-		});
+  searchEvents(event) {
+    event.preventDefault();
+    if (this.state.searchAddress != ""){
+
+      let blankSearch = "http://api.eventful.com/json/events/search?...&date=Future&origin=*&app_key=" + apiKey;
+      let blankAddressSearch = blankSearch + "&location=";
+      let addressSearch = blankAddressSearch + this.state.searchAddress;
+      let blankRadiusAddressSearch = addressSearch + "&units=mi&within=";
+      let radiusAddressSearch = blankRadiusAddressSearch + this.state.searchRadius;
+      console.log("complete URL: " + radiusAddressSearch);
+
+  		// start ajax request
+  		return axios.get(radiusAddressSearch).then(function(response){
+        console.log("EVENTFUL RESULTS: " + response.data.events.event);
+  			//if (response && response.data && response.data.data && response.data.data.eventful_url) {
+        if (response.data.events.event){
+  				this.setState({
+  					searchResults: response.data.events.event
+  				});
+  			}
+        else {
+          console.log("rejected!");//add something to handle blank search
+        }
+  		}).catch(function(error) {
+        console.log(error);
+      });
+    }
+
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   render() {
     return (
       <div className="home-content">
         <div className="header">
-          
+
 
           <ul className="nav-right">
             <img className="logo" src={logo} />
@@ -73,44 +106,40 @@ class Home extends React.Component {
             <div className="col-md-7">
               <div>
                 <input type="checkbox" id="concerts-box" value="concerts_checkbox"/>
-                <label for="concerts-box">Concerts</label>
+                <label htmlFor="concerts-box">Concerts</label>
               </div>
               <div>
                 <input type="checkbox" id="Festivals-box" value="festivals_checkbox"/>
-                <label for="festivals-box">Festivals</label>
+                <label htmlFor="festivals-box">Festivals</label>
               </div>
               <div>
                 <input type="checkbox" id="comedy-box" value="comedy_checkbox"/>
-                <label for="comedy-box">Comedy</label>
+                <label htmlFor="comedy-box">Comedy</label>
               </div>
             </div>
           </div>
           {/*section for entering address to search*/}
-          <div className="row">
-            <div className="col-md-3"></div>
-            <div className="col-md-7"> 
-              <form>
-                <div className="form-group">
-                  <label for="address">Address</label>
-                  <input type="text" className="form-control" id="search-address" placeholder="Enter you search address"/>
-                </div>
-              </form>
-            </div>
-          </div>
 
           <div className="row">
             <div className="col-md-3"></div>
             <div className="col-md-7">
               <form>
                 <div className="form-group">
-                  <label for="radius">Search Radius (miles)</label>
-                  <input type="text" className="form-control" id="search-Radius" placeholder="miles"/>
+                  <label htmlFor="address">Address</label>
+                  <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange}/>
                 </div>
+                <br/>
+                <div className="form-group">
+                  <label htmlFor="radius">Search Radius (miles)</label>
+                  <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange}/>
+                </div>
+                <br/>
+                <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
               </form>
             </div>
           </div>
 
-          <div className="search-button" onClick={this.searchEvents}>Search Events</div>
+
           {/*section for display search results*/}
           <div className="home-nav row">
           Search results
@@ -122,7 +151,7 @@ class Home extends React.Component {
                 <div src={this.state.searchResults}/>
                 :
                 <div src={loading} alt="loading..."/>
-            }            
+            }
           </div>
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
