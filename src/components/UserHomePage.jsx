@@ -5,12 +5,12 @@ import Signup from './Signup.jsx';
 
 const EVENTFUL_API = "XXXX";
 
-class Home extends React.Component {
+class UserHomePage extends React.Component {
   	constructor(props) {
 		// calls the Component constructor function
 		super(props);
 
-		// the starting state of the `Home` Component
+		// the starting state of the 'Home' Component
 		this.state = {
 			searchResults: []
 		};
@@ -49,18 +49,17 @@ class Home extends React.Component {
   }
 
   render() {
-    return (
+    return (      
       <div className="home-content">
         <div className="header">
-          
-
           <ul className="nav-right">
             <img className="logo" src={logo} />
             <li><Link to="/login">Log In</Link></li>
           </ul>
+        </div>
+        {/*section for displaying saved events*/}
+        <div className="saved-events">
 
-          <div className="headline">Bringing event-goers together</div>
-          <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
         {/*section for selecting events to search*/}
         <div className="home-nav row">
@@ -141,4 +140,4 @@ class Home extends React.Component {
   }
 };
 
-export default Home;
+export default UserHomePage;
