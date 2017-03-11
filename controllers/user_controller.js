@@ -8,14 +8,13 @@ import isEmpty from 'lodash/isEmpty';
 const LocalStrategy = require('passport-local').Strategy;
 
 let router = express.Router();
+
 function validateInput(data, otherValidations) {
     let { errors } = otherValidations(data);
     return db.User.findAll({
         where: { email: data.email }
     }).then(user => {
-        console.log(user)
         if (user[0] === undefined) {
-            console.log("hey");
             return { isValid: isEmpty(errors) };
         }
         if (user[0].dataValues.email === data.email) {
@@ -38,7 +37,7 @@ router.post('/', (req, res) => {
             db.User.create({
                 email: email,
                 password: hashedPassword
-            }).then(function (data) {
+            }).then(function(data) {
                 res.redirect('/login');
             });
 
