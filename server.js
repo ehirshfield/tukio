@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
-import users from './controllers/users';
+import users from './controllers/user_controller.js';
+import test from './controllers/test_controller.js'
 // import mongo from 'mongodb';
 // import mongoose from 'mongoose';
 // mongoose.connect('mongodb://localhost/mern');
@@ -15,7 +16,7 @@ import users from './controllers/users';
 //   console.log("Mongoose connection successful.");
 // });
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const app = express();
 
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.get('*', (request, response) => {
 });
 
 app.use('/api/users', users);
+app.use('/api/test', test);
 
-app.listen(port);
-console.log("Server started")
+app.listen(PORT);
+console.log("Server started at port " + PORT);
