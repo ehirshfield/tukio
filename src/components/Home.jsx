@@ -4,7 +4,7 @@ import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
 
-const apiKey = "mR4ZKTx6dQWXmsTw";
+
 
 class Home extends React.Component {
   	constructor(props) {
@@ -22,6 +22,7 @@ class Home extends React.Component {
 		this.searchEvents = this.searchEvents.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 	}
+
 
   displayModal() {
     let modal = document.getElementById('signupModal');
@@ -41,33 +42,26 @@ class Home extends React.Component {
   }
 
   // Function here to take input parameters and query eventful API
-  searchEvents(event) {
+  searchEvents(event){
     event.preventDefault();
-    if (this.state.searchAddress != ""){
 
-      let blankSearch = "http://api.eventful.com/json/events/search?...&date=Future&origin=*&app_key=" + apiKey;
-      let blankAddressSearch = blankSearch + "&location=";
-      let addressSearch = blankAddressSearch + this.state.searchAddress;
-      let blankRadiusAddressSearch = addressSearch + "&units=mi&within=";
-      let radiusAddressSearch = blankRadiusAddressSearch + this.state.searchRadius;
-      console.log("complete URL: " + radiusAddressSearch);
-
-  		// start ajax request
-  		return axios.get(radiusAddressSearch).then(function(response){
-        console.log("EVENTFUL RESULTS: " + response.data.events.event);
-  			//if (response && response.data && response.data.data && response.data.data.eventful_url) {
-        if (response.data.events.event){
-  				this.setState({
-  					searchResults: response.data.events.event
-  				});
-  			}
-        else {
-          console.log("rejected!");//add something to handle blank search
-        }
-  		}).catch(function(error) {
-        console.log(error);
-      });
-    }
+    return axios({
+      method: 'POST',
+      url: '/search',
+      data: {
+        address: this.state.searchAddress,
+        radius: this.state.searchRadius
+      }
+    }).then(function(response){
+       console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
+       let responseArray = [];
+       for (let i=0; i < response.data.events.event.length; i++){
+         responseArray.push(response.data.events.event[i]);
+       }
+       console.log(responseArray);
+     }).catch(function(error){
+       console.log(error);
+     });
 
   }
 
