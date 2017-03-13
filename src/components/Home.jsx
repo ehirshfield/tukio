@@ -2,14 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
-<<<<<<< HEAD
-import concerts from '../../public/assets/img/concerts.jpg';
-import festivals from '../../public/assets/img/festivals.jpg';
-=======
 import axios from 'axios';
 
 const apiKey = "mR4ZKTx6dQWXmsTw";
->>>>>>> 85b44b5c23ff39bbb1e63c7380ad30826debdf30
 
 class Home extends React.Component {
   	constructor(props) {
@@ -100,12 +95,6 @@ class Home extends React.Component {
           <div className="headline">Bringing event-goers together</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
-<<<<<<< HEAD
-        <div className="home-nav">
-          <h3>Find your community</h3>
-          <img className="festivals" src={festivals} />
-          <img className="concert" src={concerts} />
-=======
         {/*section for selecting events to search*/}
         <div className="home-nav row">
           Search events
@@ -148,7 +137,6 @@ class Home extends React.Component {
                 <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
               </form>
             </div>
->>>>>>> 85b44b5c23ff39bbb1e63c7380ad30826debdf30
           </div>
 
 
