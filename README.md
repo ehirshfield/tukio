@@ -46,7 +46,7 @@ $ npm run server
 [npm express]: <https://www.npmjs.com/package/express>
 [react]: <https://facebook.github.io/react/>
 [webpack]: <https://webpack.github.io/>
-[passport]: <http://passportjs.org/>
+[passportjs]: <http://passportjs.org/>
 [npm bcryptjs]: <https://www.npmjs.com/package/bcryptjs>
 [npm mysql]: <https://www.npmjs.com/package/mysql>
 [npm sequelize]: <http://docs.sequelizejs.com/en/v3/>
