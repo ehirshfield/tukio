@@ -1,8 +1,13 @@
-html, body {
+html,
+body {
     margin: 0 !important;
     padding: 0 !important;
     height: 100vh;
     background-color: #222 !important;
+    /*background-image: url('../img/background-texture.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;*/
+    color: #d1d6c6;
 }
 
 .header {
@@ -22,10 +27,11 @@ html, body {
     text-shadow: 2px 2px 2px #444;
 }
 
-.register {
+.register, .search-button {
     color: #444;
     background-color: #d1d6c6;
     text-transform: uppercase;
+    text-align: center;
     border-radius: 3px;
     margin: 20px auto;
     width: 270px;
@@ -36,13 +42,20 @@ html, body {
     box-sizing: border-box;
 }
 
-.register:hover {
+.register, .search-button:hover {
     cursor: pointer;
+}
+
+.search-options {
+    color: red;
 }
 
 .home-nav {
     color: white;
     text-align: center;
+    font-size: 3rem;
+    letter-spacing: 1px;
+    margin: 50px auto;
 }
 
 .container {
@@ -55,17 +68,24 @@ html, body {
     height: 30px;
 }
 
+.concert,
+.festivals {
+    width: 70%;
+    display: block;
+    margin: 40px auto;
+}
+
 .nav-right {
     float: right;
     padding: 0 !important;
-    margin-top: 15px !important;
+    margin-top: 25px !important;
     font-size: 16px;
     list-style-type: none;
     margin-right: 40px !important;
 }
 
 a {
-    color: white !important;
+    color: #d1d6c6 !important;
 }
 
 a:hover {
@@ -74,39 +94,43 @@ a:hover {
 
 li {
     display: inline-block;
-    margin-left: 40px;
+    margin-left: 60px;
     vertical-align: middle;
+    border: .5px solid #d1d6c6;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: 14px;
 }
 
-
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(70,70,70,0.9);
-    -webkit-animation: fadein 0.5s;
-    -moz-animation: fadein 0.5s;
-    -ms-animation: fadein 0.5s;
-    -o-animation: fadein 0.5s;
-    animation: fadein 0.5s;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(70, 70, 70, 0.9);
 }
 
 .modal-content {
     background-color: #333 !important;
     color: black;
-    margin: 1% auto; 
+    margin: 1% auto;
     padding: 20px;
     border: 1px solid #888;
     border-radius: 0px !important;
     width: 30%;
     box-shadow: none !important;
+    animation: blowUpModal .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 
+#modal-title {
+    text-align: center;
+    color: #d1d6c6;
+    font-size: 2rem;
+}
 
 .close {
     color: #aaa;
@@ -123,46 +147,91 @@ li {
 }
 
 @keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+    from {
+        opacity: 0;
     }
-    
-    @-moz-keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+    to {
+        opacity: 1;
     }
-    
-    @-webkit-keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+}
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
     }
-    
-    @-ms-keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+    to {
+        opacity: 1;
     }
-    
-    @-o-keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
     }
+    to {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes blowUpContent {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    99.9% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes blowUpContentTwo {
+    0% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes blowUpModal {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes blowUpModalTwo {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
