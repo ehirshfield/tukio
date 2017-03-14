@@ -1,17 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
-import Signup from './Signup.jsx';
 import axios from 'axios';
 
-
-
-class Home extends React.Component {
+class UserProfile extends React.Component {
   	constructor(props) {
 		// calls the Component constructor function
 		super(props);
 
-		// the starting state of the `Home` Component
+		// the starting state of the 'Home' Component
 		this.state = {
 			searchResults: [],
       searchRadius: "",
@@ -21,26 +18,8 @@ class Home extends React.Component {
 		// used to make the keyword `this` work inside the `searchEvents` class function
 		this.searchEvents = this.searchEvents.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-	}
-
-
-  displayModal() {
-    let modal = document.getElementById('signupModal');
-    let btn = document.querySelector("register");
-    modal.style.display = "block";
-    window.onclick = (event) => {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
   }
-
-  closeModal() {
-    let modal = document.getElementById('signupModal');
-    let span = document.querySelector("close");
-    modal.style.display = "none";
-  }
-
+  
   // Function here to take input parameters and query eventful API
   searchEvents(event){
     event.preventDefault();
@@ -73,25 +52,85 @@ class Home extends React.Component {
     this.setState({
       [name]: value
     });
-  }
-
+	}
+  
   render() {
-    return (
+    return (      
       <div className="home-content">
         <div className="header">
-
-
           <ul className="nav-right">
             <img className="logo" src={logo} />
-            <li><Link to="/login">Log In</Link></li>
+            <li><Link to="/UserHomePage">Home</Link></li>
+            <li><Link to="/Home">Log Out</Link></li>
           </ul>
-
-          <div className="headline">Bringing event-goers together</div>
-          <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
-        {/*section for selecting events to search*/}
+        {/*section for displaying saved events*/}
+        <div className="saved-events">
+
+        </div>
+
+        {/*section for entering personal details*/}
         <div className="home-nav row">
-          Search events
+          User Profile
+          </div>         
+          <div className="row">
+            <div className="col-md-3">Personal Details</div>
+            <div className="col-md-7">
+              <form>
+                <div className="form-group">
+                  <label htmlFor="fullname">Name</label>
+                  <input type="text" className="form-control" name="name" placeholder="Enter your Full Name"/>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="username">Username</label>
+                  <input type="text" className="form-control" name="username" placeholder="Enter your Username"/>
+                </div>     
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="text" className="form-control" name="email" placeholder="Enter your email"/>
+                </div> 
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input type="text" className="form-control" name="password" placeholder="Enter your Password"/>
+                  <br/>
+                  <input type="text" className="form-control" name="password" placeholder="Re-enter your Password"/>
+                </div>                                           
+                <br/>
+                <input type="submit" onClick={this.XXX} className="save-personal-details-button" value="Save Personal Details" />
+              </form>
+            </div>
+          </div>
+          <br/><br/>
+        {/*section for entering billing details*/}     
+          <div className="row">
+            <div className="col-md-3">Billing Details</div>
+            <div className="col-md-7">
+              <form>
+                <div className="form-group">
+                  <label htmlFor="card-number">Card Number</label>
+                  <input type="text" className="form-control" name="card-number" placeholder="Enter your Card Number"/>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="card-expiry-date">Expiry Date</label>
+                  <input type="text" className="form-control" name="card-expiry-date" placeholder="Enter your Card Expiry Date (mm/yy)"/>
+                </div>     
+                <div className="form-group">
+                  <label htmlFor="security-code">Security Code</label>
+                  <input type="text" className="form-control" name="security-code" placeholder="Enter your security code"/>
+                </div> 
+                <div className="form-group">
+                  <label htmlFor="zip-code">Zip Code</label>
+                  <input type="text" className="form-control" name="zip-code" placeholder="Enter your billing Zip Code"/>
+                </div>                                           
+                <br/>
+                <input type="submit" onClick={this.XXX} className="save-billing-details-button" value="Save Billing Details" />
+              </form>
+            </div>
+          </div>          
+
+        {/*section for setting events preference*/}
+        <div className="home-nav row">
+          Events Preference
           </div>
           <div className="search-options row">
             <div className="col-md-3">
@@ -117,6 +156,7 @@ class Home extends React.Component {
             </form>
                 
           </div>
+
           {/*section for entering address to search*/}
 
           <div className="row">
@@ -137,36 +177,9 @@ class Home extends React.Component {
               </form>
             </div>
           </div>
-
-
-          {/*section for display search results*/}
-          <div className="home-nav row">
-          Search results
-          </div>
-          <div className="event-results">
-            {
-              this.state.searchResults
-                ?
-                <div src={this.state.searchResults}/>
-                :
-                <div src={loading} alt="loading..."/>
-            }
-          </div>
-          {/*place holder for displaying map*/}
-          <div className = "mapAPI">
-            Map goes here
-          </div>
-
-        <div id="signupModal" className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={this.closeModal}>&times;</span>
-            <Signup />
-          </div>
-        </div>
-
       </div>
     );
   }
 };
 
-export default Home;
+export default UserProfile;
