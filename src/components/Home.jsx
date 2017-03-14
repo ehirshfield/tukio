@@ -76,6 +76,21 @@ class Home extends React.Component {
   }
 
   render() {
+    // static location for the location of the map
+    const location = {
+        lat: 40.7575285,
+        lng: -73.9884469
+    }
+      // this will place a static pin marker
+    const markers = [
+      {
+        location: {
+          lat: 40.7575285,
+          lng: -73.9884469
+        }
+      }
+    ]
+
     return (
       <div className="home-content">
         <div className="header">
@@ -152,9 +167,13 @@ class Home extends React.Component {
                 <div src={loading} alt="loading..."/>
             }
           </div>
+          
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
-            Map goes here
+            Space for the map! Inline styling for now :)
+              <div style={{width:300, height:600, background:'red'}}>
+                <Map center={location} markers={markers} />
+              </div>
           </div>
 
         <div id="signupModal" className="modal">
