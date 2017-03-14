@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
     let User = sequelize.define("User", {
         email: {
             type: DataTypes.STRING,
@@ -11,27 +11,29 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        fullName: {
-          type: DataTypes.STRING
+        fullname: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        username:{
-          type: DataTypes.STRING
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         publicProfile: {
-          type: DataTypes.BOOLEAN,
-          default: true
+            type: DataTypes.BOOLEAN,
+            default: true
         }
 
     }, {
         classMethods: {
-        associate: function(models) {
-          User.belongsToMany(models.Event, {
-            as: "Event",
-            through: "User_Events",
-            foreignKey: "User_Id"
-          });
-        }
-      },
+            associate: function(models) {
+                User.belongsToMany(models.Event, {
+                    as: "Event",
+                    through: "User_Events",
+                    foreignKey: "User_Id"
+                });
+            }
+        },
         timestamps: false
 
     });
