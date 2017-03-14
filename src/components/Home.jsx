@@ -42,6 +42,7 @@ class Home extends React.Component {
 
   // Function here to take input parameters and query eventful API
   searchEvents(event) {
+    console.log("searhcing works");
     event.preventDefault();
     if (this.state.searchAddress != ""){
 
@@ -103,20 +104,25 @@ class Home extends React.Component {
             <div className="col-md-3">
               Interests
             </div>
-            <div className="col-md-7">
-              <div>
-                <input type="checkbox" id="concerts-box" value="concerts_checkbox"/>
-                <label htmlFor="concerts-box">Concerts</label>
+            <form>
+              <div className="form-group">
+                <div className="col-md-7">
+                  <div>
+                    <input type="checkbox" id="concerts-box" value="concerts_checkbox"/>
+                    <label htmlFor="concerts-box">Concerts</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="Festivals-box" value="festivals_checkbox"/>
+                    <label htmlFor="festivals-box">Festivals</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="comedy-box" value="comedy_checkbox"/>
+                    <label htmlFor="comedy-box">Comedy</label>
+                  </div>
+                </div>
               </div>
-              <div>
-                <input type="checkbox" id="Festivals-box" value="festivals_checkbox"/>
-                <label htmlFor="festivals-box">Festivals</label>
-              </div>
-              <div>
-                <input type="checkbox" id="comedy-box" value="comedy_checkbox"/>
-                <label htmlFor="comedy-box">Comedy</label>
-              </div>
-            </div>
+            </form>
+                
           </div>
           {/*section for entering address to search*/}
 

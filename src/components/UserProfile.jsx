@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
-
-const EVENTFUL_API = "XXXX";
+import Home from './Home.jsx';
 
 class UserHomePage extends React.Component {
   	constructor(props) {
@@ -15,29 +14,17 @@ class UserHomePage extends React.Component {
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
-		this.searchEvents = this.searchEvents.bind(this);
+		// this.searchEvents = this.searchEvents.bind(this);
     // this.handleInputChange = this.handleInputChange.bind(this);
 	}
   
-  // Function here to take input parameters and query eventful API
-  searchEvents() {
-		// start ajax request
-		return axios.get(EVENTFUL_API).then((response) => {
-			if (response && response.data && response.data.data && response.data.data.eventful_url) {
-				this.setState({
-					searchResults: response.data.data.eventful_url
-				});
-			}
-		});
-  }
-
   render() {
     return (      
       <div className="home-content">
         <div className="header">
           <ul className="nav-right">
             <img className="logo" src={logo} />
-            <li><Link to="/UserProfile">Profile</Link></li>
+            <li><Link to="/UserHomePage">Home</Link></li>
             <li><Link to="/Home">Log Out</Link></li>
           </ul>
         </div>
