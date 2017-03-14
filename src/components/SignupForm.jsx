@@ -8,6 +8,8 @@ class SignupForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            fullname: '',
+            username: '',
             email: '',
             password: '',
             errors: {},
@@ -45,6 +47,23 @@ class SignupForm extends React.Component {
         const { errors } = this.state;
         return (
             <form onSubmit={this.onSubmit}>
+                <TextField
+                    type="text"
+                    error={errors.fullname}
+                    label="Full Name"
+                    onChange={this.onChange}
+                    value={this.state.fullname}
+                    name="fullname"
+                />
+
+                <TextField
+                    type="text"
+                    error={errors.username}
+                    label="Username"
+                    onChange={this.onChange}
+                    value={this.state.username}
+                    name="username"
+                />
 
                 <TextField
                     type="text"

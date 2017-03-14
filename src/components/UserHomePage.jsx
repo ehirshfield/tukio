@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
-
-const EVENTFUL_API = "XXXX";
+import Commit from './Commit.jsx';
+import axios from 'axios';
 
 class UserHomePage extends React.Component {
   	constructor(props) {
@@ -11,24 +11,66 @@ class UserHomePage extends React.Component {
 
 		// the starting state of the 'Home' Component
 		this.state = {
-			searchResults: []
+			searchResults: [],
+      searchRadius: "",
+      searchAddress: ""
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
 		this.searchEvents = this.searchEvents.bind(this);
-    // this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
 	}
   
+  // T&C to commit to purchase
+  displayModal() {
+    let modal = document.getElementById('commitModal');
+    let btn = document.querySelector("buy");
+    modal.style.display = "block";
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+
+  closeModal() {
+    let modal = document.getElementById('commitModal');
+    let span = document.querySelector("close");
+    modal.style.display = "none";
+  }
+
   // Function here to take input parameters and query eventful API
-  searchEvents() {
-		// start ajax request
-		return axios.get(EVENTFUL_API).then((response) => {
-			if (response && response.data && response.data.data && response.data.data.eventful_url) {
-				this.setState({
-					searchResults: response.data.data.eventful_url
-				});
-			}
-		});
+  searchEvents(event){
+    event.preventDefault();
+
+    return axios({
+      method: 'POST',
+      url: '/search',
+      data: {
+        address: this.state.searchAddress,
+        radius: this.state.searchRadius
+      }
+    }).then(function(response){
+       console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
+       let responseArray = [];
+       for (let i=0; i < response.data.events.event.length; i++){
+         responseArray.push(response.data.events.event[i]);
+       }
+       console.log(responseArray);
+     }).catch(function(error){
+       console.log(error);
+     });
+
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   render() {
@@ -106,10 +148,19 @@ class UserHomePage extends React.Component {
                 <div src={loading} alt="loading..."/>
             }            
           </div>
+          <div className="buy" onClick={this.displayModal}>Commit to buy</div>
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
             Map goes here
           </div>
+
+          <div id="commitModal" className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={this.closeModal}>&times;</span>
+              <Commit />
+            </div>
+          </div>
+
       </div>
     );
   }
