@@ -1,7 +1,8 @@
 import express from 'express';
 import db from '../models';
 import bcrypt from 'bcryptjs';
-import passport from 'passport';
+import jwt from 'jsonwebtoken';
+import config from './env_variable.js'
 
 let router = express.Router();
 
@@ -10,15 +11,15 @@ router.post('/', (req, res) => {
     db.User.findOne({ where: { username: identifier } }).then(user => {
         if (user) {
             if (bcrypt.compareSync(password, user.password)) {
-                console.log("Right credentials")
-
+                const token = jwt.sign({
+                    id: user.id,
+                    username: user.username
+                }, config.jwtSecret)
+                res.json(token)
             } else {
                 res.status(404).json({ errors: { form: 'Wrong Password' } })
-                console.log("wrong password")
-
             }
         } else {
-            console.log("Not registered")
             res.status(404).json({ errors: { form: 'Username not registered' } })
         }
     })

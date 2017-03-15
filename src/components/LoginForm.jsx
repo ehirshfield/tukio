@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from "./TextField.jsx";
 import validateInput from '../validations/login.js';
 import { connect } from 'react-redux';
-import { login } from '../actions/loginAction.js';
+import { login } from '../actions/authAction.js';
 
 
 
@@ -40,8 +40,7 @@ class LoginForm extends React.Component {
 
             this.props.login(this.state).then(
                 (res) => {
-                    this.context.router.push('/')
-                    console.log(res)
+                    this.context.router.push('/profile')
                 },
                 (err) => {
                     if (err.response.data.errors.form === "Wrong Password") {
