@@ -1,11 +1,8 @@
 import express from 'express';
 import commonValidations from '../src/validations/signup.js';
 import db from '../models';
-import passport from 'passport';
 import bcrypt from 'bcryptjs';
 import isEmpty from 'lodash/isEmpty';
-
-const LocalStrategy = require('passport-local').Strategy;
 
 let router = express.Router();
 

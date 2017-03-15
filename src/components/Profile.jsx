@@ -1,16 +1,16 @@
 import React from 'react';
-import LoginForm from './LoginForm.jsx';
 
-class Login extends React.Component {
+
+class Profile extends React.Component {
     render() {
         return (
             <div className="row">
                 <div className="col-md-4 col-md-offset-4">
-                    <LoginForm />
+                    hi
                 </div>
             </div>
         )
     }
 }
 
-export default Login;
+export default Profile;

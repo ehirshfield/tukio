@@ -3,8 +3,10 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import users from './controllers/user_controller.js';
 import searchController from './controllers/search_controller.js';
+import auth from './controllers/auth_controller.js';
 import cors from 'cors';
 import logger from 'morgan';
+
 // import mongo from 'mongodb';
 // import mongoose from 'mongoose';
 // mongoose.connect('mongodb://localhost/mern');
@@ -38,6 +40,7 @@ app.get('*', (request, response) => {
 
 
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 app.use('/', searchController);
 
 app.listen(PORT);
