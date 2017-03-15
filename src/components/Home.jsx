@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
+import helpers from '../actions/helpers.js';
 
 
 
@@ -23,6 +24,11 @@ class Home extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
 	}
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchResults != this.state.searchResults){
+      
+    }
+  }
 
   displayModal() {
     let modal = document.getElementById('signupModal');
@@ -39,30 +45,6 @@ class Home extends React.Component {
     let modal = document.getElementById('signupModal');
     let span = document.querySelector("close");
     modal.style.display = "none";
-  }
-
-  // Function here to take input parameters and query eventful API
-  searchEvents(event){
-    event.preventDefault();
-
-    return axios({
-      method: 'POST',
-      url: '/search',
-      data: {
-        address: this.state.searchAddress,
-        radius: this.state.searchRadius
-      }
-    }).then(function(response){
-       console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
-       let responseArray = [];
-       for (let i=0; i < response.data.events.event.length; i++){
-         responseArray.push(response.data.events.event[i]);
-       }
-       console.log(responseArray);
-     }).catch(function(error){
-       console.log(error);
-     });
-
   }
 
   handleInputChange(event) {
@@ -115,7 +97,7 @@ class Home extends React.Component {
                 </div>
               </div>
             </form>
-                
+
           </div>
           {/*section for entering address to search*/}
 
