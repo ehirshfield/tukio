@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
-import Signup from './Signup.jsx';
+import Commit from './Commit.jsx';
 import axios from 'axios';
 
-
-
-class Home extends React.Component {
+class UserHomePage extends React.Component {
   	constructor(props) {
 		// calls the Component constructor function
 		super(props);
 
-		// the starting state of the `Home` Component
+		// the starting state of the 'Home' Component
 		this.state = {
 			searchResults: [],
       searchRadius: "",
@@ -22,11 +20,11 @@ class Home extends React.Component {
 		this.searchEvents = this.searchEvents.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 	}
-
-
+  
+  // T&C to commit to purchase
   displayModal() {
-    let modal = document.getElementById('signupModal');
-    let btn = document.querySelector("register");
+    let modal = document.getElementById('commitModal');
+    let btn = document.querySelector("buy");
     modal.style.display = "block";
     window.onclick = (event) => {
       if (event.target == modal) {
@@ -36,7 +34,7 @@ class Home extends React.Component {
   }
 
   closeModal() {
-    let modal = document.getElementById('signupModal');
+    let modal = document.getElementById('commitModal');
     let span = document.querySelector("close");
     modal.style.display = "none";
   }
@@ -76,18 +74,18 @@ class Home extends React.Component {
   }
 
   render() {
-    return (
+    return (      
       <div className="home-content">
         <div className="header">
-
-
           <ul className="nav-right">
             <img className="logo" src={logo} />
-            <li><Link to="/login">Log In</Link></li>
+            <li><Link to="/UserProfile">Profile</Link></li>
+            <li><Link to="/Home">Log Out</Link></li>
           </ul>
+        </div>
+        {/*section for displaying saved events*/}
+        <div className="saved-events">
 
-          <div className="headline">Bringing event-goers together</div>
-          <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
         {/*section for selecting events to search*/}
         <div className="home-nav row">
@@ -137,8 +135,6 @@ class Home extends React.Component {
               </form>
             </div>
           </div>
-
-
           {/*section for display search results*/}
           <div className="home-nav row">
           Search results
@@ -150,23 +146,24 @@ class Home extends React.Component {
                 <div src={this.state.searchResults}/>
                 :
                 <div src={loading} alt="loading..."/>
-            }
+            }            
           </div>
+          <div className="buy" onClick={this.displayModal}>Commit to buy</div>
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
             Map goes here
           </div>
 
-        <div id="signupModal" className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={this.closeModal}>&times;</span>
-            <Signup />
+          <div id="commitModal" className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={this.closeModal}>&times;</span>
+              <Commit />
+            </div>
           </div>
-        </div>
 
       </div>
     );
   }
 };
 
-export default Home;
+export default UserHomePage;
