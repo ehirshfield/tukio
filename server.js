@@ -3,22 +3,9 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import users from './controllers/user_controller.js';
 import searchController from './controllers/search_controller.js';
+import auth from './controllers/auth_controller.js';
 import cors from 'cors';
 import logger from 'morgan';
-// import mongo from 'mongodb';
-// import mongoose from 'mongoose';
-// mongoose.connect('mongodb://localhost/mern');
-// const db = mongoose.connection;
-
-// db.on("error", (err) => {
-//   console.log("Mongoose Error: ", err);
-// });
-
-// db.once("open", () => {
-//   console.log("Mongoose connection successful.");
-// });
-
-
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -36,8 +23,8 @@ app.get('*', (request, response) => {
     response.sendFile(path.resolve(__dirname, "public/index.html"));
 });
 
-
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 app.use('/', searchController);
 
 app.listen(PORT);
