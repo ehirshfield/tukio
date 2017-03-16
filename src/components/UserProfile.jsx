@@ -57,13 +57,6 @@ class UserProfile extends React.Component {
   render() {
     return (      
       <div className="home-content">
-        <div className="header">
-          <ul className="nav-right">
-            <img className="logo" src={logo} />
-            <li><Link to="/UserHomePage">Home</Link></li>
-            <li><Link to="/Home">Log Out</Link></li>
-          </ul>
-        </div>
         {/*section for displaying saved events*/}
         <div className="saved-events">
 

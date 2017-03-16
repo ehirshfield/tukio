@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
+
 import { connect } from 'react-redux';
 // import helpers from '../actions/helpers.js';
 // import { searchEvents } from '../actions/helpers.js';
@@ -94,8 +95,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const {isAuthenticated} = this.props.auth
-
+    /*const {isAuthenticated} = this.props.auth;
+    console.log (this.props.auth.user)
     const userLinks = (
         <ul className="nav-right">
             <li id="nav-links"><Link to="#">Log Out</Link></li>
@@ -107,14 +108,11 @@ class Home extends React.Component {
 
             <li id="nav-links"><Link to="/login">Log In</Link></li>
           </ul>
-    )
+    )*/
     return (
       <div className="home-content">
         <div className="header">
-          <nav id="nav-bar">
-            <img id="logo" src={logo} />
-          { isAuthenticated  ? userLinks : guestLinks}
-          </nav>
+
           <div className="headline">Bringing event-goers together</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
@@ -209,3 +207,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Home);
+// export default Home;
