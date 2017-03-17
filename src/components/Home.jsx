@@ -16,7 +16,8 @@ class Home extends React.Component {
 		this.state = {
 			searchResults: [],
       searchRadius: "",
-      searchAddress: ""
+      searchAddress: "",
+      combinedSearch: ""
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
@@ -25,10 +26,31 @@ class Home extends React.Component {
 	}
 
   handleSubmit(event){
-    helpers.searchEvents(event);
-    this.setState({
-      searchResults: responseArray
-    })
+    event.preventDefault();
+    if (this.state.searchRadius != "" && this.state.searchAddress != ""){
+      var newSearch = {
+        searchRadius: this.state.searchRadius,
+        searchAddress: this.state.searchAddress
+      }
+      this.setState({
+        combinedSearch: newSearch
+      });
+    }
+
+  }
+
+  componentDidUpdate(){
+    if (this.state.combinedSearch != ""){
+      console.log("This is being run");
+      var searchData = this.state.combinedSearch;
+      helpers.searchEvents(searchData).then(function(data) {
+        return this.setState({
+          searchResults: data,
+          combinedSearch: ""
+        })
+      }.bind(this))
+    }
+
   }
 
   displayModal() {
@@ -132,7 +154,7 @@ class Home extends React.Component {
                 ?
                 <div src={this.state.searchResults}/>
                 :
-                <div src={loading} alt="loading..."/>
+                <div alt="loading..."/>
             }
           </div>
           {/*place holder for displaying map*/}
