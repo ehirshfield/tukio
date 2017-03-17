@@ -20,5 +20,9 @@ module.exports = {
     resolve: {
         extensions: [".jsx", ".json", ".js"]
     },
+    node: {
+        net: 'empty',
+        dns: 'empty'
+    },
     devtool: "eval-source-map"
 };

@@ -3,18 +3,23 @@ import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
-import helpers from '../actions/helpers.js';
+import Navbar from './Navbar.jsx';
+
+
+import { connect } from 'react-redux';
+// import helpers from '../actions/helpers.js';
+// import { searchEvents } from '../actions/helpers.js';
 
 
 
 class Home extends React.Component {
-  	constructor(props) {
-		// calls the Component constructor function
-		super(props);
+  constructor(props) {
+    // calls the Component constructor function
+    super(props);
 
-		// the starting state of the `Home` Component
-		this.state = {
-			searchResults: [],
+    // the starting state of the `Home` Component
+    this.state = {
+      searchResults: [],
       searchRadius: "",
       searchAddress: "",
       combinedSearch: ""
@@ -23,7 +28,8 @@ class Home extends React.Component {
 		// used to make the keyword `this` work inside the `searchEvents` class function
 		this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-	}
+  }
+
 
   handleSubmit(event){
     event.preventDefault();
@@ -49,6 +55,7 @@ class Home extends React.Component {
           combinedSearch: ""
         })
       }.bind(this))
+
     }
 
   }
@@ -65,6 +72,7 @@ class Home extends React.Component {
   }
 
   closeModal() {
+
     let modal = document.getElementById('signupModal');
     let span = document.querySelector("close");
     modal.style.display = "none";
@@ -79,93 +87,116 @@ class Home extends React.Component {
       [name]: value
     });
   }
+  searchEvents(event) {
+    event.preventDefault();
+
+    return axios({
+      method: 'POST',
+      url: '/search',
+      data: {
+        address: this.state.searchAddress,
+        radius: this.state.searchRadius
+      }
+    }).then(function (response) {
+      console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
+      let responseArray = [];
+      for (let i = 0; i < response.data.events.event.length; i++) {
+        responseArray.push(response.data.events.event[i]);
+      }
+      console.log(responseArray);
+      return responseArray;
+    }).catch(function (error) {
+      console.log(error);
+    });
+
+  }
 
   render() {
     return (
       <div className="home-content">
+        <Navbar />
+
         <div className="header">
-
-
-          <ul className="nav-right">
-            <img className="logo" src={logo} />
-            <li><Link to="/login">Log In</Link></li>
-          </ul>
-
           <div className="headline">Bringing event-goers together</div>
+          <hr className="line-break" />
+          <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
         {/*section for selecting events to search*/}
         <div className="home-nav row">
           Search events
           </div>
-          <div className="search-options row">
-            <div className="col-md-3">
-              Interests
+        <div className="search-options row">
+          <div className="col-md-3">
+            Interests
             </div>
-            <form>
-              <div className="form-group">
-                <div className="col-md-7">
-                  <div>
-                    <input type="checkbox" id="concerts-box" value="concerts_checkbox"/>
-                    <label htmlFor="concerts-box">Concerts</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="Festivals-box" value="festivals_checkbox"/>
-                    <label htmlFor="festivals-box">Festivals</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="comedy-box" value="comedy_checkbox"/>
-                    <label htmlFor="comedy-box">Comedy</label>
-                  </div>
+          <form>
+            <div className="form-group">
+              <div className="col-md-7">
+                <div>
+                  <input type="checkbox" id="concerts-box" value="concerts_checkbox" />
+                  <label htmlFor="concerts-box">Concerts</label>
                 </div>
-              </div>
-            </form>
-
-          </div>
-          {/*section for entering address to search*/}
-
-          <div className="row">
-            <div className="col-md-3"></div>
-            <div className="col-md-7">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="address">Address</label>
-                  <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange}/>
+                <div>
+                  <input type="checkbox" id="Festivals-box" value="festivals_checkbox" />
+                  <label htmlFor="festivals-box">Festivals</label>
                 </div>
-                <br/>
-                <div className="form-group">
-                  <label htmlFor="radius">Search Radius (miles)</label>
-                  <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange}/>
+                <div>
+                  <input type="checkbox" id="comedy-box" value="comedy_checkbox" />
+                  <label htmlFor="comedy-box">Comedy</label>
                 </div>
                 <br/>
                 <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
               </form>
+              </div>
             </div>
+          </form>
+
+        </div>
+        {/*section for entering address to search*/}
+
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-7">
+            <form>
+              <div className="form-group">
+                <label htmlFor="address">Address</label>
+                <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />
+              </div>
+              <br />
+              <div className="form-group">
+                <label htmlFor="radius">Search Radius (miles)</label>
+                <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
+              </div>
+              <br />
+              <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
+            </form>
           </div>
+        </div>
 
 
-          {/*section for display search results*/}
-          <div className="home-nav row">
+        {/*section for display search results*/}
+        <div className="home-nav row">
           Search results
           </div>
-          <div className="event-results">
-            {
-              this.state.searchResults
-                ?
-                <div src={this.state.searchResults}/>
-                :
-                <div alt="loading..."/>
-            }
-          </div>
-          {/*place holder for displaying map*/}
-          <div className = "mapAPI">
-            Map goes here
+        <div className="event-results">
+          {
+            this.state.searchResults
+              ?
+              <div src={this.state.searchResults} />
+              :
+              <div src={loading} alt="loading..." />
+          }
+        </div>
+        {/*place holder for displaying map*/}
+        <div className="mapAPI">
+          Map goes here
           </div>
 
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
-            <Signup />
+            <Signup errors={this.state.errors} />
           </div>
         </div>
 
@@ -174,4 +205,15 @@ class Home extends React.Component {
   }
 };
 
-export default Home;
+Home.propTypes = {
+  auth: React.PropTypes.object.isRequired
+}
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps)(Home);
+// export default Home;

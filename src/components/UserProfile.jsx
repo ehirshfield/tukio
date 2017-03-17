@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import axios from 'axios';
+import Navbar from './Navbar.jsx';
 
 class UserProfile extends React.Component {
   	constructor(props) {
@@ -57,13 +58,8 @@ class UserProfile extends React.Component {
   render() {
     return (      
       <div className="home-content">
-        <div className="header">
-          <ul className="nav-right">
-            <img className="logo" src={logo} />
-            <li><Link to="/UserHomePage">Home</Link></li>
-            <li><Link to="/Home">Log Out</Link></li>
-          </ul>
-        </div>
+        <Navbar />
+      
         {/*section for displaying saved events*/}
         <div className="saved-events">
 

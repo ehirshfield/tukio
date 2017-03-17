@@ -1,18 +1,15 @@
 import express from 'express';
 import commonValidations from '../src/validations/signup.js';
 import db from '../models';
-import passport from 'passport';
 import bcrypt from 'bcryptjs';
 import isEmpty from 'lodash/isEmpty';
-
-const LocalStrategy = require('passport-local').Strategy;
 
 let router = express.Router();
 
 function validateInput(data, otherValidations) {
     let { errors } = otherValidations(data);
     return db.User.findAll({
-        $or: [{ email: data.email }, { username: data.username }]
+        where: { email: data.email, username: data.username }
     }).then(user => {
         if (user[0] === undefined) {
             return { isValid: isEmpty(errors) };
@@ -25,7 +22,6 @@ function validateInput(data, otherValidations) {
             errors.username = 'Username is already registered';
         }
         return { errors }
-
     })
 }
 
@@ -52,12 +48,13 @@ router.post('/', (req, res) => {
                 username: username,
                 email: email,
                 password: hashedPassword
-            }).then(function(data) {
+            }).then(function (data) {
                 res.redirect('/login');
             });
 
         } else {
             res.status(400).json(errors);
+
         }
     });
 

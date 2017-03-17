@@ -4,10 +4,10 @@ import isEmpty from 'lodash/isEmpty';
 export default function validateInput(data) {
     let errors = {};
     if (Validator.isEmpty(data.fullname)) {
-        errors.fullname = 'This field is required';
+        errors.fullname = 'Name is required';
     }
     if (Validator.isEmpty(data.username)) {
-        errors.username = 'This field is required';
+        errors.username = 'Username is required';
     }
     if (Validator.isEmpty(data.email)) {
         errors.email = 'Email is required';
@@ -15,7 +15,7 @@ export default function validateInput(data) {
         errors.email = 'Email is invalid';
     }
     if (Validator.isEmpty(data.password)) {
-        errors.password = 'This field is required';
+        errors.password = 'Password is required';
     }
     return {
         errors,
