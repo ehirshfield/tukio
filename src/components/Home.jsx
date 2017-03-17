@@ -4,8 +4,9 @@ import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
 import Navbar from './Navbar.jsx';
-
-
+import Header from './Header.jsx';
+import About from './About.jsx';
+import Footer from './Footer.jsx';
 import { connect } from 'react-redux';
 // import helpers from '../actions/helpers.js';
 // import { searchEvents } from '../actions/helpers.js';
@@ -23,17 +24,17 @@ class Home extends React.Component {
       searchRadius: "",
       searchAddress: "",
       combinedSearch: ""
-		};
+    };
 
-		// used to make the keyword `this` work inside the `searchEvents` class function
-		this.handleSubmit = this.handleSubmit.bind(this);
+    // used to make the keyword `this` work inside the `searchEvents` class function
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
 
-  handleSubmit(event){
+  handleSubmit(event) {
     event.preventDefault();
-    if (this.state.searchRadius != "" && this.state.searchAddress != ""){
+    if (this.state.searchRadius != "" && this.state.searchAddress != "") {
       var newSearch = {
         searchRadius: this.state.searchRadius,
         searchAddress: this.state.searchAddress
@@ -45,11 +46,11 @@ class Home extends React.Component {
 
   }
 
-  componentDidUpdate(){
-    if (this.state.combinedSearch != ""){
+  componentDidUpdate() {
+    if (this.state.combinedSearch != "") {
       console.log("This is being run");
       var searchData = this.state.combinedSearch;
-      helpers.searchEvents(searchData).then(function(data) {
+      helpers.searchEvents(searchData).then(function (data) {
         return this.setState({
           searchResults: data,
           combinedSearch: ""
@@ -60,23 +61,23 @@ class Home extends React.Component {
 
   }
 
-  displayModal() {
-    let modal = document.getElementById('signupModal');
-    let btn = document.querySelector("register");
-    modal.style.display = "block";
-    window.onclick = (event) => {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  }
+  // displayModal() {
+  //   let modal = document.getElementById('signupModal');
+  //   let btn = document.querySelector("register");
+  //   modal.style.display = "block";
+  //   window.onclick = (event) => {
+  //     if (event.target == modal) {
+  //       modal.style.display = "none";
+  //     }
+  //   }
+  // }
 
-  closeModal() {
+  // closeModal() {
 
-    let modal = document.getElementById('signupModal');
-    let span = document.querySelector("close");
-    modal.style.display = "none";
-  }
+  //   let modal = document.getElementById('signupModal');
+  //   let span = document.querySelector("close");
+  //   modal.style.display = "none";
+  // }
 
   handleInputChange(event) {
     const target = event.target;
@@ -115,13 +116,15 @@ class Home extends React.Component {
     return (
       <div className="home-content">
         <Navbar />
+        <Header />
+        <About />
 
-        <div className="header">
+        {/*<div className="header">
           <div className="headline">Bringing event-goers together</div>
           <hr className="line-break" />
           <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
-        </div>
+        </div>*/}
         {/*section for selecting events to search*/}
         <div className="home-nav row">
           Search events
@@ -145,9 +148,8 @@ class Home extends React.Component {
                   <input type="checkbox" id="comedy-box" value="comedy_checkbox" />
                   <label htmlFor="comedy-box">Comedy</label>
                 </div>
-                <br/>
+                <br />
                 <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
-              </form>
               </div>
             </div>
           </form>
@@ -193,14 +195,15 @@ class Home extends React.Component {
           Map goes here
           </div>
 
-        <div id="signupModal" className="modal">
+        {/*<div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
             <Signup errors={this.state.errors} />
           </div>
-        </div>
-
+        </div>*/}
+        <Footer />
       </div>
+
     );
   }
 };
