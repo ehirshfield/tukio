@@ -26,7 +26,7 @@ class Navbar extends React.Component {
         )
         return (
             <nav id="nav-bar">
-                <img id="logo" src={logo} />
+                <a href="/"><img id="logo" src={logo} /></a>
                 {isAuthenticated ? userLinks : guestLinks}
             </nav>
         )

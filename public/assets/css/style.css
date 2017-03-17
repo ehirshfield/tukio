@@ -334,7 +334,7 @@ li {
 .modal-content {
     background-color: white !important;
     color: black;
-    margin: 3% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     border-radius: 0px !important;
@@ -345,7 +345,7 @@ li {
 }
 
 #modal-title {
-    height: 80px;
+    width: 70%;
 }
 
 input {

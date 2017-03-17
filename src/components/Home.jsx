@@ -61,24 +61,6 @@ class Home extends React.Component {
 
   }
 
-  // displayModal() {
-  //   let modal = document.getElementById('signupModal');
-  //   let btn = document.querySelector("register");
-  //   modal.style.display = "block";
-  //   window.onclick = (event) => {
-  //     if (event.target == modal) {
-  //       modal.style.display = "none";
-  //     }
-  //   }
-  // }
-
-  // closeModal() {
-
-  //   let modal = document.getElementById('signupModal');
-  //   let span = document.querySelector("close");
-  //   modal.style.display = "none";
-  // }
-
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -119,13 +101,6 @@ class Home extends React.Component {
         <Header />
         <About />
 
-        {/*<div className="header">
-          <div className="headline">Bringing event-goers together</div>
-          <hr className="line-break" />
-          <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
-          <div className="register" onClick={this.displayModal}>Sign up with email</div>
-        </div>*/}
-        {/*section for selecting events to search*/}
         <div className="home-nav row">
           Search events
           </div>

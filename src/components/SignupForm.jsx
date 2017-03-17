@@ -43,6 +43,7 @@ class SignupForm extends React.Component {
             )
         }
     }
+    
     render() {
         const { errors } = this.state;
         return (
