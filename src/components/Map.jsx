@@ -5,7 +5,7 @@ class Map extends Component {
     render() {
         const mapContainer = <div style={{height:'100%', width:'100%'}}></div>
 
-        const markers = this.props.markers.map((venue, i) => {
+        const events = this.props.events.map((venue, i) => {
             
             const marker = {
                 position: {
@@ -25,7 +25,7 @@ class Map extends Component {
                         defaultZoom={15}
                         defaultCenter={this.props.center}
                         options={{streetViewControl: false, mapTypeControl: false}}>
-                        { markers }
+                        { events }
                     </GoogleMap>
                 } />
         )
