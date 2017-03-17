@@ -170,8 +170,6 @@ a {
     background-size: cover;
     height: 100vh;
     padding-top: 100px !important;
-    position: relative;
-    z-index: 1001;
 }
 
 .login-box {

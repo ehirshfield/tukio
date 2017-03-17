@@ -5,6 +5,7 @@ import logo from '../../public/assets/img/logo.png';
 import { logout } from '../actions/authAction.js';
 
 
+
 class Main extends React.Component {
   componentDidMount() {
     window.onscroll = function () {
@@ -17,13 +18,13 @@ class Main extends React.Component {
     }
   }
 
-  logout(e) {
-    e.preventDefault();
-    this.props.logout();
-  }
+  // logout(e) {
+  //   e.preventDefault();
+  //   this.props.logout();
+  // }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    /*const { isAuthenticated } = this.props.auth;
     const user = this.props.auth.user.username;
     const userLinks = (
       <ul className="nav-right">
@@ -36,15 +37,14 @@ class Main extends React.Component {
       <ul className="nav-right">
         <li id="nav-links"><Link to="/login">Log In</Link></li>
       </ul>
-    )
-    
+    )*/
+
     return (
       <div className="container">
-        <nav id="nav-bar">
+        {/*<nav id="nav-bar">
           <img id="logo" src={logo} />
           {isAuthenticated ? userLinks : guestLinks}
-        </nav>
-
+        </nav>*/}
         <div className="children">
           {this.props.children}
         </div>
@@ -53,15 +53,16 @@ class Main extends React.Component {
   }
 };
 
-Main.propTypes = {
-  auth: React.PropTypes.object.isRequired,
-  logout: React.PropTypes.func.isRequired
-}
+// Main.propTypes = {
+//   auth: React.PropTypes.object.isRequired,
+//   logout: React.PropTypes.func.isRequired
+// }
 
-function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     auth: state.auth
+//   }
+// }
 
-export default connect(mapStateToProps, { logout })(Main);
+// export default connect(mapStateToProps, { logout })(Main);
+export default Main;

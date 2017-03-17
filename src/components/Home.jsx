@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
+import Navbar from './Navbar.jsx';
+
 
 import { connect } from 'react-redux';
 // import helpers from '../actions/helpers.js';
@@ -19,8 +21,7 @@ class Home extends React.Component {
     this.state = {
       searchResults: [],
       searchRadius: "",
-      searchAddress: "",
-      errors: {}
+      searchAddress: ""
     };
 
     // used to make the keyword `this` work inside the `searchEvents` class function
@@ -88,12 +89,13 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-content">
+        <Navbar />
+
         <div className="header">
           <div className="headline">Bringing event-goers together</div>
           <hr className="line-break" />
           <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
-
         </div>
         {/*section for selecting events to search*/}
         <div className="home-nav row">
