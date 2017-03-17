@@ -21,18 +21,43 @@ class Home extends React.Component {
     this.state = {
       searchResults: [],
       searchRadius: "",
-      searchAddress: ""
-    };
+      searchAddress: "",
+      combinedSearch: ""
+		};
 
-    // used to make the keyword `this` work inside the `searchEvents` class function
-    this.searchEvents = this.searchEvents.bind(this);
+		// used to make the keyword `this` work inside the `searchEvents` class function
+		this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchResults != this.state.searchResults) {
+
+  handleSubmit(event){
+    event.preventDefault();
+    if (this.state.searchRadius != "" && this.state.searchAddress != ""){
+      var newSearch = {
+        searchRadius: this.state.searchRadius,
+        searchAddress: this.state.searchAddress
+      }
+      this.setState({
+        combinedSearch: newSearch
+      });
+    }
+
+  }
+
+  componentDidUpdate(){
+    if (this.state.combinedSearch != ""){
+      console.log("This is being run");
+      var searchData = this.state.combinedSearch;
+      helpers.searchEvents(searchData).then(function(data) {
+        return this.setState({
+          searchResults: data,
+          combinedSearch: ""
+        })
+      }.bind(this))
 
     }
+
   }
 
   displayModal() {
@@ -120,6 +145,9 @@ class Home extends React.Component {
                   <input type="checkbox" id="comedy-box" value="comedy_checkbox" />
                   <label htmlFor="comedy-box">Comedy</label>
                 </div>
+                <br/>
+                <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
+              </form>
               </div>
             </div>
           </form>
