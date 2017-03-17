@@ -90,7 +90,9 @@ class Home extends React.Component {
   }
   searchEvents(event) {
     event.preventDefault();
+    // Setting 'self' variable to 'this' due to axios' handling of the 'this' statement
     let self = this;
+
     return axios({
       method: 'POST',
       url: '/search',
@@ -105,7 +107,7 @@ class Home extends React.Component {
         responseArray.push(response.data.events.event[i]);
       }
       console.log(responseArray);
-
+        // setting State for the 'responseArray' to be called on by the map
       self.setState ({
         searchResults: responseArray
       })
@@ -117,34 +119,29 @@ class Home extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-
-=======
-    // static location for the location of the map
->>>>>>> 5b51527cc7029ac78d0446a801ee8755860b5ac0
+    // static position for the location of the map
     const location = {
         lat: 40.7575285,
         lng: -73.9884469
     }
-<<<<<<< HEAD
+    // working on the dynamic markers with the Eventful API
     console.log(this.state.searchResults);
     let markers = [];
     this.state.searchResults.forEach(function(result) {
       console.log(result);
-      // to be continued
     })
-=======
-      // this will place a static pin marker
-    const markers = [
-      {
-        location: {
-          lat: 40.7575285,
-          lng: -73.9884469
-        }
-      }
-    ]
 
->>>>>>> 5b51527cc7029ac78d0446a801ee8755860b5ac0
+    // this will place a static pin marker, uncomment if you want to see a pin on the map
+    // 
+    // const markers = [
+    //   {
+    //     location: {
+    //       lat: 40.7575285,
+    //       lng: -73.9884469
+    //     }
+    //   }
+    // ]
+
     return (
       <div className="home-content">
         <Navbar />
@@ -180,7 +177,6 @@ class Home extends React.Component {
                 </div>
                 <br/>
                 <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
-              </form>
               </div>
             </div>
           </form>
@@ -225,8 +221,8 @@ class Home extends React.Component {
           
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
-            Space for the map! Inline styling for now :)
-              <div style={{width:300, height:600, background:'red'}}>
+            Space for the map!
+              <div style={{width:300, height:400, background:'red'}}>
                 <Map center={location} markers={markers} />
               </div>
           </div>
