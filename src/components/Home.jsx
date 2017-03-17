@@ -222,7 +222,7 @@ class Home extends React.Component {
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
             Space for the map!
-              <div style={{width:300, height:400, background:'red'}}>
+              <div style={{width:300, height:400}}>
                 <Map center={location} markers={markers} />
               </div>
           </div>
