@@ -81,7 +81,7 @@ hr {
     font-weight: 800;
 }
 
-a {
+ul.nav-right {
     font-family: 'Russo One', sans-serif;
     text-transform: uppercase;
     color: black !important;
@@ -90,6 +90,21 @@ a {
     -moz-transition: .5s;
     -webkit-transition: .5s;
 }
+
+li {
+    color: black !important;
+}
+
+
+/*a {
+    font-family: 'Russo One', sans-serif;
+    text-transform: uppercase;
+    color: black !important;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+}*/
 
 .register {
     color: white;
@@ -284,15 +299,29 @@ li {
     padding: 20px;
     border: 1px solid #888;
     border-radius: 0px !important;
-    width: 30%;
+    width: 50%;
     min-width: 400px;
     box-shadow: none !important;
     animation: blowUpModal 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 
+input {
+    outline: none;
+    border: none !important;
+    border-radius: 0 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid black !important;
+}
+
 #modal-title {
     width: 100%;
     margin: 0 auto;
+}
+
+.center-text {
+    text-align: center;
 }
 
 .close {

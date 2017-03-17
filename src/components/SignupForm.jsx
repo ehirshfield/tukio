@@ -82,6 +82,7 @@ class SignupForm extends React.Component {
                     value={this.state.password}
                     name="password"
                 />
+                <p className="center-text">Already have an account? <a href="/login">Log in!</a></p>
                 <div className="button-div">
                     <button disabled={this.state.isLoading} className="register">Register</button>
                 </div>
