@@ -20,14 +20,15 @@ class Home extends React.Component {
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
-		this.searchEvents = this.searchEvents.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 	}
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchResults != this.state.searchResults){
-      
-    }
+  handleSubmit(event){
+    helpers.searchEvents(event);
+    this.setState({
+      searchResults: responseArray
+    })
   }
 
   displayModal() {
@@ -115,7 +116,7 @@ class Home extends React.Component {
                   <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange}/>
                 </div>
                 <br/>
-                <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
+                <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
               </form>
             </div>
           </div>
