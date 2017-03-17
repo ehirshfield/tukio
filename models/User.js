@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
             validate: {
                 isLongEnough: function (val) {
                 if (val.length < 16) {
-                    throw new Error("Please enter full credit card number")
+                    throw new Error("Please enter full bank card number")
                     }
                 }
             }
