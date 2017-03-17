@@ -2,6 +2,7 @@ import React from 'react';
 import SignupForm from './SignupForm.jsx';
 import { connect } from 'react-redux';
 import { userSignupRequest } from '../actions/signupAction.js';
+import signupLogo from '../../public/assets/img/signuplogo.png';
 
 class Signup extends React.Component {
     render() {
@@ -9,7 +10,7 @@ class Signup extends React.Component {
         return (
             <div className="row">
                 <div className="input-container">
-                    <div id="modal-title">Sign Up for tukio</div>
+                    <img id="modal-title" src={signupLogo} />
                     <hr />
                     <SignupForm
                         userSignupRequest={userSignupRequest}

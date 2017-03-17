@@ -3,6 +3,9 @@ import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
+import Navbar from './Navbar.jsx';
+
+
 import { connect } from 'react-redux';
 // import helpers from '../actions/helpers.js';
 // import { searchEvents } from '../actions/helpers.js';
@@ -26,17 +29,6 @@ class Home extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidMount(){
-    window.onscroll=function(){
-      
-      if (window.pageYOffset > 50) {
-        document.getElementById("nav-bar").style.backgroundColor = "white";
-      } else {
-        document.getElementById("nav-bar").style.backgroundColor = "transparent";
-      }
-    }
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchResults != this.state.searchResults) {
 
@@ -55,6 +47,7 @@ class Home extends React.Component {
   }
 
   closeModal() {
+
     let modal = document.getElementById('signupModal');
     let span = document.querySelector("close");
     modal.style.display = "none";
@@ -94,28 +87,14 @@ class Home extends React.Component {
   }
 
   render() {
-    const {isAuthenticated} = this.props.auth
-
-    const userLinks = (
-        <ul className="nav-right">
-            <li id="nav-links"><Link to="#">Log Out</Link></li>
-          </ul>
-    )
-
-    const guestLinks = (
-       <ul className="nav-right">
-
-            <li id="nav-links"><Link to="/login">Log In</Link></li>
-          </ul>
-    )
     return (
       <div className="home-content">
+        <Navbar />
+
         <div className="header">
-          <nav id="nav-bar">
-            <img id="logo" src={logo} />
-          { isAuthenticated  ? userLinks : guestLinks}
-          </nav>
           <div className="headline">Bringing event-goers together</div>
+          <hr className="line-break" />
+          <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
         {/*section for selecting events to search*/}
@@ -189,7 +168,7 @@ class Home extends React.Component {
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
-            <Signup />
+            <Signup errors={this.state.errors} />
           </div>
         </div>
 
@@ -209,3 +188,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Home);
+// export default Home;
