@@ -92,17 +92,34 @@ class Home extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
 
+=======
+    // static location for the location of the map
+>>>>>>> 5b51527cc7029ac78d0446a801ee8755860b5ac0
     const location = {
         lat: 40.7575285,
         lng: -73.9884469
     }
+<<<<<<< HEAD
     console.log(this.state.searchResults);
     let markers = [];
     this.state.searchResults.forEach(function(result) {
       console.log(result);
       // to be continued
     })
+=======
+      // this will place a static pin marker
+    const markers = [
+      {
+        location: {
+          lat: 40.7575285,
+          lng: -73.9884469
+        }
+      }
+    ]
+
+>>>>>>> 5b51527cc7029ac78d0446a801ee8755860b5ac0
     return (
       <div className="home-content">
         <Navbar />
@@ -167,19 +184,21 @@ class Home extends React.Component {
         <div className="home-nav row">
           Search results
           </div>
-        <div className="event-results">
-          {
-            this.state.searchResults
-              ?
-              <div src={this.state.searchResults} />
-              :
-              <div src={loading} alt="loading..." />
-          }
-        </div>
-        {/*place holder for displaying map*/}
-        <div className="mapAPI">
-            Space for the map! Inline styling for now
-              <div style={{width:500, height:500}}>
+
+          <div className="event-results">
+            {
+              this.state.searchResults
+                ?
+                <div src={this.state.searchResults}/>
+                :
+                <div src={loading} alt="loading..."/>
+            }
+          </div>
+          
+          {/*place holder for displaying map*/}
+          <div className = "mapAPI">
+            Space for the map! Inline styling for now :)
+              <div style={{width:300, height:600, background:'red'}}>
                 <Map center={location} markers={markers} />
               </div>
           </div>
