@@ -4,6 +4,7 @@ import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
 import Navbar from './Navbar.jsx';
+import Map from './Map.jsx';
 
 
 import { connect } from 'react-redux';
@@ -64,7 +65,7 @@ class Home extends React.Component {
   }
   searchEvents(event) {
     event.preventDefault();
-
+    let self = this;
     return axios({
       method: 'POST',
       url: '/search',
@@ -79,6 +80,10 @@ class Home extends React.Component {
         responseArray.push(response.data.events.event[i]);
       }
       console.log(responseArray);
+
+      self.setState ({
+        searchResults: responseArray
+      })
       return responseArray;
     }).catch(function (error) {
       console.log(error);
@@ -87,6 +92,17 @@ class Home extends React.Component {
   }
 
   render() {
+
+    const location = {
+        lat: 40.7575285,
+        lng: -73.9884469
+    }
+    console.log(this.state.searchResults);
+    let markers = [];
+    this.state.searchResults.forEach(function(result) {
+      console.log(result);
+      // to be continued
+    })
     return (
       <div className="home-content">
         <Navbar />
@@ -162,7 +178,10 @@ class Home extends React.Component {
         </div>
         {/*place holder for displaying map*/}
         <div className="mapAPI">
-          Map goes here
+            Space for the map! Inline styling for now
+              <div style={{width:500, height:500}}>
+                <Map center={location} markers={markers} />
+              </div>
           </div>
 
         <div id="signupModal" className="modal">
