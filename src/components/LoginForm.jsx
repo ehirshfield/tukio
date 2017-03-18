@@ -33,6 +33,7 @@ class LoginForm extends React.Component {
         }
         return isValid;
     }
+
     onSubmit(e) {
         e.preventDefault();
         if (this.isValid()) {
@@ -40,7 +41,7 @@ class LoginForm extends React.Component {
 
             this.props.login(this.state).then(
                 (res) => {
-                    this.context.router.push('/profile')
+                    this.context.router.push('/userprofile')
                 },
                 (err) => {
                     if (err.response.data.errors.form === "Wrong Password") {

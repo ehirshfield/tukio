@@ -3,6 +3,10 @@ import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
+import Navbar from './Navbar.jsx';
+import Map from './Map.jsx';
+
+
 import { connect } from 'react-redux';
 // import helpers from '../actions/helpers.js';
 // import { searchEvents } from '../actions/helpers.js';
@@ -18,29 +22,43 @@ class Home extends React.Component {
     this.state = {
       searchResults: [],
       searchRadius: "",
-      searchAddress: ""
-    };
+      searchAddress: "",
+      combinedSearch: ""
+		};
 
-    // used to make the keyword `this` work inside the `searchEvents` class function
-    this.searchEvents = this.searchEvents.bind(this);
+		// used to make the keyword `this` work inside the `searchEvents` class function
+		this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidMount(){
-    window.onscroll=function(){
-      
-      if (window.pageYOffset > 50) {
-        document.getElementById("nav-bar").style.backgroundColor = "white";
-      } else {
-        document.getElementById("nav-bar").style.backgroundColor = "transparent";
+
+  handleSubmit(event){
+    event.preventDefault();
+    if (this.state.searchRadius != "" && this.state.searchAddress != ""){
+      var newSearch = {
+        searchRadius: this.state.searchRadius,
+        searchAddress: this.state.searchAddress
       }
+      this.setState({
+        combinedSearch: newSearch
+      });
     }
+
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchResults != this.state.searchResults) {
+  componentDidUpdate(){
+    if (this.state.combinedSearch != ""){
+      console.log("This is being run");
+      var searchData = this.state.combinedSearch;
+      helpers.searchEvents(searchData).then(function(data) {
+        return this.setState({
+          searchResults: data,
+          combinedSearch: ""
+        })
+      }.bind(this))
 
     }
+
   }
 
   displayModal() {
@@ -55,6 +73,7 @@ class Home extends React.Component {
   }
 
   closeModal() {
+
     let modal = document.getElementById('signupModal');
     let span = document.querySelector("close");
     modal.style.display = "none";
@@ -71,6 +90,8 @@ class Home extends React.Component {
   }
   searchEvents(event) {
     event.preventDefault();
+    // Setting 'self' variable to 'this' due to axios' handling of the 'this' statement
+    let self = this;
 
     return axios({
       method: 'POST',
@@ -86,6 +107,10 @@ class Home extends React.Component {
         responseArray.push(response.data.events.event[i]);
       }
       console.log(responseArray);
+        // setting State for the 'responseArray' to be called on by the map
+      self.setState ({
+        searchResults: responseArray
+      })
       return responseArray;
     }).catch(function (error) {
       console.log(error);
@@ -94,28 +119,37 @@ class Home extends React.Component {
   }
 
   render() {
-    const {isAuthenticated} = this.props.auth
+    // static position for the location of the map
+    const location = {
+        lat: 40.7575285,
+        lng: -73.9884469
+    }
+    // working on the dynamic markers with the Eventful API
+    console.log(this.state.searchResults);
+    let markers = [];
+    this.state.searchResults.forEach(function(result) {
+      console.log(result);
+    })
 
-    const userLinks = (
-        <ul className="nav-right">
-            <li id="nav-links"><Link to="#">Log Out</Link></li>
-          </ul>
-    )
+    // this will place a static pin marker, uncomment if you want to see a pin on the map
+    // 
+    // const markers = [
+    //   {
+    //     location: {
+    //       lat: 40.7575285,
+    //       lng: -73.9884469
+    //     }
+    //   }
+    // ]
 
-    const guestLinks = (
-       <ul className="nav-right">
-
-            <li id="nav-links"><Link to="/login">Log In</Link></li>
-          </ul>
-    )
     return (
       <div className="home-content">
+        <Navbar />
+
         <div className="header">
-          <nav id="nav-bar">
-            <img id="logo" src={logo} />
-          { isAuthenticated  ? userLinks : guestLinks}
-          </nav>
           <div className="headline">Bringing event-goers together</div>
+          <hr className="line-break" />
+          <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
           <div className="register" onClick={this.displayModal}>Sign up with email</div>
         </div>
         {/*section for selecting events to search*/}
@@ -141,6 +175,8 @@ class Home extends React.Component {
                   <input type="checkbox" id="comedy-box" value="comedy_checkbox" />
                   <label htmlFor="comedy-box">Comedy</label>
                 </div>
+                <br/>
+                <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
               </div>
             </div>
           </form>
@@ -172,24 +208,29 @@ class Home extends React.Component {
         <div className="home-nav row">
           Search results
           </div>
-        <div className="event-results">
-          {
-            this.state.searchResults
-              ?
-              <div src={this.state.searchResults} />
-              :
-              <div src={loading} alt="loading..." />
-          }
-        </div>
-        {/*place holder for displaying map*/}
-        <div className="mapAPI">
-          Map goes here
-        </div>
+
+          <div className="event-results">
+            {
+              this.state.searchResults
+                ?
+                <div src={this.state.searchResults}/>
+                :
+                <div src={loading} alt="loading..."/>
+            }
+          </div>
+          
+          {/*place holder for displaying map*/}
+          <div className = "mapAPI">
+            Space for the map!
+              <div style={{width:300, height:400}}>
+                <Map center={location} markers={markers} />
+              </div>
+          </div>
 
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
-            <Signup />
+            <Signup errors={this.state.errors} />
           </div>
         </div>
 
@@ -209,3 +250,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Home);
+// export default Home;

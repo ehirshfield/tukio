@@ -4,8 +4,16 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     height: 100%;
+    width: 100%;
     background-color: white !important;
     color: #d1d6c6;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif !important;
+}
+
+.home-content {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 #nav-bar {
@@ -21,6 +29,11 @@ body {
     -webkit-transition: .5s;
     padding: 10px 0px 10px 20px;
     box-sizing: border-box;
+    z-index: 1000;
+}
+
+.row {
+    margin: 0 !important;
 }
 
 .nav-right {
@@ -28,10 +41,28 @@ body {
     margin-right: 30px;
 }
 
+.fa {
+    font-weight: 800 !important;
+}
+
+.line-break {
+    height: 0;
+    border: 0;
+    width: 100px;
+    border-top: 3.5px solid black !important;
+}
+
+hr {
+    height: 0 !important;
+    border: 0;
+    border-top: 1px solid black !important;
+}
+
 .header {
     background-image: url('../img/bgfaded.jpg');
     background-size: cover;
-    min-height: 500px;
+    width: 100%;
+    height: 100vh;
     text-align: center;
 }
 
@@ -40,9 +71,14 @@ body {
     color: black;
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 4rem;
+    font-size: 5rem;
+    width: 50%;
+    margin: 0 auto;
     letter-spacing: 2px;
-    text-shadow: 2px 2px 2px #ccc;
+}
+
+.headline-text {
+    font-weight: 800;
 }
 
 a {
@@ -60,11 +96,11 @@ a {
     background-color: black;
     text-transform: uppercase;
     text-align: center;
-    border-radius: 3px;
-    margin: 20px auto;
-    width: 270px;
+    border-radius: 25px;
+    margin: 20px auto !important;
+    width: 240px;
     height: 50px;
-    font-size: 15px;
+    font-size: 13px;
     padding: 14px;
     font-weight: 600;
     box-sizing: border-box;
@@ -73,12 +109,14 @@ a {
     -ms-transition: .5s;
     -moz-transition: .5s;
     -webkit-transition: .5s;
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.3), inset 0 10px 10px rgba(255, 255, 255, 0.2), inset 0 -10px 10px rgba(255, 255, 255, 0.2);
 }
 
 .register:hover {
     background-color: white;
     color: black;
     border: 2px solid #333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 10px 10px rgba(0, 0, 0, 0.1), inset 0 -10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .search-button {
@@ -127,6 +165,91 @@ a {
     -webkit-transition: .5s;
 }
 
+.login-content {
+    background-image: url('../img/loginbg.jpg');
+    background-size: cover;
+    height: 100vh;
+    padding-top: 100px !important;
+}
+
+.login-box {
+    background-color: white;
+    width: 30%;
+    margin: 0 auto;
+    min-width: 400px;
+    padding: 30px;
+    text-align: center;
+    -webkit-animation: fadein 1s;
+    -moz-animation: fadein 1s;
+    -ms-animation: fadein 1s;
+    -o-animation: fadein 1s;
+    animation: fadein 1s;
+}
+
+#sublogo {
+    width: 25%;
+}
+
+.form-group {
+    width: 90% !important;
+    margin: 0 auto;
+}
+
+.button-div {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+button:focus {
+    outline: none !important;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .concert,
 .festivals {
     width: 70%;
@@ -155,21 +278,21 @@ li {
 }
 
 .modal-content {
-    background-color: #333 !important;
+    background-color: white !important;
     color: black;
-    margin: 1% auto;
+    margin: 3% auto;
     padding: 20px;
     border: 1px solid #888;
     border-radius: 0px !important;
     width: 30%;
+    min-width: 400px;
     box-shadow: none !important;
     animation: blowUpModal 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 
 #modal-title {
-    text-align: center;
-    color: #d1d6c6;
-    font-size: 2rem;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .close {
