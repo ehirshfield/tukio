@@ -9,14 +9,18 @@ class Checkbox extends Component {
     isChecked: false,
   }
 
+  this.toggleCheckboxChange = this.toggleCheckboxChange.bind(this);
+
 }
 
   toggleCheckboxChange() {
-    const { handleCheckboxChange, label } = this.props;
+    console.log(this.props);
+    const { handleCheckboxChange, label }  = this.props;
 
     this.setState({
-        isChecked: !isChecked,
+        isChecked: !this.state.isChecked,
       });
+
     handleCheckboxChange(label);
   }
 
