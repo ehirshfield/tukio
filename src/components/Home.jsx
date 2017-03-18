@@ -7,8 +7,8 @@ import Navbar from './Navbar.jsx';
 import Checkbox from './Checkbox.jsx';
 
 import { connect } from 'react-redux';
-// import helpers from '../actions/helpers.js';
-// import { searchEvents } from '../actions/helpers.js';
+import helpers from '../actions/helpers.js';
+
 
 const items = [
   'Concerts',
@@ -30,15 +30,17 @@ class Home extends React.Component {
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
+    this.createCheckbox = this.createCheckbox.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.toggleCheckbox = this.toggleCheckbox.bind(this);
   }
 
-  componentWillMount = () => {
+  componentWillMount() {
     this.selectedCheckboxes = new Set();
   }
 
-  toggleCheckbox = label => {
+  toggleCheckbox(label) {
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
     } else {
@@ -107,41 +109,24 @@ class Home extends React.Component {
       [name]: value
     });
   }
-  searchEvents(event) {
-    event.preventDefault();
 
-    return axios({
-      method: 'POST',
-      url: '/search',
-      data: {
-        address: this.state.searchAddress,
-        radius: this.state.searchRadius
-      }
-    }).then(function (response) {
-      console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
-      let responseArray = [];
-      for (let i = 0; i < response.data.events.event.length; i++) {
-        responseArray.push(response.data.events.event[i]);
-      }
-      console.log(responseArray);
-      return responseArray;
-    }).catch(function (error) {
-      console.log(error);
-    });
 
+  createCheckbox(label){
+    return (
+      <Checkbox
+        label={label}
+        handleCheckboxChange={this.toggleCheckbox}
+        key={label}
+        />
+    )
   }
 
-  createCheckbox = label => (
-    <Checkbox
-            label={label}
-            handleCheckboxChange={this.toggleCheckbox}
-            key={label}
-        />
-  )
 
-  createCheckboxes = () => (
-    items.map(this.createCheckbox)
-  )
+  createCheckboxes() {
+    return (
+      items.map(this.createCheckbox)
+    )
+  }
 
   render() {
     return (
@@ -166,8 +151,7 @@ class Home extends React.Component {
             <div className="form-group">
               <div className="col-md-7">
                 {this.createCheckboxes()}
-                <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
-              </form>
+
               </div>
             </div>
           </form>
@@ -189,7 +173,7 @@ class Home extends React.Component {
                 <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
               </div>
               <br />
-              <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
+              <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
             </form>
           </div>
         </div>
