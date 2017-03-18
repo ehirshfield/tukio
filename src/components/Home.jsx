@@ -4,14 +4,19 @@ import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
 import Navbar from './Navbar.jsx';
+import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
 
 
 import { connect } from 'react-redux';
-// import helpers from '../actions/helpers.js';
-// import { searchEvents } from '../actions/helpers.js';
+import helpers from '../actions/helpers.js';
 
 
+const items = [
+  'Concerts',
+  'Festivals',
+  'Comedy',
+];
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,13 +32,31 @@ class Home extends React.Component {
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
+    this.createCheckbox = this.createCheckbox.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.toggleCheckbox = this.toggleCheckbox.bind(this);
   }
 
+  componentWillMount() {
+    this.selectedCheckboxes = new Set();
+  }
+
+  toggleCheckbox(label) {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
+    }
+  }
 
   handleSubmit(event){
     event.preventDefault();
+
+    for (const checkbox of this.selectedCheckboxes) {
+      console.log(checkbox, 'is selected.');
+    }
+
     if (this.state.searchRadius != "" && this.state.searchAddress != ""){
       var newSearch = {
         searchRadius: this.state.searchRadius,
@@ -88,34 +111,22 @@ class Home extends React.Component {
       [name]: value
     });
   }
-  searchEvents(event) {
-    event.preventDefault();
-    // Setting 'self' variable to 'this' due to axios' handling of the 'this' statement
-    let self = this;
 
-    return axios({
-      method: 'POST',
-      url: '/search',
-      data: {
-        address: this.state.searchAddress,
-        radius: this.state.searchRadius
-      }
-    }).then(function (response) {
-      console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
-      let responseArray = [];
-      for (let i = 0; i < response.data.events.event.length; i++) {
-        responseArray.push(response.data.events.event[i]);
-      }
-      console.log(responseArray);
-        // setting State for the 'responseArray' to be called on by the map
-      self.setState ({
-        searchResults: responseArray
-      })
-      return responseArray;
-    }).catch(function (error) {
-      console.log(error);
-    });
+  createCheckbox(label){
+    return (
+      <Checkbox
+        label={label}
+        handleCheckboxChange={this.toggleCheckbox}
+        key={label}
+        />
+    )
+  }
 
+
+  createCheckboxes() {
+    return (
+      items.map(this.createCheckbox)
+    )
   }
 
   render() {
@@ -132,7 +143,7 @@ class Home extends React.Component {
     })
 
     // this will place a static pin marker, uncomment if you want to see a pin on the map
-    // 
+    //
     // const markers = [
     //   {
     //     location: {
@@ -163,20 +174,9 @@ class Home extends React.Component {
           <form>
             <div className="form-group">
               <div className="col-md-7">
-                <div>
-                  <input type="checkbox" id="concerts-box" value="concerts_checkbox" />
-                  <label htmlFor="concerts-box">Concerts</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="Festivals-box" value="festivals_checkbox" />
-                  <label htmlFor="festivals-box">Festivals</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="comedy-box" value="comedy_checkbox" />
-                  <label htmlFor="comedy-box">Comedy</label>
-                </div>
-                <br/>
-                <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
+
+                {this.createCheckboxes()}
+
               </div>
             </div>
           </form>
@@ -198,7 +198,7 @@ class Home extends React.Component {
                 <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
               </div>
               <br />
-              <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
+              <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
             </form>
           </div>
         </div>
@@ -218,12 +218,12 @@ class Home extends React.Component {
                 <div src={loading} alt="loading..."/>
             }
           </div>
-          
+
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
             Space for the map!
               <div style={{width:300, height:400}}>
-                <Map center={location} markers={markers} />
+                <Map center={location} events={markers} />
               </div>
           </div>
 
