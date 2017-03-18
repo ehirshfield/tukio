@@ -8,7 +8,7 @@ import Map from './Map.jsx';
 
 
 import { connect } from 'react-redux';
-// import helpers from '../actions/helpers.js';
+import helpers from '../actions/helpers.js';
 // import { searchEvents } from '../actions/helpers.js';
 
 
@@ -88,35 +88,35 @@ class Home extends React.Component {
       [name]: value
     });
   }
-  searchEvents(event) {
-    event.preventDefault();
-    // Setting 'self' variable to 'this' due to axios' handling of the 'this' statement
-    let self = this;
+  // searchEvents(event) {
+  //   event.preventDefault();
+  //   // Setting 'self' variable to 'this' due to axios' handling of the 'this' statement
+  //   // let self = this;
 
-    return axios({
-      method: 'POST',
-      url: '/search',
-      data: {
-        address: this.state.searchAddress,
-        radius: this.state.searchRadius
-      }
-    }).then(function (response) {
-      console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
-      let responseArray = [];
-      for (let i = 0; i < response.data.events.event.length; i++) {
-        responseArray.push(response.data.events.event[i]);
-      }
-      console.log(responseArray);
-        // setting State for the 'responseArray' to be called on by the map
-      self.setState ({
-        searchResults: responseArray
-      })
-      return responseArray;
-    }).catch(function (error) {
-      console.log(error);
-    });
+  //   return axios({
+  //     method: 'POST',
+  //     url: '/search',
+  //     data: {
+  //       address: this.state.searchAddress,
+  //       radius: this.state.searchRadius
+  //     }
+  //   }).then(function (response) {
+  //     console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
+  //     let responseArray = [];
+  //     for (let i = 0; i < response.data.events.event.length; i++) {
+  //       responseArray.push(response.data.events.event[i]);
+  //     }
+  //     console.log(responseArray);
+  //       // setting State for the 'responseArray' to be called on by the map
+  //     self.setState ({
+  //       searchResults: responseArray
+  //     })
+  //     return responseArray;
+  //   }).catch(function (error) {
+  //     console.log(error);
+  //   });
 
-  }
+  // }
 
   render() {
     // static position for the location of the map
@@ -176,7 +176,7 @@ class Home extends React.Component {
                   <label htmlFor="comedy-box">Comedy</label>
                 </div>
                 <br/>
-                <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
+                {/*<input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />*/}
               </div>
             </div>
           </form>
@@ -202,31 +202,37 @@ class Home extends React.Component {
             </form>
           </div>
         </div>
-
+        
 
         {/*section for display search results*/}
         <div className="home-nav row">
           Search results
+        </div>
+        <div className="row">
+          <div className="col-md-1"></div>
+          <div className="col-md-7">
+            <div className="event-results">
+              Space for the event results!
+              {
+                this.state.searchResults
+                  ?
+                  <div src={this.state.searchResults}/>
+                  :
+                  <div src={loading} alt="loading..."/>
+              }
+            </div>
           </div>
-
-          <div className="event-results">
-            {
-              this.state.searchResults
-                ?
-                <div src={this.state.searchResults}/>
-                :
-                <div src={loading} alt="loading..."/>
-            }
+          <div className="col-md-4">
+            {/*place holder for displaying map*/}
+            <div className = "mapAPI">
+              Space for the map!
+                <div style={{width:300, height:400}}>
+                  <Map center={location} events={markers} />
+                </div>
+            </div>
           </div>
-          
-          {/*place holder for displaying map*/}
-          <div className = "mapAPI">
-            Space for the map!
-              <div style={{width:300, height:400}}>
-                <Map center={location} markers={markers} />
-              </div>
-          </div>
-
+        </div>
+        
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
