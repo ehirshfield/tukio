@@ -5,6 +5,8 @@ import Signup from './Signup.jsx';
 import axios from 'axios';
 import Navbar from './Navbar.jsx';
 import Checkbox from './Checkbox.jsx';
+import Map from './Map.jsx';
+
 
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
@@ -110,7 +112,6 @@ class Home extends React.Component {
     });
   }
 
-
   createCheckbox(label){
     return (
       <Checkbox
@@ -129,6 +130,29 @@ class Home extends React.Component {
   }
 
   render() {
+    // static position for the location of the map
+    const location = {
+        lat: 40.7575285,
+        lng: -73.9884469
+    }
+    // working on the dynamic markers with the Eventful API
+    console.log(this.state.searchResults);
+    let markers = [];
+    this.state.searchResults.forEach(function(result) {
+      console.log(result);
+    })
+
+    // this will place a static pin marker, uncomment if you want to see a pin on the map
+    //
+    // const markers = [
+    //   {
+    //     location: {
+    //       lat: 40.7575285,
+    //       lng: -73.9884469
+    //     }
+    //   }
+    // ]
+
     return (
       <div className="home-content">
         <Navbar />
@@ -150,6 +174,7 @@ class Home extends React.Component {
           <form>
             <div className="form-group">
               <div className="col-md-7">
+
                 {this.createCheckboxes()}
 
               </div>
@@ -183,18 +208,23 @@ class Home extends React.Component {
         <div className="home-nav row">
           Search results
           </div>
-        <div className="event-results">
-          {
-            this.state.searchResults
-              ?
-              <div src={this.state.searchResults} />
-              :
-              <div src={loading} alt="loading..." />
-          }
-        </div>
-        {/*place holder for displaying map*/}
-        <div className="mapAPI">
-          Map goes here
+
+          <div className="event-results">
+            {
+              this.state.searchResults
+                ?
+                <div src={this.state.searchResults}/>
+                :
+                <div src={loading} alt="loading..."/>
+            }
+          </div>
+
+          {/*place holder for displaying map*/}
+          <div className = "mapAPI">
+            Space for the map!
+              <div style={{width:300, height:400}}>
+                <Map center={location} events={markers} />
+              </div>
           </div>
 
         <div id="signupModal" className="modal">
