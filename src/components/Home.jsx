@@ -4,13 +4,17 @@ import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
 import Navbar from './Navbar.jsx';
-
+import Checkbox from './Checkbox.jsx';
 
 import { connect } from 'react-redux';
 // import helpers from '../actions/helpers.js';
 // import { searchEvents } from '../actions/helpers.js';
 
-
+const items = [
+  'Concerts',
+  'Festivals',
+  'Comedy',
+];
 
 class Home extends React.Component {
   constructor(props) {
@@ -30,9 +34,25 @@ class Home extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  componentWillMount = () => {
+    this.selectedCheckboxes = new Set();
+  }
+
+  toggleCheckbox = label => {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
+    }
+  }
 
   handleSubmit(event){
     event.preventDefault();
+
+    for (const checkbox of this.selectedCheckboxes) {
+      console.log(checkbox, 'is selected.');
+    }
+
     if (this.state.searchRadius != "" && this.state.searchAddress != ""){
       var newSearch = {
         searchRadius: this.state.searchRadius,
@@ -111,6 +131,18 @@ class Home extends React.Component {
 
   }
 
+  createCheckbox = label => (
+    <Checkbox
+            label={label}
+            handleCheckboxChange={this.toggleCheckbox}
+            key={label}
+        />
+  )
+
+  createCheckboxes = () => (
+    items.map(this.createCheckbox)
+  )
+
   render() {
     return (
       <div className="home-content">
@@ -133,19 +165,7 @@ class Home extends React.Component {
           <form>
             <div className="form-group">
               <div className="col-md-7">
-                <div>
-                  <input type="checkbox" id="concerts-box" value="concerts_checkbox" />
-                  <label htmlFor="concerts-box">Concerts</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="Festivals-box" value="festivals_checkbox" />
-                  <label htmlFor="festivals-box">Festivals</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="comedy-box" value="comedy_checkbox" />
-                  <label htmlFor="comedy-box">Comedy</label>
-                </div>
-                <br/>
+                {this.createCheckboxes()}
                 <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
               </form>
               </div>
