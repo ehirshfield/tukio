@@ -6,6 +6,7 @@ import Signup from "../components/Signup.jsx";
 import Login from "../components/Login.jsx";
 import UserHomePage from "../components/UserHomePage.jsx";
 import UserProfile from "../components/UserProfile.jsx";
+import Profile from "../components/Profile.jsx";
 
 export default () => {
   return (
@@ -15,6 +16,7 @@ export default () => {
     <Route path="/login" component={Login} />
     <Route path="/UserHomePage" component={UserHomePage} />
     <Route path="/UserProfile" component={UserProfile} />
+    <Route path="/profile" component={Profile} />
       <IndexRoute component={Home} />
     </Route>
   )
