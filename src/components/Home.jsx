@@ -136,11 +136,7 @@ class Home extends React.Component {
         lng: -73.9884469
     }
     // working on the dynamic markers with the Eventful API
-    console.log(this.state.searchResults);
-    let markers = [];
-    this.state.searchResults.forEach(function(result) {
-      console.log(result);
-    })
+
 
     // this will place a static pin marker, uncomment if you want to see a pin on the map
     //
@@ -223,7 +219,7 @@ class Home extends React.Component {
           <div className = "mapAPI">
             Space for the map!
               <div style={{width:300, height:400}}>
-                <Map center={location} events={markers} />
+                <Map center={location} events={this.state.searchResults} />
               </div>
           </div>
 
