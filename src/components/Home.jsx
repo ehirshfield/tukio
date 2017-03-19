@@ -4,24 +4,20 @@ import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
 import Navbar from './Navbar.jsx';
-<<<<<<< HEAD
 import Header from './Header.jsx';
 import About from './About.jsx';
 import Footer from './Footer.jsx';
-=======
 import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
-
-
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
 
 
 const items = [
-  'Concerts',
+  'Music',
   'Festivals',
   'Comedy',
+  'Food'
 ];
 
 class Home extends React.Component {
@@ -34,17 +30,13 @@ class Home extends React.Component {
       searchResults: [],
       searchRadius: "",
       searchAddress: "",
-      combinedSearch: ""
+      combinedSearch: "",
+      checkedBoxes: []
     };
 
-<<<<<<< HEAD
-    // used to make the keyword `this` work inside the `searchEvents` class function
-    this.handleSubmit = this.handleSubmit.bind(this);
-=======
 		// used to make the keyword `this` work inside the `searchEvents` class function
     this.createCheckbox = this.createCheckbox.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
     this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
   }
@@ -63,19 +55,20 @@ class Home extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-<<<<<<< HEAD
     if (this.state.searchRadius != "" && this.state.searchAddress != "") {
-=======
+    var checkboxArray = [];
 
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
+      checkboxArray.push(checkbox);
     }
 
     if (this.state.searchRadius != "" && this.state.searchAddress != ""){
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
+
       var newSearch = {
         searchRadius: this.state.searchRadius,
-        searchAddress: this.state.searchAddress
+        searchAddress: this.state.searchAddress,
+        checkedBoxes: checkboxArray
       }
       this.setState({
         combinedSearch: newSearch
@@ -91,7 +84,8 @@ class Home extends React.Component {
       helpers.searchEvents(searchData).then(function (data) {
         return this.setState({
           searchResults: data,
-          combinedSearch: ""
+          combinedSearch: "",
+          checkedBoxes: []
         })
       }.bind(this))
 
@@ -159,10 +153,10 @@ class Home extends React.Component {
           <div className="col-md-3">
             Interests
             </div>
+
           <form>
             <div className="form-group">
               <div className="col-md-7">
-<<<<<<< HEAD
                 <div>
                   <input type="checkbox" id="concerts-box" value="concerts_checkbox" />
                   <label htmlFor="concerts-box">Concerts</label>
@@ -177,14 +171,14 @@ class Home extends React.Component {
                 </div>
                 <br />
                 <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
-=======
+
 
                 {this.createCheckboxes()}
 
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
               </div>
             </div>
           </form>
+
 
         </div>
         {/*section for entering address to search*/}
@@ -193,6 +187,7 @@ class Home extends React.Component {
           <div className="col-md-3"></div>
           <div className="col-md-7">
             <form>
+              {this.createCheckboxes()}
               <div className="form-group">
                 <label htmlFor="address">Address</label>
                 <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />

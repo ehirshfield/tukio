@@ -11,7 +11,8 @@ const helpers = {
       url: '/search',
       data: {
         address: searchData.searchAddress,
-        radius: searchData.searchRadius
+        radius: searchData.searchRadius,
+        categories: searchData.checkedBoxes
       }
     }).then(function(response){
        console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
