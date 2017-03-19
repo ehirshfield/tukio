@@ -10,15 +10,19 @@ const authKey = "mR4ZKTx6dQWXmsTw";
 
     let axiosAddress = req.body.address;
     let axiosRadius = req.body.radius;
+    let axiosCategoriesPreJoin = req.body.categories;
+    let axiosCategories = axiosCategoriesPreJoin.join();
 
     let blankURL = "http://api.eventful.com/json/events/search?...&date=Future&app_key=" + authKey;
-    let blankAddressSearch = blankURL + "&location=";
+    let blankAddressSearch = blankURL + "&page_size=20&sort_order=popularity&location=";
     let addressSearch = blankAddressSearch + axiosAddress;
     let blankRadiusAddressSearch = addressSearch + "&units=mi&within=";
     let radiusAddressSearch = blankRadiusAddressSearch + axiosRadius;
-    console.log("complete URL: " + radiusAddressSearch);
+    let blankRadAddCatSearch = radiusAddressSearch + "&category=";
+    let radAddCatSearch = blankRadAddCatSearch + axiosCategories;
+    console.log("complete URL: " + radAddCatSearch);
 
-    request.get(radiusAddressSearch, function(error, response, body){
+    request.get(radAddCatSearch, function(error, response, body){
       if (error){
         console.log("error on request call: " + error);
         console.log('statusCode:', response && response.statusCode);
