@@ -13,9 +13,10 @@ import helpers from '../actions/helpers.js';
 
 
 const items = [
-  'Concerts',
+  'Music',
   'Festivals',
   'Comedy',
+  'Food'
 ];
 
 class Home extends React.Component {
@@ -28,7 +29,8 @@ class Home extends React.Component {
       searchResults: [],
       searchRadius: "",
       searchAddress: "",
-      combinedSearch: ""
+      combinedSearch: "",
+      checkedBoxes: []
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
@@ -52,15 +54,17 @@ class Home extends React.Component {
 
   handleSubmit(event){
     event.preventDefault();
-
+    var checkboxArray = [];
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
+      checkboxArray.push(checkbox);
     }
 
     if (this.state.searchRadius != "" && this.state.searchAddress != ""){
       var newSearch = {
         searchRadius: this.state.searchRadius,
-        searchAddress: this.state.searchAddress
+        searchAddress: this.state.searchAddress,
+        checkedBoxes: checkboxArray
       }
       this.setState({
         combinedSearch: newSearch
@@ -76,7 +80,8 @@ class Home extends React.Component {
       helpers.searchEvents(searchData).then(function(data) {
         return this.setState({
           searchResults: data,
-          combinedSearch: ""
+          combinedSearch: "",
+          checkedBoxes: []
         })
       }.bind(this))
 
@@ -167,16 +172,6 @@ class Home extends React.Component {
           <div className="col-md-3">
             Interests
             </div>
-          <form>
-            <div className="form-group">
-              <div className="col-md-7">
-
-                {this.createCheckboxes()}
-
-              </div>
-            </div>
-          </form>
-
         </div>
         {/*section for entering address to search*/}
 
@@ -184,6 +179,7 @@ class Home extends React.Component {
           <div className="col-md-3"></div>
           <div className="col-md-7">
             <form>
+              {this.createCheckboxes()}
               <div className="form-group">
                 <label htmlFor="address">Address</label>
                 <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />
