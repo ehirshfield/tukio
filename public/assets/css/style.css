@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Russo+One');
+@import url('https://fonts.googleapis.com/css?family=Candal');
 html,
 body {
     margin: 0 !important;
@@ -45,11 +46,49 @@ body {
     font-weight: 800 !important;
 }
 
+.arrow-left {
+    color: black;
+    float: left;
+    font-size: 20px;
+}
+
+.about-tukio {
+    text-align: center;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 80px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+.footer {
+    text-align: center;
+    color: white;
+    background-color: black;
+    padding: 20px;
+    width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 10px !important;
+}
+
 .line-break {
     height: 0;
     border: 0;
     width: 100px;
     border-top: 3.5px solid black !important;
+}
+
+#transform-uppercase {
+    text-transform: uppercase;
 }
 
 hr {
@@ -64,6 +103,12 @@ hr {
     width: 100%;
     height: 100vh;
     text-align: center;
+    margin: 0 !important;
+    -webkit-animation: fadein 1.5s;
+    -moz-animation: fadein 1.5s;
+    -ms-animation: fadein 1.5s;
+    -o-animation: fadein 1.5s;
+    animation: fadein 1.5s;
 }
 
 .headline {
@@ -75,13 +120,14 @@ hr {
     width: 50%;
     margin: 0 auto;
     letter-spacing: 2px;
+    font-family: 'Candal', sans-serif;
 }
 
 .headline-text {
     font-weight: 800;
 }
 
-a {
+ul.nav-right {
     font-family: 'Russo One', sans-serif;
     text-transform: uppercase;
     color: black !important;
@@ -89,6 +135,14 @@ a {
     -ms-transition: .5s;
     -moz-transition: .5s;
     -webkit-transition: .5s;
+}
+
+li {
+    color: black !important;
+}
+
+#login-input {
+    padding-top: 30px;
 }
 
 .register {
@@ -179,26 +233,26 @@ a {
     min-width: 400px;
     padding: 30px;
     text-align: center;
-    -webkit-animation: fadein 1s;
-    -moz-animation: fadein 1s;
-    -ms-animation: fadein 1s;
-    -o-animation: fadein 1s;
-    animation: fadein 1s;
+    -webkit-animation: fadein 1.5s;
+    -moz-animation: fadein 1.5s;
+    -ms-animation: fadein 1.5s;
+    -o-animation: fadein 1.5s;
+    animation: fadein 1.5s;
 }
 
 #sublogo {
     width: 25%;
-}
-
-.form-group {
-    width: 90% !important;
-    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .button-div {
     width: 90%;
     margin: 0 auto;
     text-align: center;
+}
+
+a {
+    color: red !important;
 }
 
 button:focus {
@@ -280,19 +334,47 @@ li {
 .modal-content {
     background-color: white !important;
     color: black;
-    margin: 3% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     border-radius: 0px !important;
-    width: 30%;
+    width: 55%;
     min-width: 400px;
     box-shadow: none !important;
     animation: blowUpModal 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 
 #modal-title {
-    width: 100%;
+    width: 70%;
+}
+
+input {
+    outline: none;
+    border: none !important;
+    border-radius: 0 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid black !important;
+}
+
+.form-group {
+    width: 90% !important;
     margin: 0 auto;
+}
+
+#inline-element {
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+    vertical-align: top;
+    padding: 10px;
+}
+
+.center-text {
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 14px;
 }
 
 .close {
