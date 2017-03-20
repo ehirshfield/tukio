@@ -14,19 +14,19 @@ class Navbar extends React.Component {
         const user = this.props.auth.user.username;
         const userLinks = (
             <ul className="nav-right">
-                <li id="nav-links"><Link to="#">{user} <i className="fa fa-angle-down"></i></Link></li>
-                <li id="nav-links"><Link to="/#" onClick={this.logout.bind(this)}>Log Out</Link></li>
+                <Link to="#"><li id="nav-links">{user} <i className="fa fa-angle-down"></i></li></Link>
+                <Link to="/#" onClick={this.logout.bind(this)}><li id="nav-links">Log Out</li></Link>
             </ul>
         )
 
         const guestLinks = (
             <ul className="nav-right">
-                <li id="nav-links"><Link to="/login">Log In</Link></li>
+                <Link to="/login"><li id="nav-links">Log In</li></Link>
             </ul>
         )
         return (
             <nav id="nav-bar">
-                <img id="logo" src={logo} />
+                <a href="/"><img id="logo" src={logo} /></a>
                 {isAuthenticated ? userLinks : guestLinks}
             </nav>
         )

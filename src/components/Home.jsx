@@ -6,11 +6,11 @@ import axios from 'axios';
 import Navbar from './Navbar.jsx';
 import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
-
-
+import About from './About.jsx';
+import Header from './Header.jsx';
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
-
+import Footer from './Footer.jsx';
 
 const items = [
   'Music',
@@ -157,13 +157,9 @@ class Home extends React.Component {
     return (
       <div className="home-content">
         <Navbar />
+        <Header />
+        <About />
 
-        <div className="header">
-          <div className="headline">Bringing event-goers together</div>
-          <hr className="line-break" />
-          <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
-          <div className="register" onClick={this.displayModal}>Sign up with email</div>
-        </div>
         {/*section for selecting events to search*/}
         <div className="home-nav row">
           Search events
@@ -218,7 +214,7 @@ class Home extends React.Component {
                 <Map center={location} events={this.state.searchResults} />
               </div>
           </div>
-
+        <Footer />
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
