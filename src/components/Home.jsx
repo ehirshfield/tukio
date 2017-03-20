@@ -4,25 +4,20 @@ import logo from '../../public/assets/img/logo.png';
 import Signup from './Signup.jsx';
 import axios from 'axios';
 import Navbar from './Navbar.jsx';
-<<<<<<< HEAD
 import Header from './Header.jsx';
 import About from './About.jsx';
 import Footer from './Footer.jsx';
-=======
 import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
-
-
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
 
-
-const items = [
-  'Concerts',
-  'Festivals',
-  'Comedy',
-];
+    const items = [
+    'Music',
+    'Festivals',
+    'Comedy',
+    'Food'
+    ];
 
 class Home extends React.Component {
   constructor(props) {
@@ -34,48 +29,33 @@ class Home extends React.Component {
       searchResults: [],
       searchRadius: "",
       searchAddress: "",
-      combinedSearch: ""
+      combinedSearch: "",
+      checkedBoxes: []
     };
 
-<<<<<<< HEAD
     // used to make the keyword `this` work inside the `searchEvents` class function
-    this.handleSubmit = this.handleSubmit.bind(this);
-=======
-		// used to make the keyword `this` work inside the `searchEvents` class function
     this.createCheckbox = this.createCheckbox.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
     this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
   }
 
-  componentWillMount() {
-    this.selectedCheckboxes = new Set();
-  }
-
-  toggleCheckbox(label) {
-    if (this.selectedCheckboxes.has(label)) {
-      this.selectedCheckboxes.delete(label);
-    } else {
-      this.selectedCheckboxes.add(label);
-    }
-  }
-
-  handleSubmit(event) {
+handleSubmit(event) {
     event.preventDefault();
-<<<<<<< HEAD
     if (this.state.searchRadius != "" && this.state.searchAddress != "") {
-=======
+    var checkboxArray = [];
 
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
+      checkboxArray.push(checkbox);
     }
 
     if (this.state.searchRadius != "" && this.state.searchAddress != ""){
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
+
       var newSearch = {
         searchRadius: this.state.searchRadius,
-        searchAddress: this.state.searchAddress
+        searchAddress: this.state.searchAddress,
+        checkedBoxes: checkboxArray
       }
       this.setState({
         combinedSearch: newSearch
@@ -83,6 +63,7 @@ class Home extends React.Component {
     }
 
   }
+}
 
   componentDidUpdate() {
     if (this.state.combinedSearch != "") {
@@ -99,6 +80,14 @@ class Home extends React.Component {
 
   }
 
+    toggleCheckbox(label) {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
+    }
+  }
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -109,43 +98,42 @@ class Home extends React.Component {
     });
   }
 
-  createCheckbox(label){
-    return (
-      <Checkbox
-        label={label}
-        handleCheckboxChange={this.toggleCheckbox}
-        key={label}
-        />
-    )
+  searchEvents(event) {
+    event.preventDefault();
+
+    return axios({
+      method: 'POST',
+      url: '/search',
+      data: {
+        address: this.state.searchAddress,
+        radius: this.state.searchRadius
+      }
+    }).then(function (response) {
+      console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
+      let responseArray = [];
+      for (let i = 0; i < response.data.events.event.length; i++) {
+        responseArray.push(response.data.events.event[i]);
+      }
+      console.log(responseArray);
+      return responseArray;
+    }).catch(function (error) {
+      console.log(error);
+    });
+
   }
 
-
-  createCheckboxes() {
+  createCheckbox() {
     return (
       items.map(this.createCheckbox)
     )
   }
 
+
   render() {
-    // static position for the location of the map
-    const location = {
+        const location = {
         lat: 40.7575285,
         lng: -73.9884469
-    }
-    // working on the dynamic markers with the Eventful API
-
-
-    // this will place a static pin marker, uncomment if you want to see a pin on the map
-    //
-    // const markers = [
-    //   {
-    //     location: {
-    //       lat: 40.7575285,
-    //       lng: -73.9884469
-    //     }
-    //   }
-    // ]
-
+        }
     return (
       <div className="home-content">
         <Navbar />
@@ -155,14 +143,15 @@ class Home extends React.Component {
         <div className="home-nav row">
           Search events
           </div>
+
         <div className="search-options row">
           <div className="col-md-3">
             Interests
             </div>
+           </div> 
           <form>
             <div className="form-group">
               <div className="col-md-7">
-<<<<<<< HEAD
                 <div>
                   <input type="checkbox" id="concerts-box" value="concerts_checkbox" />
                   <label htmlFor="concerts-box">Concerts</label>
@@ -177,16 +166,13 @@ class Home extends React.Component {
                 </div>
                 <br />
                 <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
-=======
 
-                {this.createCheckboxes()}
 
->>>>>>> 8f5099c4da27e2824de260fc65115f51d8ef3f6e
+                {this.createCheckbox()}
+
               </div>
             </div>
           </form>
-
-        </div>
         {/*section for entering address to search*/}
 
         <div className="row">
@@ -203,7 +189,7 @@ class Home extends React.Component {
                 <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
               </div>
               <br />
-              <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
+              <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
             </form>
           </div>
         </div>
@@ -213,37 +199,28 @@ class Home extends React.Component {
         <div className="home-nav row">
           Search results
           </div>
-
-          <div className="event-results">
-            {
-              this.state.searchResults
-                ?
-                <div src={this.state.searchResults}/>
-                :
-                <div src={loading} alt="loading..."/>
-            }
+        <div className="event-results">
+          {
+            this.state.searchResults
+              ?
+              <div src={this.state.searchResults} />
+              :
+              <div src={loading} alt="loading..." />
+          }
+        </div>
+        {/*place holder for displaying map*/}
+        <div className="mapAPI">
+          Map goes here
           </div>
 
-          {/*place holder for displaying map*/}
-          <div className = "mapAPI">
-            Space for the map!
-              <div style={{width:300, height:400}}>
-                <Map center={location} events={this.state.searchResults} />
-              </div>
-          </div>
-
-        {/*<div id="signupModal" className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={this.closeModal}>&times;</span>
-            <Signup errors={this.state.errors} />
-          </div>
-        </div>*/}
         <Footer />
       </div>
 
     );
   }
 };
+
+
 
 Home.propTypes = {
   auth: React.PropTypes.object.isRequired
