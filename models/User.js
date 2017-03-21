@@ -56,14 +56,15 @@ module.exports = function(sequelize, DataTypes) {
         //             }
         //         }
         //     }
-        // },        
+        // },
         // publicProfile: {
         //     type: DataTypes.BOOLEAN,
         //     default: true
         // }
 
     }, {
-        classMethods: {
+      tableName: 'user',
+      classMethods: {
             associate: function(models) {
                 User.belongsToMany(models.Event, {
                     as: "Event",

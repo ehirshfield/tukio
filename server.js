@@ -3,9 +3,11 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import users from './controllers/user_controller.js';
 import searchController from './controllers/search_controller.js';
+import saveController from './controllers/save_controller.js';
 import auth from './controllers/auth_controller.js';
 import cors from 'cors';
 import logger from 'morgan';
+import db from './models';
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -26,6 +28,12 @@ app.get('*', (request, response) => {
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/', searchController);
+app.use('/api/save', saveController);
 
-app.listen(PORT);
-console.log("Server started at port " + PORT);
+
+db.sequelize.sync().then(function(){
+  app.listen(PORT, function(){
+    console.log("Server started at port " + PORT);
+  });
+
+});
