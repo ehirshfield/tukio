@@ -43,45 +43,53 @@ class SignupForm extends React.Component {
             )
         }
     }
+    
     render() {
         const { errors } = this.state;
         return (
             <form onSubmit={this.onSubmit}>
-                <TextField
-                    type="text"
-                    error={errors.fullname}
-                    label="Full Name"
-                    onChange={this.onChange}
-                    value={this.state.fullname}
-                    name="fullname"
-                />
+                <div id="inline-element">
+                    <TextField
+                        type="text"
+                        error={errors.fullname}
+                        label="Full Name"
+                        onChange={this.onChange}
+                        value={this.state.fullname}
+                        name="fullname"
+                    />
+                </div>
+                <div id="inline-element">
+                    <TextField
+                        type="text"
+                        error={errors.username}
+                        label="Username"
+                        onChange={this.onChange}
+                        value={this.state.username}
+                        name="username"
+                    />
+                </div>
+                <div id="inline-element">
+                    <TextField
+                        type="text"
+                        error={errors.email}
+                        label="Email"
+                        onChange={this.onChange}
+                        value={this.state.email}
+                        name="email"
+                    />
 
-                <TextField
-                    type="text"
-                    error={errors.username}
-                    label="Username"
-                    onChange={this.onChange}
-                    value={this.state.username}
-                    name="username"
-                />
-
-                <TextField
-                    type="text"
-                    error={errors.email}
-                    label="Email"
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    name="email"
-                />
-
-                <TextField
-                    type="password"
-                    error={errors.password}
-                    label="Password"
-                    onChange={this.onChange}
-                    value={this.state.password}
-                    name="password"
-                />
+                </div>
+                <div id="inline-element">
+                    <TextField
+                        type="password"
+                        error={errors.password}
+                        label="Password"
+                        onChange={this.onChange}
+                        value={this.state.password}
+                        name="password"
+                    />
+                </div>
+                <p className="center-text">Already have an account? <a href="/login">Log in!</a></p>
                 <div className="button-div">
                     <button disabled={this.state.isLoading} className="register">Register</button>
                 </div>

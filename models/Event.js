@@ -9,29 +9,29 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false
     },
-    address: {
+    venue_name: {
+      type: DataTypes.STRING
+    },
+    venue_address: {
       type: DataTypes.STRING,
       allowNull: false
     },
     commits: {
       type: DataTypes.INTEGER,
-      default: 0
+      defaultValue: 0
     },
     commits_goal: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 100
     }
   }, {
+    tableName: 'event',
     classMethods: {
       associate: function(models) {
         Event.belongsToMany(models.User, {
           as: "User",
           through: "User_Events",
           foreignKey: "Event_Id"
-        });
-        Event.belongsTo(models.Venue, {
-          foreignKey: {
-              allowNull: false
-            }
         });
         Event.hasMany(models.Comment)
       }

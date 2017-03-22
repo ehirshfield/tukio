@@ -60,29 +60,30 @@ class LoginForm extends React.Component {
         const { errors, identifier, password, isLoading } = this.state;
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Login</h1>
+                <h1 id="transform-uppercase">Login</h1>
+                <div id="login-input">
+                    <TextField
+                        type="text"
+                        field="identifier"
+                        error={errors.identifier}
+                        label="Username"
+                        onChange={this.onChange}
+                        value={identifier}
+                        name="identifier"
+                    />
 
-                <TextField
-                    type="text"
-                    field="identifier"
-                    error={errors.identifier}
-                    label="Username"
-                    onChange={this.onChange}
-                    value={identifier}
-                    name="identifier"
-                />
+                    <TextField
+                        field="passowrd"
+                        type="password"
+                        error={errors.password}
+                        label="Password"
+                        onChange={this.onChange}
+                        value={password}
+                        name="password"
+                    />
 
-                <TextField
-                    field="passowrd"
-                    type="password"
-                    error={errors.password}
-                    label="Password"
-                    onChange={this.onChange}
-                    value={password}
-                    name="password"
-                />
-
-                <button className="primary" type="submit" disabled={isLoading}>Log in</button>
+                    <button className="primary" type="submit" disabled={isLoading}>Log in</button>
+                </div>
             </form>
         )
     }

@@ -6,17 +6,19 @@ import axios from 'axios';
 import Navbar from './Navbar.jsx';
 import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
-
-
+import About from './About.jsx';
+import Header from './Header.jsx';
+import Results from './Results.jsx';
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
-
+import Footer from './Footer.jsx';
 
 
 const items = [
-  'Concerts',
+  'Music',
   'Festivals',
   'Comedy',
+  'Food'
 ];
 
 class Home extends React.Component {
@@ -29,7 +31,8 @@ class Home extends React.Component {
       searchResults: [],
       searchRadius: "",
       searchAddress: "",
-      combinedSearch: ""
+      combinedSearch: "",
+      checkedBoxes: []
 		};
 
 		// used to make the keyword `this` work inside the `searchEvents` class function
@@ -53,15 +56,17 @@ class Home extends React.Component {
 
   handleSubmit(event){
     event.preventDefault();
-
+    var checkboxArray = [];
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
+      checkboxArray.push(checkbox);
     }
 
     if (this.state.searchRadius != "" && this.state.searchAddress != ""){
       var newSearch = {
         searchRadius: this.state.searchRadius,
-        searchAddress: this.state.searchAddress
+        searchAddress: this.state.searchAddress,
+        checkedBoxes: checkboxArray
       }
       this.setState({
         combinedSearch: newSearch
@@ -77,7 +82,8 @@ class Home extends React.Component {
       helpers.searchEvents(searchData).then(function(data) {
         return this.setState({
           searchResults: data,
-          combinedSearch: ""
+          combinedSearch: "",
+          checkedBoxes: []
         })
       }.bind(this))
 
@@ -138,11 +144,7 @@ class Home extends React.Component {
         lng: -73.9884469
     }
     // working on the dynamic markers with the Eventful API
-    console.log(this.state.searchResults);
-    let markers = [];
-    this.state.searchResults.forEach(function(result) {
-      console.log(result);
-    })
+
 
     // this will place a static pin marker, uncomment if you want to see a pin on the map
     //
@@ -158,13 +160,9 @@ class Home extends React.Component {
     return (
       <div className="home-content">
         <Navbar />
+        <Header />
+        <About />
 
-        <div className="header">
-          <div className="headline">Bringing event-goers together</div>
-          <hr className="line-break" />
-          <div className="headline-text">Find the best things to do all year with our events calendar of 2017's can't-miss happenings.</div>
-          <div className="register" onClick={this.displayModal}>Sign up with email</div>
-        </div>
         {/*section for selecting events to search*/}
         <div className="home-nav row">
           Search events
@@ -173,18 +171,6 @@ class Home extends React.Component {
           <div className="col-md-3">
             Interests
             </div>
-          <form>
-            <div className="form-group">
-              <div className="col-md-7">
-
-
-                {this.createCheckboxes()}
-
-
-              </div>
-            </div>
-          </form>
-
         </div>
         {/*section for entering address to search*/}
 
@@ -192,6 +178,7 @@ class Home extends React.Component {
           <div className="col-md-3"></div>
           <div className="col-md-7">
             <form>
+              {this.createCheckboxes()}
               <div className="form-group">
                 <label htmlFor="address">Address</label>
                 <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />
@@ -212,31 +199,19 @@ class Home extends React.Component {
         <div className="home-nav row">
           Search results
         </div>
+        <br/>
+        <br/>
+        <br/>
         <div className="row">
           <div className="col-md-1"></div>
           <div className="col-md-7">
             <div className="event-results">
-              Space for the event results!
-              {
-                this.state.searchResults
-                  ?
-                  <div src={this.state.searchResults}/>
-                  :
-                  <div src={loading} alt="loading..."/>
-              }
+              <Results searchResults={this.state.searchResults}/>
             </div>
           </div>
-          <div className="col-md-4">
-            {/*place holder for displaying map*/}
-            <div className = "mapAPI">
-              Space for the map!
-                <div style={{width:300, height:400}}>
-                  <Map center={location} events={markers} />
-                </div>
-            </div>
-          </div>
+
         </div>
-        
+        <Footer />
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>

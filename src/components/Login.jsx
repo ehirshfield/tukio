@@ -7,9 +7,10 @@ class Login extends React.Component {
         return (
             <div className="login-content">
                 <div className="login-box">
+                    <a href="/"><span className="arrow-left">&#8592;</span></a>
                     <img id="sublogo" src={sublogo} />
-                        <LoginForm />
-                    </div>
+                    <LoginForm />
+                </div>
             </div>
         )
     }

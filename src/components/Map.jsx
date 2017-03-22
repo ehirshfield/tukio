@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps'
+import React, { Component } from 'react';
+import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 
 class Map extends Component {
     render() {
         const mapContainer = <div style={{height:'100%', width:'100%'}}></div>
 
-        const events = this.props.events.map((venue, i) => {
-            
+        const events = this.props.events.map((results, i) => {
+
             const marker = {
                 position: {
-                    lat: venue.location.lat,
-                    lng: venue.location.lng
+                    lat: results.latitude,
+                    lng: results.longitude
                 }
             }
 
