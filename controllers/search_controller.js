@@ -11,9 +11,9 @@ const authKey = "mR4ZKTx6dQWXmsTw";
     let axiosAddress = req.body.address;
     let axiosRadius = req.body.radius;
     let axiosCategoriesPreJoin = req.body.categories;
-    let axiosCategories = axiosCategoriesPreJoin.join();
+    let axiosCategories = axiosCategoriesPreJoin.join().toLowerCase();
 
-    let blankURL = "http://api.eventful.com/json/events/search?...&date=Future&app_key=" + authKey;
+    let blankURL = "http://api.eventful.com/json/events/search?...&date=future&app_key=" + authKey;
     let blankAddressSearch = blankURL + "&page_size=20&sort_order=popularity&location=";
     let addressSearch = blankAddressSearch + axiosAddress;
     let blankRadiusAddressSearch = addressSearch + "&units=mi&within=";
