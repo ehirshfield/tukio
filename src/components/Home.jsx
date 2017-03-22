@@ -8,9 +8,11 @@ import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
 import About from './About.jsx';
 import Header from './Header.jsx';
+import Results from './Results.jsx';
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
 import Footer from './Footer.jsx';
+
 
 const items = [
   'Music',
@@ -117,6 +119,7 @@ class Home extends React.Component {
     });
   }
 
+
   createCheckbox(label){
     return (
       <Checkbox
@@ -177,31 +180,32 @@ class Home extends React.Component {
             </form>
           </div>
         </div>
-
+        
 
         {/*section for display search results*/}
         <div className="home-nav row">
           Search results
-          </div>
-
-          <div className="event-results">
-            {
-              this.state.searchResults
-                ?
-                <div src={this.state.searchResults}/>
-                :
-                <div src={loading} alt="loading..."/>
-            }
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div className="row">
+          <div className="col-md-1"></div>
+          <div className="col-md-6">
+            <div className="event-results">
+              <Results searchResults={this.state.searchResults}/>
+            </div>
           </div>
 
           {/*place holder for displaying map*/}
-          <div className = "mapAPI">
-            Space for the map!
-              <div style={{width:600, height:400}}>
-                <Map center={location} events={this.state.searchResults} />
-              </div>
+          <div className="col-md-3">
+            <div className = "mapAPI">
+                <div style={{width:600, height:400}}>
+                  <Map center={location} events={this.state.searchResults} />
+                </div>
+            </div>
           </div>
-
+        </div>
         <Footer />
 
         <div id="signupModal" className="modal">
@@ -210,7 +214,6 @@ class Home extends React.Component {
             <Signup errors={this.state.errors} />
           </div>
         </div>
-
       </div>
     );
   }
