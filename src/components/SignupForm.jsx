@@ -22,6 +22,7 @@ class SignupForm extends React.Component {
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     }
+    
     isValid() {
         const { errors, isValid } = validateInput(this.state);
         if (!isValid) {
@@ -43,7 +44,7 @@ class SignupForm extends React.Component {
             )
         }
     }
-    
+
     render() {
         const { errors } = this.state;
         return (
