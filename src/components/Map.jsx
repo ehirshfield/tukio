@@ -8,9 +8,9 @@ class Map extends Component {
         const events = this.props.events.map((venue, i) => {
 
             const marker = {
-                position: {
-                    lat: venue.location.lat,
-                    lng: venue.location.lng
+                "position": {
+                    "lat": parseFloat(venue.latitude),
+                    "lng": parseFloat(venue.longitude)
                 }
             }
 
