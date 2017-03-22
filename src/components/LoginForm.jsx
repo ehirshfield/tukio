@@ -20,10 +20,16 @@ class LoginForm extends React.Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+    }
+
+    onChangePassword(e) {
+        const passwordInput = e.target.value.toLowerCase().trim()
+        this.setState({ password: passwordInput })
     }
 
     onChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
+        this.setState({ identifier: e.target.value })
     }
 
     isValid() {
@@ -73,11 +79,11 @@ class LoginForm extends React.Component {
                     />
 
                     <TextField
-                        field="passowrd"
-                        type="password"
+                        field="password"
+                        type="text"
                         error={errors.password}
                         label="Password"
-                        onChange={this.onChange}
+                        onChange={this.onChangePassword}
                         value={password}
                         name="password"
                     />

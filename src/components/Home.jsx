@@ -135,24 +135,11 @@ class Home extends React.Component {
   }
 
   render() {
-    // static position for the location of the map
     const location = {
-        lat: 40.7575285,
-        lng: -73.9884469
+        lat: 34.0523003,
+        lng: -118.2787902
     }
-    // working on the dynamic markers with the Eventful API
 
-
-    // this will place a static pin marker, uncomment if you want to see a pin on the map
-    //
-    // const markers = [
-    //   {
-    //     location: {
-    //       lat: 40.7575285,
-    //       lng: -73.9884469
-    //     }
-    //   }
-    // ]
 
     return (
       <div className="home-content">
@@ -210,11 +197,13 @@ class Home extends React.Component {
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
             Space for the map!
-              <div style={{width:300, height:400}}>
+              <div style={{width:600, height:400}}>
                 <Map center={location} events={this.state.searchResults} />
               </div>
           </div>
+
         <Footer />
+
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
