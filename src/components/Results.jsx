@@ -18,15 +18,15 @@ class Results extends React.Component {
                 <p> Venue Address: {event.venue_address}</p>
               </span>
               <span className="btn-group pull-right">
-                <a href={event.save} rel="noopener noreferrer" target="_blank">
-                  <button className="btn btn-default ">Save Event</button>
-                </a>
-              </span>
-              <span className="btn-group pull-right">
                 <a href={event.commits} rel="noopener noreferrer" target="_blank">
                   <button className="btn btn-default ">Commit to buy</button>
                 </a>
-              </span>              
+              </span>  
+              <span className="btn-group pull-right">
+                <a href={event.save} rel="noopener noreferrer" target="_blank">
+                  <button className="btn btn-default ">Save Event</button>
+                </a>
+              </span>                          
             </h3>
             <p> Event Date: {event.start_time}</p>
 

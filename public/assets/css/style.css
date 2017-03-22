@@ -455,3 +455,30 @@ input {
         opacity: 0;
     }
 }
+
+.search-content {
+    background-color: black;
+    color: white;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.search-header-input {
+    display: inline-block !important;
+    width: 50% !important;
+}
+
+.address-input, .radius-input {
+    background-color: #333;
+    display: inline-block !important;
+}
+
+.checkbox {
+    display: inline-block !important;
+}
+
+input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
