@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     }
 
   }, {
+    tableName: 'comment',
     classMethods: {
       associate: function(models) {
         Comment.belongsTo(models.Event, {
