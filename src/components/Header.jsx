@@ -37,7 +37,7 @@ class Header extends React.Component {
         )
 
         const loggedIn = (
-            "No"
+                null
         )
         return (
             <div className="header">

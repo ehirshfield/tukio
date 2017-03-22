@@ -197,11 +197,13 @@ class Home extends React.Component {
           {/*place holder for displaying map*/}
           <div className = "mapAPI">
             Space for the map!
-              <div style={{width:300, height:400}}>
+              <div style={{width:600, height:400}}>
                 <Map center={location} events={this.state.searchResults} />
               </div>
           </div>
+
         <Footer />
+
         <div id="signupModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={this.closeModal}>&times;</span>
