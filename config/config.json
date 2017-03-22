@@ -1,9 +1,9 @@
 {
     "development": {
-        "username": "root",
-        "password": "password",
-        "database": "tukio_db",
-        "host": "127.0.0.1",
+        "username": "xocupyvbha9e045q",
+        "password": "d9ilranedgdp0qli ",
+        "database": "j24wlw8qrorjh60w",
+        "host": "	edo4plet5mhv93s3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
         "dialect": "mysql"
     },
     "test": {
