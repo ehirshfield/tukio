@@ -1,5 +1,4 @@
 import React from 'react';
-import helpers from '../actions/helpers.js';
 
 // Results Component Declaration
 class Results extends React.Component {
