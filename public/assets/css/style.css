@@ -468,13 +468,18 @@ input {
     width: 50% !important;
 }
 
-.address-input, .radius-input {
+.address-input,
+.radius-input {
     background-color: #333;
     display: inline-block !important;
 }
 
 .checkbox {
     display: inline-block !important;
+}
+
+#image-header {
+    width: 33.33%;
 }
 
 input[type='checkbox'] {

@@ -7,6 +7,7 @@ import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
 import About from './About.jsx';
 import Header from './Header.jsx';
+import ImageHeader from './ImageHeader.jsx';
 import Results from './Results.jsx';
 import Search from './Search.jsx';
 import { connect } from 'react-redux';
@@ -59,6 +60,7 @@ class Home extends React.Component {
         <Navbar />
         <Header />
         <About />
+        <ImageHeader />
         <Search setSearchResults={this.setSearchResults} />    
 
         {/*section for display search results*/}
