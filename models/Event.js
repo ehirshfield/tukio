@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
           through: "User_Events",
           foreignKey: "Event_Id"
         });
-        Event.hasMany(models.Comment)
+        Event.hasMany(models.Comment);
       }
     }
   });
