@@ -21,7 +21,8 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0
     },
     commits_goal: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 100
     }
   }, {
     tableName: 'event',
@@ -32,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
           through: "User_Events",
           foreignKey: "Event_Id"
         });
-        Event.hasMany(models.Comment)
+        Event.hasMany(models.Comment);
       }
     }
   });
