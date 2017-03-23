@@ -5,12 +5,12 @@ class Map extends Component {
     render() {
         const mapContainer = <div style={{height:'100%', width:'100%'}}></div>
 
-        const events = this.props.events.map((results, i) => {
+        const events = this.props.events.map((venue, i) => {
 
             const marker = {
-                position: {
-                    lat: results.latitude,
-                    lng: results.longitude
+                "position": {
+                    "lat": parseFloat(venue.latitude),
+                    "lng": parseFloat(venue.longitude)
                 }
             }
 
@@ -32,4 +32,4 @@ class Map extends Component {
     }
 }
 
-export default Map
+export default Map;
