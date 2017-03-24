@@ -1,8 +1,8 @@
-import express from 'express';
-import db from '../models';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import config from './env_variable.js'
+const express = require('express');
+const db = require('../models');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('./env_variable.js');
 
 let router = express.Router();
 
@@ -27,4 +27,4 @@ router.post('/', (req, res) => {
 });
 
 
-export default router;
+module.exports = router;

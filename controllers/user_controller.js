@@ -1,8 +1,8 @@
-import express from 'express';
-import commonValidations from '../src/validations/signup.js';
-import db from '../models';
-import bcrypt from 'bcryptjs';
-import isEmpty from 'lodash/isEmpty';
+const express = require('express');
+const commonValidations = require('../src/validations/signup.js');
+const db = require('../models');
+const bcrypt = require('bcryptjs');
+const isEmpty = require('lodash/isEmpty');
 
 let router = express.Router();
 
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
                 username: username,
                 email: email,
                 password: hashedPassword
-            }).then(function (data) {
+            }).then(function(data) {
                 res.redirect('/login');
             });
 
@@ -62,4 +62,4 @@ router.post('/', (req, res) => {
 })
 
 
-export default router;
+module.exports = router;

@@ -5,7 +5,7 @@ let router = express.Router();
 const authKey = "mR4ZKTx6dQWXmsTw";
 
 
-  router.post('/search', function(req, res){
+router.post('/search', function(req, res) {
     console.log("At least this happened");
 
     let axiosAddress = req.body.address;
@@ -22,17 +22,16 @@ const authKey = "mR4ZKTx6dQWXmsTw";
     let radAddCatSearch = blankRadAddCatSearch + axiosCategories;
     console.log("complete URL: " + radAddCatSearch);
 
-    request.get(radAddCatSearch, function(error, response, body){
-      if (error){
-        console.log("error on request call: " + error);
-        console.log('statusCode:', response && response.statusCode);
-      }
-      else{
-        console.log('statusCode:', response && response.statusCode);
-        console.log("BODY: " + body);
-        return res.send(body);
-      }
+    request.get(radAddCatSearch, function(error, response, body) {
+        if (error) {
+            console.log("error on request call: " + error);
+            console.log('statusCode:', response && response.statusCode);
+        } else {
+            console.log('statusCode:', response && response.statusCode);
+            console.log("BODY: " + body);
+            return res.send(body);
+        }
     })
-  });
+});
 
 export default router;

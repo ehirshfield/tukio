@@ -10,7 +10,7 @@ module.exports = {
             loader: 'file-loader?name=/assets/img/[name].[ext]'
         }, {
             test: /\.jsx?$/,
-            include: [/src/, '/src/validations/'],
+            include: [/src/, '/src/validations/', '/controllers/'],
             loader: "babel-loader",
             query: {
                 presets: ["react", "es2015"]
