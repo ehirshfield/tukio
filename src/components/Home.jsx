@@ -66,8 +66,7 @@ class Home extends React.Component {
             <div className="event-results">
               <Results searchResults={this.state.searchResults}/>
             </div>
-     
-
+    
 
             <div className = "mapAPI">
                 <div style={{width: '100%', height:700}}>
