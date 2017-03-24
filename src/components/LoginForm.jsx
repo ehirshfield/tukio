@@ -80,7 +80,7 @@ class LoginForm extends React.Component {
 
                     <TextField
                         field="password"
-                        type="text"
+                        type="password"
                         error={errors.password}
                         label="Password"
                         onChange={this.onChangePassword}
