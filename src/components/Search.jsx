@@ -4,7 +4,7 @@ import axios from 'axios';
 import Checkbox from './Checkbox.jsx';
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
-
+import logo from '../../public/assets/img/logo.png';
 
 const items = [
   'Music',
@@ -115,39 +115,19 @@ class Search extends React.Component {
   render() {
 
     return (
-        <div className="home-content">
-
-        // {/*section for selecting events to search*/}
-        <div className="home-nav row">
-          Search events
-          </div>
-        <div className="search-options row">
-          <div className="col-md-3">
-            Interests
-            </div>
-        </div>
-        // {/*section for entering address to search*/}
-
-        <div className="row">
-          <div className="col-md-3"></div>
-          <div className="col-md-7">
+        <div className="search-content">
+          <img id="search-component-logo" src={logo} />
             <form>
               {this.createCheckboxes()}
-              <div className="form-group">
                 <label htmlFor="address">Address</label>
-                <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />
-              </div>
-              <br />
-              <div className="form-group">
+                <input type="text" value={this.state.searchAddress} className="address-input" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />
+
                 <label htmlFor="radius">Search Radius (miles)</label>
-                <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
-              </div>
-              <br />
+                <input type="text" value={this.state.searchRadius} className="radius-input" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
+              
               <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
             </form>
           </div>
-        </div>
-        </div>
     );
   }
 };
@@ -163,4 +143,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Search);
-// export default Search;
