@@ -7,7 +7,11 @@
         "axios": "^0.15.3",
         "babel-cli": "^6.23.0",
         "babel-core": "^6.23.1",
+<<<<<<< HEAD
         "babel-loader": "^6.3.2",
+=======
+        "babel-loader": "^6.4.1",
+>>>>>>> 81f33e942ee0d3d565ece874445793923473ebbf
         "babel-preset-es2015": "^6.22.0",
         "babel-preset-react": "^6.23.0",
         "bcryptjs": "^2.4.3",
@@ -45,9 +49,14 @@
         "webpack": "^2.2.1"
     },
     "scripts": {
+<<<<<<< HEAD
         "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
         "prod": "NODE_ENV=production node server.js",
         "postinstall": "webpack -p"
+=======
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "server": "node server.js"
+>>>>>>> 81f33e942ee0d3d565ece874445793923473ebbf
     },
     "repository": {
         "type": "git",
