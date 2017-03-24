@@ -60,12 +60,11 @@ class Results extends React.Component {
     return (
       <div className="main-container">
         <div className="row">
-          <div className="col-lg-12">
+
             <div className="panel panel-primary">
               <div className="panel-heading">
                 <h1 className="panel-title">
                   <strong>
-                    <i className="fa fa-list-alt"></i>
                     Results
                   </strong>
                 </h1>
@@ -78,7 +77,6 @@ class Results extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
   render() {

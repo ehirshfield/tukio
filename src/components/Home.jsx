@@ -62,31 +62,19 @@ class Home extends React.Component {
         <About />
         <ImageHeader />
         <Search setSearchResults={this.setSearchResults} />    
-
-        {/*section for display search results*/}
-        <div className="home-nav row">
-          Search results
-        </div>
-        <br/>
-        <br/>
-        <br/>
-        <div className="row">
-          <div className="col-md-1"></div>
-          <div className="col-md-6">
+  
             <div className="event-results">
               <Results searchResults={this.state.searchResults}/>
             </div>
-          </div>
+     
 
-          {/*place holder for displaying map*/}
-          <div className="col-md-3">
+
             <div className = "mapAPI">
-                <div style={{width:600, height:400}}>
+                <div style={{width: '100%', height:700}}>
                   <Map center={location} events={this.state.searchResults} />
                 </div>
-            </div>
-          </div>
-        </div>
+                </div>
+       
         <Footer />
 
         <div id="signupModal" className="modal">
