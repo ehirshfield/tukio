@@ -3,7 +3,25 @@ import db from '../models';
 
 let router = express.Router();
 
+router.get('/saved-events', (req, res) => {
+  let userID = req.params.userID;
 
+    db.User_Events.findAll({
+      where: {
+        User_Id: userID
+      }
+    }).then((data) => {
+      db.Event.findAll({
+        where: {
+          id: data.Event_Id
+        }
+      }).then((response) => {
+        res.send(response);
+      })
+    })
+})
+
+// Saving an event
 router.post('/event', (req, res) => {
   let eventTitle = req.body.title;
   let eventDate = req.body.date;
@@ -46,6 +64,7 @@ router.post('/event', (req, res) => {
 
 });
 
+//Increase commits by one
 router.put('/event/:event_id/commit/:user_id/', (req, res) => {
 
   let userID = req.params.user_id;
@@ -74,37 +93,12 @@ router.put('/event/:event_id/commit/:user_id/', (req, res) => {
       })
 
     }
-    // else {
-    //   db.User_Events.update({hasCommited: false}, {where: {User_Id: userID, Event_Id: eventID, hasCommited: true}})
-    //   .then((data) => {
-    //     if (data) {
-    //       db.Event.find({
-    //         where: {
-    //           id: eventID
-    //         }
-    //       }).then((eventRow) => {
-    //         if (eventRow) {
-    //           console.log("Number of commits: " + eventRow.commits);
-    //           let newCommitTotal = ((eventRow.commits) - 1);
-    //           eventRow.update({
-    //             commits: newCommitTotal
-    //           }).then((response) => {
-    //             res.send("Commits have been decremented!");
-    //           });
-    //         }
-    //         else {
-    //           res.send("Can't find it");
-    //         }
-    //       })
-    //     }
-    //     else {
-    //       res.send("Error, can't find either. Instance may not exist");
-    //     }
-    //   })
-    // }
+
   });
 });
 
+
+//Set the number of total commits -- For an admin
 router.put('/:event_id/set-commit-total/:new_goal', (req, res) => {
   let eventID = req.params.event_id;
   let commitGoal = req.params.new_goal;
