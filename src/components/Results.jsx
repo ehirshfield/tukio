@@ -21,7 +21,6 @@ class Results extends React.Component {
   }
 
   renderSearchResults(){
-
     return this.props.searchResults.map(function(event, index) {
       // Each event reperesents a list group item with a known index
       return (
@@ -82,6 +81,7 @@ class Results extends React.Component {
     );
   }
   render() {
+
     // If we have no event, render this HTML
 
         if (this.props.searchResults == []) {
@@ -100,4 +100,14 @@ class Results extends React.Component {
   }
 };
 
-export default Results;
+Results.propTypes = {
+    auth: React.PropTypes.object.isRequired,
+}
+
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(Results);
