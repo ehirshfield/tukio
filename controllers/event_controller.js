@@ -3,6 +3,24 @@ import db from '../models';
 
 let router = express.Router();
 
+router.get('/saved-events', (req, res) => {
+  let userID = req.params.userID;
+
+    db.User_Events.findAll({
+      where: {
+        User_Id: userID
+      }
+    }).then((data) => {
+      db.Event.findAll({
+        where: {
+          id: data.Event_Id
+        }
+      }).then((response) => {
+        res.send(response);
+      })
+    })
+})
+
 // Saving an event
 router.post('/event', (req, res) => {
   let eventTitle = req.body.title;
@@ -75,7 +93,7 @@ router.put('/event/:event_id/commit/:user_id/', (req, res) => {
       })
 
     }
-    
+
   });
 });
 

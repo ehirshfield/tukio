@@ -1,11 +1,28 @@
 import React from 'react';
+import helpers from '../actions/helpers.js';
+import { connect } from 'react-redux';
 
 // Results Component Declaration
 class Results extends React.Component {
-  
+
+  constructor(props) {
+      super(props);
+      this.state = {
+          eventToSave: []
+      }
+
+      this.handleEventSubmit = this.handleEventSubmit.bind(this);
+  }
+
+  handleEventSubmit(event) {
+    event.preventDefault();
+    let saveEventData = this.target.value;
+    console.log("Heres the data for one event: " + saveEventData);
+  }
+
   renderSearchResults(){
-    
-    return this.props.searchResults.map(function(event, index) {  
+
+    return this.props.searchResults.map(function(event, index) {
       // Each event reperesents a list group item with a known index
       return (
         <div key={index}>
@@ -17,15 +34,15 @@ class Results extends React.Component {
                 <p> Venue Address: {event.venue_address}</p>
               </span>
               <span className="btn-group pull-right">
-                <a href={event.commits} rel="noopener noreferrer" target="_blank">
+                <a rel="noopener noreferrer" target="_blank">
                   <button className="btn btn-default ">Commit to buy</button>
                 </a>
-              </span>  
+              </span>
               <span className="btn-group pull-right">
-                <a href={event.save} rel="noopener noreferrer" target="_blank">
-                  <button className="btn btn-default ">Save Event</button>
+                <a rel="noopener noreferrer">
+                  <button onClick={this.handleEventSubmit} value={event} className="btn btn-default ">Save Event</button>
                 </a>
-              </span>                          
+              </span>
             </h3>
             <p> Event Date: {event.start_time}</p>
 
@@ -64,7 +81,7 @@ class Results extends React.Component {
   }
   render() {
     // If we have no event, render this HTML
-    
+
         if (this.props.searchResults == []) {
       return (
         <li className="list-group-item">
@@ -75,7 +92,7 @@ class Results extends React.Component {
           </h3>
         </li>
       );
-    } 
+    }
     // If we have events, return this.renderContainer() which in turn, returns all the events
     return this.renderContainer();
   }
