@@ -1,5 +1,5 @@
-import express from 'express';
-import db from '../models';
+const express = require('express');
+const db = require('../models');
 
 let router = express.Router();
 
@@ -70,4 +70,5 @@ router.put('/update', (req, res) => {
 
 });
 
-export default router;
+
+module.exports = router;

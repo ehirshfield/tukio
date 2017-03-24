@@ -1,6 +1,6 @@
 "use strict";
-import request from 'request';
-import express from 'express';
+const express = require('express');
+const request = require('request');
 let router = express.Router();
 const authKey = "mR4ZKTx6dQWXmsTw";
 
@@ -34,4 +34,5 @@ router.post('/search', function(req, res) {
     })
 });
 
-export default router;
+
+module.exports = router;

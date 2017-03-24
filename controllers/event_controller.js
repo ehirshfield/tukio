@@ -1,5 +1,5 @@
-import express from 'express';
-import db from '../models';
+const express = require('express');
+const db = require('../models');
 
 let router = express.Router();
 
@@ -119,4 +119,5 @@ router.put('/:event_id/set-commit-total/:new_goal', (req, res) => {
 });
 
 
-export default router;
+
+module.exports = router;

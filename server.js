@@ -1,14 +1,14 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import path from 'path';
-import users from './controllers/user_controller.js';
-import searchController from './controllers/search_controller.js';
-import eventController from './controllers/event_controller.js';
-import creditCardController from './controllers/credit_card_controller.js';
-import auth from './controllers/auth_controller.js';
-import cors from 'cors';
-import logger from 'morgan';
-import db from './models';
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const users = require('./controllers/user_controller.js');
+const searchController = require('./controllers/search_controller.js');
+const eventController = require('./controllers/event_controller.js');
+const creditCardController = require('./controllers/credit_card_controller.js');
+const auth = require('./controllers/auth_controller.js');
+const cors = require('cors');
+const logger = require('morgan');
+const db = require('./models');
 
 const PORT = process.env.PORT || 8000;
 const app = express();
