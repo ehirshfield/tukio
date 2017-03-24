@@ -64,7 +64,6 @@ class Search extends React.Component {
         combinedSearch: newSearch
       });
     }
-
   }
 
   componentDidUpdate(){
@@ -79,9 +78,7 @@ class Search extends React.Component {
           checkedBoxes: []
         })
       }.bind(this))
-
     }
-
   }
 
   handleInputChange(event) {
