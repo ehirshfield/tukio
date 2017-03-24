@@ -3,6 +3,21 @@ import axios from 'axios';
 
 const helpers = {
 
+  getSavedEvents: (userID) => {
+    return axios({
+      method: 'GET',
+      url: '/api/save/saved-events',
+      params: {
+        userID: userID
+      }
+    }).then((response) => {
+      console.log(response)
+      return response
+    }).catch((error) => {
+      console.log(error);
+    });
+  },
+
   // Function to take input parameters and query eventful API
   searchEvents: (searchData) => {
 

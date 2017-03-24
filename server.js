@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import users from './controllers/user_controller.js';
 import searchController from './controllers/search_controller.js';
-import saveController from './controllers/save_controller.js';
+import eventController from './controllers/event_controller.js';
 import creditCardController from './controllers/credit_card_controller.js'
 import auth from './controllers/auth_controller.js';
 import cors from 'cors';
@@ -29,7 +29,7 @@ app.get('*', (request, response) => {
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/', searchController);
-app.use('/api/save', saveController);
+app.use('/api/save', eventController);
 app.use('/api/cc', creditCardController);
 
 
