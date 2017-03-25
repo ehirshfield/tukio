@@ -1,6 +1,6 @@
 # Tukio!
 
-![N|Solid](http://alalyaatourism.com/wp-content/uploads/2015/06/book-tickets.png)
+![N|Solid](https://tukiotk.herokuapp.com/assets/img/logo.png)
 
 Tukio is an app that allows users to search, save and purchase discounted events tickets.
 
