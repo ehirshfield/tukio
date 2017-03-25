@@ -61,6 +61,8 @@ class Search extends React.Component {
         checkedBoxes: checkboxArray
       }
       this.setState({
+        // searchRadius: "",
+        // searchAddress: "",
         combinedSearch: newSearch
       });
     }
@@ -72,7 +74,7 @@ class Search extends React.Component {
       console.log("This is being run");
       var searchData = this.state.combinedSearch;
       helpers.searchEvents(searchData).then(function(data) {
-        this.props.setSearchResults(data);    
+        this.props.setSearchResults(data);
         return this.setState({
           searchResults: data,
           combinedSearch: "",

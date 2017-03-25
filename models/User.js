@@ -25,12 +25,8 @@ module.exports = function(sequelize, DataTypes) {
       tableName: 'user',
       classMethods: {
             associate: function(models) {
-                User.belongsToMany(models.Event, {
-                    as: "Event",
-                    through: "User_Events",
-                    foreignKey: "User_Id"
-                });
                 User.hasMany(models.Credit_Card);
+                User.hasMany(models.User_Events);
             }
         },
         timestamps: false

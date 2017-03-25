@@ -1,24 +1,17 @@
 import React from 'react';
 import helpers from '../actions/helpers.js';
 import { connect } from 'react-redux';
+import SaveEventButton from './SaveEventButton.jsx';
 
 // Results Component Declaration
 class Results extends React.Component {
 
   constructor(props) {
       super(props);
-      this.state = {
-          eventToSave: []
-      }
 
-      this.handleEventSubmit = this.handleEventSubmit.bind(this);
   }
 
-  handleEventSubmit(event) {
-    event.preventDefault();
-    let saveEventData = this.target.value;
-    console.log("Heres the data for one event: " + saveEventData);
-  }
+
 
   renderSearchResults(){
 
@@ -40,7 +33,7 @@ class Results extends React.Component {
               </span>
               <span className="btn-group pull-right">
                 <a rel="noopener noreferrer">
-                  <button onClick={this.handleEventSubmit} value={event} className="btn btn-default ">Save Event</button>
+                  <SaveEventButton eventData={event} />
                 </a>
               </span>
             </h3>
@@ -99,5 +92,7 @@ class Results extends React.Component {
     return this.renderContainer();
   }
 };
+
+
 
 export default Results;
