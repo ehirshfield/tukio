@@ -5,17 +5,32 @@ const helpers = {
 
   getSavedEvents: (userID) => {
     return axios({
-      method: 'GET',
+      method: 'POST',
       url: '/api/save/saved-events',
-      params: {
+      data: {
         userID: userID
       }
+    }).then(function(response){
+      return response.data
+    })
+  },
+
+  saveEvent: (eventData) => {
+    return axios({
+      method: 'POST',
+      url: '/api/save/event',
+      data: {
+        title: eventData.title,
+        date: eventData.date,
+        address: eventData.address,
+        venue: eventData.venue,
+        user_id: eventData.user_id
+      }
     }).then((response) => {
-      console.log(response)
-      return response
+      console.log("Saved Event YAY!!");
     }).catch((error) => {
       console.log(error);
-    });
+    })
   },
 
   // Function to take input parameters and query eventful API

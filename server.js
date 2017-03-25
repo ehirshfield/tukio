@@ -33,6 +33,7 @@ app.use('/api/save', eventController);
 app.use('/api/cc', creditCardController);
 
 
+
 db.sequelize.sync({ force: true }).then(function() {
     app.listen(PORT, function() {
         console.log("Server started at port " + PORT);
