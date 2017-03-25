@@ -15,6 +15,7 @@ body {
     width: 100%;
     margin: 0 !important;
     padding: 0 !important;
+    background-color: #eee;
 }
 
 #nav-bar {
@@ -174,13 +175,12 @@ li {
 }
 
 .search-button {
-    color: #444;
-    background-color: #d1d6c6;
-    text-transform: uppercase;
+    color: white;
+    background-color: #000;
     text-align: center;
     border-radius: 3px;
-    margin: 20px auto;
-    width: 270px;
+    margin-left: 20px;
+    width: 200px;
     height: 50px;
     font-size: 15px;
     padding: 14px;
@@ -472,18 +472,72 @@ input {
 .radius-input {
     background-color: #333;
     display: inline-block !important;
+    width: 20%;
+    padding-left: 20px;
 }
 
 .checkbox {
     display: inline-block !important;
+    margin: 10px;
 }
 
 #image-header {
     width: 33.33%;
+    margin-top: -1px;
+    margin-bottom: -1px;
 }
 
 input[type='checkbox'] {
     width: 20px;
     height: 20px;
     margin-left: 10px;
+}
+
+.mapAPI {
+    width: 60%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.event-results {
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.panel-title {
+    color: #ED3E2F !important;
+}
+
+.panel-primary {
+    background-color: #eee !important;
+    border-radius: 0px !important;
+    border: none !important;
+}
+
+.panel-heading {
+    background-color: black !important;
+    border-radius: 0px !important;
+    border: 0 !important;
+}
+
+p {
+    font-size: 14px !important;
+}
+
+#search-component-logo {
+    width: 150px;
+    filter: invert(100%);
+    display: inline-block !important;
+}
+
+.search-content {
+    background-color: #333;
+    margin-top: 0 !important;
+    padding: 20px;
+}
+
+form {
+    display: inline;
+    margin: 0;
 }

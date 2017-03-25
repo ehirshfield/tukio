@@ -2,6 +2,8 @@ import React from 'react';
 import helpers from '../actions/helpers.js';
 import { connect } from 'react-redux';
 import SaveEventButton from './SaveEventButton.jsx';
+import Commit from './Commit.jsx';
+
 
 // Results Component Declaration
 class Results extends React.Component {
@@ -13,8 +15,25 @@ class Results extends React.Component {
 
 
 
-  renderSearchResults(){
+     // T&C to commit to purchase
+    displayModal() {
+    let modal = document.getElementById('commitModal');
+    let btn = document.querySelector("buy");
+    modal.style.display = "block";
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
 
+  closeModal() {
+    let modal = document.getElementById('commitModal');
+    let span = document.querySelector("close");
+    modal.style.display = "none";
+  }
+
+  renderSearchResults(){
     return this.props.searchResults.map(function(event, index) {
       // Each event reperesents a list group item with a known index
       return (
@@ -28,7 +47,7 @@ class Results extends React.Component {
               </span>
               <span className="btn-group pull-right">
                 <a rel="noopener noreferrer" target="_blank">
-                  <button className="btn btn-default ">Commit to buy</button>
+                  <button className="btn btn-default commit" onClick={this.displayModal}>Commit to buy</button>
                 </a>
               </span>
               <span className="btn-group pull-right">
@@ -53,12 +72,11 @@ class Results extends React.Component {
     return (
       <div className="main-container">
         <div className="row">
-          <div className="col-lg-12">
+
             <div className="panel panel-primary">
               <div className="panel-heading">
                 <h1 className="panel-title">
                   <strong>
-                    <i className="fa fa-list-alt"></i>
                     Results
                   </strong>
                 </h1>
@@ -71,10 +89,10 @@ class Results extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
   render() {
+
     // If we have no event, render this HTML
 
         if (this.props.searchResults == []) {
@@ -90,9 +108,25 @@ class Results extends React.Component {
     }
     // If we have events, return this.renderContainer() which in turn, returns all the events
     return this.renderContainer();
+                  /*<div id="commitModal" className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={this.closeModal}>&times;</span>
+              <Commit />
+            </div>
+          </div>*/
   }
+
 };
 
 
+Results.propTypes = {
+    auth: React.PropTypes.object.isRequired,
+}
 
-export default Results;
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(Results);

@@ -13,6 +13,7 @@ import Search from './Search.jsx';
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
 import Footer from './Footer.jsx';
+import Commit from './Commit.jsx';
 
 class Home extends React.Component {
 
@@ -62,31 +63,18 @@ class Home extends React.Component {
         <About />
         <ImageHeader />
         <Search setSearchResults={this.setSearchResults} />    
-
-        {/*section for display search results*/}
-        <div className="home-nav row">
-          Search results
-        </div>
-        <br/>
-        <br/>
-        <br/>
-        <div className="row">
-          <div className="col-md-1"></div>
-          <div className="col-md-6">
+  
             <div className="event-results">
               <Results searchResults={this.state.searchResults}/>
             </div>
-          </div>
+    
 
-          {/*place holder for displaying map*/}
-          <div className="col-md-3">
             <div className = "mapAPI">
-                <div style={{width:600, height:400}}>
+                <div style={{width: '100%', height:700}}>
                   <Map center={location} events={this.state.searchResults} />
                 </div>
-            </div>
-          </div>
-        </div>
+                </div>
+       
         <Footer />
 
         <div id="signupModal" className="modal">
@@ -95,6 +83,15 @@ class Home extends React.Component {
             <Signup errors={this.state.errors} />
           </div>
         </div>
+
+          {/*modal to commit to buy*/}
+          <div id="commitModal" className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={this.closeModal}>&times;</span>
+              <Commit />
+            </div>
+          </div>
+
       </div>
     );
   }

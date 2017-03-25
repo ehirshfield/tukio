@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+const bcrypt = require('bcryptjs');
 
 module.exports = function(sequelize, DataTypes) {
     let User = sequelize.define("User", {
@@ -22,8 +22,8 @@ module.exports = function(sequelize, DataTypes) {
         }
 
     }, {
-      tableName: 'user',
-      classMethods: {
+        tableName: 'user',
+        classMethods: {
             associate: function(models) {
                 User.hasMany(models.Credit_Card);
                 User.hasMany(models.User_Events);
