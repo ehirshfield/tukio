@@ -1,6 +1,7 @@
 import React from 'react';
 import helpers from '../actions/helpers.js';
 import { connect } from 'react-redux';
+import Commit from './Commit.jsx';
 
 // Results Component Declaration
 class Results extends React.Component {
@@ -20,8 +21,25 @@ class Results extends React.Component {
     console.log("Heres the data for one event: " + saveEventData);
   }
 
-  renderSearchResults(){
+     // T&C to commit to purchase
+    displayModal() {
+    let modal = document.getElementById('commitModal');
+    let btn = document.querySelector("buy");
+    modal.style.display = "block";
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
 
+  closeModal() {
+    let modal = document.getElementById('commitModal');
+    let span = document.querySelector("close");
+    modal.style.display = "none";
+  }
+
+  renderSearchResults(){
     return this.props.searchResults.map(function(event, index) {
       // Each event reperesents a list group item with a known index
       return (
@@ -35,7 +53,7 @@ class Results extends React.Component {
               </span>
               <span className="btn-group pull-right">
                 <a rel="noopener noreferrer" target="_blank">
-                  <button className="btn btn-default ">Commit to buy</button>
+                  <button className="btn btn-default commit" onClick={this.displayModal}>Commit to buy</button>
                 </a>
               </span>
               <span className="btn-group pull-right">
@@ -80,6 +98,7 @@ class Results extends React.Component {
     );
   }
   render() {
+
     // If we have no event, render this HTML
 
         if (this.props.searchResults == []) {
@@ -95,7 +114,24 @@ class Results extends React.Component {
     }
     // If we have events, return this.renderContainer() which in turn, returns all the events
     return this.renderContainer();
+                  /*<div id="commitModal" className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={this.closeModal}>&times;</span>
+              <Commit />
+            </div>
+          </div>*/
   }
+
 };
 
-export default Results;
+Results.propTypes = {
+    auth: React.PropTypes.object.isRequired,
+}
+
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(Results);
