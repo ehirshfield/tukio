@@ -13,6 +13,7 @@ import Search from './Search.jsx';
 import { connect } from 'react-redux';
 import helpers from '../actions/helpers.js';
 import Footer from './Footer.jsx';
+import Commit from './Commit.jsx';
 
 class Home extends React.Component {
 
@@ -66,8 +67,7 @@ class Home extends React.Component {
             <div className="event-results">
               <Results searchResults={this.state.searchResults}/>
             </div>
-     
-
+    
 
             <div className = "mapAPI">
                 <div style={{width: '100%', height:700}}>
@@ -83,6 +83,15 @@ class Home extends React.Component {
             <Signup errors={this.state.errors} />
           </div>
         </div>
+
+          {/*modal to commit to buy*/}
+          <div id="commitModal" className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={this.closeModal}>&times;</span>
+              <Commit />
+            </div>
+          </div>
+
       </div>
     );
   }
