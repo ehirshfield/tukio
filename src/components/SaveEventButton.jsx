@@ -1,6 +1,7 @@
 import React from 'react';
 import helpers from '../actions/helpers.js';
 import { connect } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
 
 class SaveEventButton extends React.Component {
   constructor(props) {
@@ -67,7 +68,6 @@ componentWillMount() {
 
 
   render(){
-
     if(this.state.disabled){
       return(
         <button className="btn btn-default" disabled={this.state.disabled} onClick={this.handleClick} >Saved!</button>
@@ -75,13 +75,10 @@ componentWillMount() {
     }
     else {
       return(
-        <button className="btn btn-default" disabled={this.state.disabled} onClick={this.handleClick} >Save Event</button>
-      )
+        <button className="btn btn-default" data-tip="Please Sign In!" disabled={this.state.disabled} onClick={this.handleClick} >Save Event</button>
+      )  
     }
-
   }
-
-
 }
 
 SaveEventButton.propTypes = {

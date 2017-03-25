@@ -3,6 +3,7 @@ import helpers from '../actions/helpers.js';
 import { connect } from 'react-redux';
 import SaveEventButton from './SaveEventButton.jsx';
 import Commit from './Commit.jsx';
+import ReactTooltip from 'react-tooltip';
 
 
 // Results Component Declaration
@@ -52,7 +53,9 @@ class Results extends React.Component {
               </span>
               <span className="btn-group pull-right">
                 <a rel="noopener noreferrer">
+                  <ReactTooltip place="top" type="warning" effect="float" />
                   <SaveEventButton eventData={event} />
+                  
                 </a>
               </span>
             </h3>
