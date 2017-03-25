@@ -15,7 +15,7 @@ const helpers = {
         })
     },
 
-    commitToBuy: (commit) => {
+    commitToBuy: (userID, eventID) => {
         return axios({
             method: 'PUT',
             url: '/api/save/commit',
@@ -52,7 +52,7 @@ const helpers = {
                 user_id: eventData.user_id
             }
         }).then((response) => {
-            console.log("Saved Event YAY!!");
+            return response.data;
         }).catch((error) => {
             console.log(error);
         })

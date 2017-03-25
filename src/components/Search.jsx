@@ -25,11 +25,11 @@ class Search extends React.Component {
       searchAddress: "",
       combinedSearch: "",
       checkedBoxes: []
-		};
+    };
 
-		// used to make the keyword `this` work inside the `searchEvents` class function
+    // used to make the keyword `this` work inside the `searchEvents` class function
     this.createCheckbox = this.createCheckbox.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
   }
@@ -46,7 +46,7 @@ class Search extends React.Component {
     }
   }
 
-  handleSubmit(event){
+  handleSubmit(event) {
     event.preventDefault();
     var checkboxArray = [];
     for (const checkbox of this.selectedCheckboxes) {
@@ -54,7 +54,7 @@ class Search extends React.Component {
       checkboxArray.push(checkbox);
     }
 
-    if (this.state.searchRadius != "" && this.state.searchAddress != ""){
+    if (this.state.searchRadius != "" && this.state.searchAddress != "") {
       var newSearch = {
         searchRadius: this.state.searchRadius,
         searchAddress: this.state.searchAddress,
@@ -68,11 +68,11 @@ class Search extends React.Component {
     }
   }
 
-  componentDidUpdate(){
-    if (this.state.combinedSearch != ""){
+  componentDidUpdate() {
+    if (this.state.combinedSearch != "") {
       console.log("This is being run");
       var searchData = this.state.combinedSearch;
-      helpers.searchEvents(searchData).then(function(data) {
+      helpers.searchEvents(searchData).then(function (data) {
         this.props.setSearchResults(data);
         return this.setState({
           searchResults: data,
@@ -94,13 +94,13 @@ class Search extends React.Component {
   }
 
 
-  createCheckbox(label){
+  createCheckbox(label) {
     return (
       <Checkbox
         label={label}
         handleCheckboxChange={this.toggleCheckbox}
         key={label}
-        />
+      />
     )
   }
 
@@ -114,19 +114,16 @@ class Search extends React.Component {
   render() {
 
     return (
-        <div className="search-content">
-          <img id="search-component-logo" src={logo} />
-            <form>
-              {this.createCheckboxes()}
-                <label htmlFor="address">Address</label>
-                <input type="text" value={this.state.searchAddress} className="address-input" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />
+      <div className="search-content">
+        <img id="search-component-logo" src={logo} />
+        <form>
+          {this.createCheckboxes()}
+          <input type="text" value={this.state.searchAddress} className="address-input" name="searchAddress" placeholder="Enter Location" onChange={this.handleInputChange} />
+          <input type="text" value={this.state.searchRadius} className="radius-input" name="searchRadius" placeholder="Radius In Miles" onChange={this.handleInputChange} />
 
-                <label htmlFor="radius">Search Radius (miles)</label>
-                <input type="text" value={this.state.searchRadius} className="radius-input" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
-
-              <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
-            </form>
-          </div>
+          <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
+        </form>
+      </div>
     );
   }
 };

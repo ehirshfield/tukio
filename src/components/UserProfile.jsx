@@ -6,6 +6,7 @@ import helpers from '../actions/helpers.js';
 import { connect } from 'react-redux';
 import Navbar from './Navbar.jsx';
 import TextField from './TextField.jsx';
+import Footer from './Footer.jsx';
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -24,10 +25,6 @@ class UserProfile extends React.Component {
       errors: {}
     };
 
-    // used to make the keyword `this` work inside the `searchEvents` class function
-    this.searchEvents = this.searchEvents.bind(this);
-    // this.onChange = this.onChange.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -47,29 +44,7 @@ class UserProfile extends React.Component {
   onSubmit(e) {
     e.preventDefault();
   }
-  // Function here to take input parameters and query eventful API
-  searchEvents(event) {
-    event.preventDefault();
 
-    return axios({
-      method: 'POST',
-      url: '/search',
-      data: {
-        address: this.state.searchAddress,
-        radius: this.state.searchRadius
-      }
-    }).then(function (response) {
-      console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
-      let responseArray = [];
-      for (let i = 0; i < response.data.events.event.length; i++) {
-        responseArray.push(response.data.events.event[i]);
-      }
-      console.log(responseArray);
-    }).catch(function (error) {
-      console.log(error);
-    });
-
-  }
 
   render() {
     const { errors } = this.state;
@@ -98,7 +73,7 @@ class UserProfile extends React.Component {
                 </h1>
               </div>
               <div className="panel-body">
-                Name: {this.state.name}
+                Name: {this.state.fullname}
               </div>
               <div className="panel-body">
                 Username: {this.state.username}
@@ -106,10 +81,14 @@ class UserProfile extends React.Component {
               <div className="panel-body">
                 Email: {this.state.email}
               </div>
+              <hr />
+              <div className="panel-body">
+                <a href='/progress'>Your Saved Events</a>
+                <br />
+                <a href='/userhomepage'>Search Events</a>
+              </div>
             </div>
           </div>
-
-
 
 
           <div className="user-info-panel">
@@ -168,8 +147,10 @@ class UserProfile extends React.Component {
               </form>
             </div>
           </div>
+
         </div>
-      </div>
+      </div >
+
     );
   }
 };
