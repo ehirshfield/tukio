@@ -22,7 +22,7 @@ class Map extends Component {
                 containerElement = { mapContainer }
                 googleMapElement = {
                     <GoogleMap
-                        defaultZoom={15}
+                        defaultZoom={6}
                         defaultCenter={this.props.center}
                         options={{streetViewControl: false, mapTypeControl: false}}>
                         { events }
