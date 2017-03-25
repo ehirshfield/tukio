@@ -31,11 +31,11 @@ app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/', searchController);
 app.use('/api/save', eventController);
-app.use('/api/save', userCredController);
+app.use('/api/usercred', userCredController);
 app.use('/api/cc', creditCardController);
 
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
         console.log("Server started at port " + PORT);
     });

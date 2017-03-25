@@ -14,7 +14,7 @@ class Navbar extends React.Component {
         const user = this.props.auth.user.username;
         const userLinks = (
             <ul className="nav-right">
-                <Link to="/userprofile"><li id="nav-links">{user} <i className="fa fa-angle-down"></i></li></Link>
+                <Link to="/userprofile"><li id="nav-links">{user}</li></Link>
                 <Link to="/#" onClick={this.logout.bind(this)}><li id="nav-links">Log Out</li></Link>
             </ul>
         )

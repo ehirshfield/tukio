@@ -2,31 +2,53 @@ import React from 'react';
 import { Link } from 'react-router';
 import logo from '../../public/assets/img/logo.png';
 import axios from 'axios';
+import helpers from '../actions/helpers.js';
+import { connect } from 'react-redux';
 import Navbar from './Navbar.jsx';
+import TextField from './TextField.jsx';
 
 class UserProfile extends React.Component {
-  	constructor(props) {
-		// calls the Component constructor function
-		super(props);
+  constructor(props) {
+    // calls the Component constructor function
+    super(props);
 
-		// the starting state of the 'Home' Component
-		this.state = {
-			searchResults: [],
+    // the starting state of the 'Home' Component
+    this.state = {
+      searchResults: [],
       searchRadius: "",
-      searchAddress: ""
-		};
+      searchAddress: "",
+      fullname: "",
+      username: "",
+      email: "",
+      password: "",
+      errors: {}
+    };
 
-		// used to make the keyword `this` work inside the `searchEvents` class function
-		this.searchEvents = this.searchEvents.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    // used to make the keyword `this` work inside the `searchEvents` class function
+    this.searchEvents = this.searchEvents.bind(this);
+    // this.onChange = this.onChange.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidUpdate() {
-// 
+  componentDidMount() {
+    let userID = this.props.auth.user.id;
+    helpers.getUserInfo(userID).then(response => {
+      this.setState({
+        fullname: response.fullname,
+        username: response.username,
+        email: response.email
+      })
+    })
   }
-  
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+  onSubmit(e) {
+    e.preventDefault();
+  }
   // Function here to take input parameters and query eventful API
-  searchEvents(event){
+  searchEvents(event) {
     event.preventDefault();
 
     return axios({
@@ -36,34 +58,25 @@ class UserProfile extends React.Component {
         address: this.state.searchAddress,
         radius: this.state.searchRadius
       }
-    }).then(function(response){
-       console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
-       let responseArray = [];
-       for (let i=0; i < response.data.events.event.length; i++){
-         responseArray.push(response.data.events.event[i]);
-       }
-       console.log(responseArray);
-     }).catch(function(error){
-       console.log(error);
-     });
+    }).then(function (response) {
+      console.log("AXIOS RESPONSE: " + response.data.events.event[0].title);
+      let responseArray = [];
+      for (let i = 0; i < response.data.events.event.length; i++) {
+        responseArray.push(response.data.events.event[i]);
+      }
+      console.log(responseArray);
+    }).catch(function (error) {
+      console.log(error);
+    });
 
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-	}
-  
   render() {
-    return (      
+    const { errors } = this.state;
+    return (
       <div className="user-content">
         <Navbar />
-      
+
         {/*section for displaying saved events*/}
         <div className="saved-events">
 
@@ -72,114 +85,106 @@ class UserProfile extends React.Component {
         {/*section for entering personal details*/}
         <div className="home-nav row">
           User Profile
-          </div>         
-          <div className="row">
-            <div className="col-md-3">Personal Details</div>
-            <div className="col-md-7">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="fullname">Name</label>
-                  <input type="text" className="form-control" name="name" placeholder="Enter your Full Name"/>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="username">Username</label>
-                  <input type="text" className="form-control" name="username" placeholder="Enter your Username"/>
-                </div>     
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="text" className="form-control" name="email" placeholder="Enter your email"/>
-                </div> 
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input type="text" className="form-control" name="password" placeholder="Enter your Password"/>
-                  <br/>
-                  <input type="text" className="form-control" name="password" placeholder="Re-enter your Password"/>
-                </div>                                           
-                <br/>
-                <input type="submit" onClick={this.XXX} className="save-personal-details-button" value="Save Personal Details" />
-              </form>
-            </div>
           </div>
-          <br/><br/>
-        {/*section for entering billing details*/}     
-          <div className="row">
-            <div className="col-md-3">Billing Details</div>
-            <div className="col-md-7">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="card-number">Card Number</label>
-                  <input type="text" className="form-control" name="card-number" placeholder="Enter your Card Number"/>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="card-expiry-date">Expiry Date</label>
-                  <input type="text" className="form-control" name="card-expiry-date" placeholder="Enter your Card Expiry Date (mm/yy)"/>
-                </div>     
-                <div className="form-group">
-                  <label htmlFor="security-code">Security Code</label>
-                  <input type="text" className="form-control" name="security-code" placeholder="Enter your security code"/>
-                </div> 
-                <div className="form-group">
-                  <label htmlFor="zip-code">Zip Code</label>
-                  <input type="text" className="form-control" name="zip-code" placeholder="Enter your billing Zip Code"/>
-                </div>                                           
-                <br/>
-                <input type="submit" onClick={this.XXX} className="save-billing-details-button" value="Save Billing Details" />
-              </form>
-            </div>
-          </div>          
 
-        {/*section for setting events preference*/}
-        <div className="home-nav row">
-          Events Preference
-          </div>
-          <div className="search-options row">
-            <div className="col-md-3">
-              Interests
-            </div>
-            <form>
-              <div className="form-group">
-                <div className="col-md-7">
-                  <div>
-                    <input type="checkbox" id="concerts-box" value="concerts_checkbox"/>
-                    <label htmlFor="concerts-box">Concerts</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="Festivals-box" value="festivals_checkbox"/>
-                    <label htmlFor="festivals-box">Festivals</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="comedy-box" value="comedy_checkbox"/>
-                    <label htmlFor="comedy-box">Comedy</label>
-                  </div>
-                </div>
+        <div className="user-info-container">
+          <div className="user-info-panel">
+            <div className="panel panel-primary">
+              <div className="panel-heading">
+                <h1 className="panel-title">
+                  <strong>
+                    User Information
+                  </strong>
+                </h1>
               </div>
-            </form>
-                
+              <div className="panel-body">
+                Name: {this.state.name}
+              </div>
+              <div className="panel-body">
+                Username: {this.state.username}
+              </div>
+              <div className="panel-body">
+                Email: {this.state.email}
+              </div>
+            </div>
           </div>
 
-          {/*section for entering address to search*/}
 
-          <div className="row">
-            <div className="col-md-3"></div>
-            <div className="col-md-7">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="address">Address</label>
-                  <input type="text" value={this.state.searchAddress} className="form-control" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange}/>
+
+
+          <div className="user-info-panel">
+            <div className="panel panel-primary">
+              <div className="panel-heading">
+                <h1 className="panel-title">
+                  <strong>
+                    Change Info
+                  </strong></h1>
+              </div>
+              <form onSubmit={this.onSubmit}>
+                <div id="inline-element">
+                  <TextField
+                    type="text"
+                    error={errors.fullname}
+                    label="Full Name"
+                    onChange={this.onChange}
+                    value={this.state.fullname}
+                    name="fullname"
+                  />
                 </div>
-                <br/>
-                <div className="form-group">
-                  <label htmlFor="radius">Search Radius (miles)</label>
-                  <input type="text" value={this.state.searchRadius} className="form-control" name="searchRadius" placeholder="miles" onChange={this.handleInputChange}/>
+                <div id="inline-element">
+                  <TextField
+                    type="text"
+                    error={errors.username}
+                    label="Username"
+                    onChange={this.onChange}
+                    value={this.state.username}
+                    name="username"
+                  />
                 </div>
-                <br/>
-                <input type="submit" onClick={this.searchEvents} className="search-button" value="Search Events" />
+                <div id="inline-element">
+                  <TextField
+                    type="text"
+                    error={errors.email}
+                    label="Email"
+                    onChange={this.onChange}
+                    value={this.state.email}
+                    name="email"
+                  />
+
+                </div>
+                <div id="inline-element">
+                  <TextField
+                    type="password"
+                    error={errors.password}
+                    label="Password"
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    name="password"
+                  />
+                </div>
+                <div className="button-div">
+                  <button disabled={this.state.isLoading}>Update</button>
+                </div>
               </form>
             </div>
           </div>
+        </div>
       </div>
     );
   }
 };
 
-export default UserProfile;
+
+
+UserProfile.propTypes = {
+  auth: React.PropTypes.object.isRequired
+}
+
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps)(UserProfile);

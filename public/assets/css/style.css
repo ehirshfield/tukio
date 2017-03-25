@@ -545,3 +545,14 @@ form {
 .user-content {
     padding-top: 100px;
 }
+
+.user-info-panel {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5%;
+}
+
+.user-info-container {
+    text-align: center;
+}
