@@ -23,6 +23,7 @@ class Progress extends React.Component {
     componentDidMount() {
         let userID = this.props.auth.user.id;
         helpers.getSavedEvents(userID).then(response => {
+            console.log(response)
             this.setState({ events: response })
         })
         helpers.getUserInfo(userID).then(response => {
