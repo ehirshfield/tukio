@@ -61,6 +61,8 @@ class Search extends React.Component {
         checkedBoxes: checkboxArray
       }
       this.setState({
+        // searchRadius: "",
+        // searchAddress: "",
         combinedSearch: newSearch
       });
     }
@@ -71,7 +73,7 @@ class Search extends React.Component {
       console.log("This is being run");
       var searchData = this.state.combinedSearch;
       helpers.searchEvents(searchData).then(function(data) {
-        this.props.setSearchResults(data);    
+        this.props.setSearchResults(data);
         return this.setState({
           searchResults: data,
           combinedSearch: "",
@@ -121,7 +123,7 @@ class Search extends React.Component {
 
                 <label htmlFor="radius">Search Radius (miles)</label>
                 <input type="text" value={this.state.searchRadius} className="radius-input" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
-              
+
               <input type="submit" onClick={this.handleSubmit} className="search-button" value="Search Events" />
             </form>
           </div>
@@ -138,5 +140,6 @@ function mapStateToProps(state) {
     auth: state.auth
   }
 }
+
 
 export default connect(mapStateToProps)(Search);

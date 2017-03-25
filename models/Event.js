@@ -28,12 +28,8 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'event',
     classMethods: {
       associate: function(models) {
-        Event.belongsToMany(models.User, {
-          as: "User",
-          through: "User_Events",
-          foreignKey: "Event_Id"
-        });
         Event.hasMany(models.Comment);
+        Event.hasMany(models.User_Events);
       }
     }
   });
