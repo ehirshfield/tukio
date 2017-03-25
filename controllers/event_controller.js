@@ -79,57 +79,29 @@ router.put('/event/:event_id/commit/:user_id/', (req, res) => {
     let userID = req.params.user_id;
     let eventID = req.params.event_id;
 
-    db.User_Events.update({ hasCommited: true }, { where: { User_Id: userID, Event_Id: eventID, hasCommited: false } })
-        .then((data) => {
-            if (data) {
-                db.Event.find({
-                    where: {
-                        id: eventID
-                    }
-                }).then((eventRow) => {
-                    if (eventRow) {
-                        console.log("Number of commits: " + eventRow.commits);
-                        let newCommitTotal = ((eventRow.commits) + 1);
-                        eventRow.update({
-                            commits: newCommitTotal
-                        }).then((response) => {
-                            res.send("Commits have been incremented!");
-                        });
-                    } else {
-                        res.send("Can't find it");
-                    }
-                })
-
-            }
-
-
-  db.User_Events.update({ hasCommited: true}, { where: {UserId: userID, EventId: eventID, hasCommited: false}})
-  .then((data) => {
-    if (data){
-      db.Event.find({
-        where: {
-          id: eventID
-        }
-      }).then((eventRow) => {
-        if (eventRow) {
-          console.log("Number of commits: " + eventRow.commits);
-          let newCommitTotal = ((eventRow.commits) + 1);
-          eventRow.update({
-            commits: newCommitTotal
-          }).then((response) => {
-            res.send("Commits have been incremented!");
-          });
-        }
-        else {
-          res.send("Can't find it");
-        }
-      })
-
-    }
-
+  db.User_Events.update({ hasCommited: true }, { where: { User_Id: userID, Event_Id: eventID, hasCommited: false } })
+    .then((data) => {
+      if (data) {
+          db.Event.find({
+              where: {
+                  id: eventID
+              }
+          }).then((eventRow) => {
+              if (eventRow) {
+                  console.log("Number of commits: " + eventRow.commits);
+                  let newCommitTotal = ((eventRow.commits) + 1);
+                  eventRow.update({
+                      commits: newCommitTotal
+                  }).then((response) => {
+                      res.send("Commits have been incremented!");
+                  });
+              } else {
+                  res.send("Can't find it");
+              }
+        })
+      }
   });
 });
-
 
 //Set the number of total commits -- For an admin
 router.put('/:event_id/set-commit-total/:new_goal', (req, res) => {
@@ -152,7 +124,6 @@ router.put('/:event_id/set-commit-total/:new_goal', (req, res) => {
         }
     });
 });
-
 
 
 module.exports = router;
