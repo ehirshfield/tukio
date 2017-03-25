@@ -14,21 +14,22 @@ class CommitButton extends React.Component {
     }
 
     handleClick() {
-        let eventTitle = this.props.eventData.title;
-        let eventDate = this.props.eventData.start_time;
-        let eventAddress = this.props.eventData.venue_address;
-        let eventVenue = this.props.eventData.venue_name;
+        let eventId = this.props.eventId
+        // let eventTitle = this.props.eventData.title;
+        // let eventDate = this.props.eventData.start_time;
+        // let eventAddress = this.props.eventData.venue_address;
+        // let eventVenue = this.props.eventData.venue_name;
         let userID = this.props.auth.user.id;
-        let eventData = {
-            title: eventTitle,
-            date: eventDate,
-            address: eventAddress,
-            venue: eventVenue,
-            user_id: userID
-        }
+        // let eventData = {
+        //     title: eventTitle,
+        //     date: eventDate,
+        //     address: eventAddress,
+        //     venue: eventVenue,
+        //     user_id: userID
+        // }
 
         if (this.props.auth.user.id) {
-            helpers.commitToBuy(userID, response.id).then(response => {
+            helpers.commitToBuy(userID, eventId).then(response => {
                 console.log(response.id)
                 return this.setState({
                     commits: response.commits,

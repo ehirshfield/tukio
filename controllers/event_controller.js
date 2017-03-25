@@ -14,7 +14,9 @@ router.post('/saved-events', (req, res) => {
         include: db.Event
     }).then((result) => {
         res.send(result);
+        return;
     })
+    return;
 })
 
 // Saving an event

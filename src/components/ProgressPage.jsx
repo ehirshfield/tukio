@@ -16,14 +16,11 @@ class Progress extends React.Component {
             email: "",
             events: [],
         }
-
-
     }
 
     componentDidMount() {
         let userID = this.props.auth.user.id;
         helpers.getSavedEvents(userID).then(response => {
-            console.log(response)
             this.setState({ events: response })
         })
         helpers.getUserInfo(userID).then(response => {
@@ -35,8 +32,32 @@ class Progress extends React.Component {
         })
     }
 
+    componentDidUpdate() {
+        let userID = this.props.auth.user.id;
+        helpers.getSavedEvents(userID).then(response => {
+            this.setState({ events: response })
+        })
+    }
+
+
+    displayModal() {
+        let modal = document.getElementById('commitModal');
+        modal.style.display = "block";
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+
+    closeModal() {
+        let modal = document.getElementById('commitModal');
+        let span = document.querySelector("close");
+        modal.style.display = "none";
+    }
+
+
     renderEvents() {
-        console.log(this.state.events)
         return this.state.events.map((event, index) => {
             return (
                 <div key={index}>
@@ -59,12 +80,13 @@ class Progress extends React.Component {
                             <div className="panel-body">
                                 Date: {event.Event.localDate}
                             </div>
-                            <CommitButton />
+                            <CommitButton eventId={event.EventId} onClick={this.displayModal} />
 
                             <Line percent={event.Event.commits} strokeWidth="2" strokeColor="#ED3E2F" style={{ width: '90%' }} /> {event.Event.commits}%
 
                         </div>
                     </div>
+
                 </div>
             )
         })
@@ -103,6 +125,12 @@ class Progress extends React.Component {
                         </div>
                     </div>
 
+                </div>
+                <div id="commitModal" className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={this.closeModal}>&times;</span>
+                        You have commited to buy tickets for this event!
+                        </div>
                 </div>
             </div>
         );
