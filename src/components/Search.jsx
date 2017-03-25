@@ -119,7 +119,7 @@ class Search extends React.Component {
             <form>
               {this.createCheckboxes()}
                 <label htmlFor="address">Address</label>
-                <input type="text" value={this.state.searchAddress} className="address-input" name="searchAddress" placeholder="Enter you search address" onChange={this.handleInputChange} />
+                <input type="text" value={this.state.searchAddress} className="address-input" name="searchAddress" placeholder="Enter your search address" onChange={this.handleInputChange} />
 
                 <label htmlFor="radius">Search Radius (miles)</label>
                 <input type="text" value={this.state.searchRadius} className="radius-input" name="searchRadius" placeholder="miles" onChange={this.handleInputChange} />
