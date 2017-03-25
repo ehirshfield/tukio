@@ -3,20 +3,19 @@ import helpers from '../actions/helpers.js';
 import { connect } from 'react-redux';
 import SaveEventButton from './SaveEventButton.jsx';
 import Commit from './Commit.jsx';
+import CommitButton from './CommitButton.jsx';
 
 
 // Results Component Declaration
 class Results extends React.Component {
 
   constructor(props) {
-      super(props);
+    super(props);
 
   }
 
-
-
-     // T&C to commit to purchase
-    displayModal() {
+  // T&C to commit to purchase
+  displayModal() {
     let modal = document.getElementById('commitModal');
     let btn = document.querySelector("buy");
     modal.style.display = "block";
@@ -33,8 +32,8 @@ class Results extends React.Component {
     modal.style.display = "none";
   }
 
-  renderSearchResults(){
-    return this.props.searchResults.map(function(event, index) {
+  renderSearchResults() {
+    return this.props.searchResults.map(function (event, index) {
       // Each event reperesents a list group item with a known index
       return (
         <div key={index}>
@@ -44,11 +43,6 @@ class Results extends React.Component {
                 <p>Event Name: {event.title}</p>
                 <p> Venue Name: {event.venue_name}</p>
                 <p> Venue Address: {event.venue_address}</p>
-              </span>
-              <span className="btn-group pull-right">
-                <a rel="noopener noreferrer" target="_blank">
-                  <button className="btn btn-default commit" onClick={this.displayModal}>Commit to buy</button>
-                </a>
               </span>
               <span className="btn-group pull-right">
                 <a rel="noopener noreferrer">
@@ -73,29 +67,29 @@ class Results extends React.Component {
       <div className="main-container">
         <div className="row">
 
-            <div className="panel panel-primary">
-              <div className="panel-heading">
-                <h1 className="panel-title">
-                  <strong>
-                    Results
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <h1 className="panel-title">
+                <strong>
+                  Results
                   </strong>
-                </h1>
-              </div>
-              <div className="panel-body">
-                <ul className="list-group">
-                  {this.renderSearchResults()}
-                </ul>
-              </div>
+              </h1>
+            </div>
+            <div className="panel-body">
+              <ul className="list-group">
+                {this.renderSearchResults()}
+              </ul>
             </div>
           </div>
         </div>
+      </div>
     );
   }
   render() {
 
     // If we have no event, render this HTML
 
-        if (this.props.searchResults == []) {
+    if (this.props.searchResults == []) {
       return (
         <li className="list-group-item">
           <h3>
@@ -108,25 +102,25 @@ class Results extends React.Component {
     }
     // If we have events, return this.renderContainer() which in turn, returns all the events
     return this.renderContainer();
-                  /*<div id="commitModal" className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={this.closeModal}>&times;</span>
-              <Commit />
-            </div>
-          </div>*/
+    /*<div id="commitModal" className="modal">
+<div className="modal-content">
+<span className="close" onClick={this.closeModal}>&times;</span>
+<Commit />
+</div>
+</div>*/
   }
 
 };
 
 
 Results.propTypes = {
-    auth: React.PropTypes.object.isRequired,
+  auth: React.PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {
-    return {
-        auth: state.auth
-    }
+  return {
+    auth: state.auth
+  }
 }
 
 export default connect(mapStateToProps)(Results);

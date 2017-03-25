@@ -70,6 +70,8 @@ body {
     background-color: black;
     padding: 20px;
     width: 100%;
+    position: relative;
+    bottom: 0;
 }
 
 h1,
@@ -474,6 +476,7 @@ input {
     display: inline-block !important;
     width: 20%;
     padding-left: 20px;
+    margin-left: 20px;
 }
 
 .checkbox {
@@ -544,15 +547,35 @@ form {
 
 .user-content {
     padding-top: 100px;
+    height: 100vh;
 }
 
 .user-info-panel {
     width: 30%;
     display: inline-block;
     vertical-align: top;
-    margin: 5%;
+    margin-left: 5%;
 }
 
 .user-info-container {
     text-align: center;
+}
+
+.progress-content {
+    padding-top: 100px;
+}
+
+.userhome-content {
+    padding-top: 50px;
+}
+
+.events-container {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    margin-left: 5%;
+}
+
+.panel-body {
+    text-align: left;
 }
