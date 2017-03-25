@@ -541,3 +541,7 @@ form {
     display: inline;
     margin: 0;
 }
+
+.user-content {
+    padding-top: 100px;
+}

@@ -20,6 +20,10 @@ class UserProfile extends React.Component {
 		this.searchEvents = this.searchEvents.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  componentDidUpdate() {
+// 
+  }
   
   // Function here to take input parameters and query eventful API
   searchEvents(event){
@@ -57,7 +61,7 @@ class UserProfile extends React.Component {
   
   render() {
     return (      
-      <div className="home-content">
+      <div className="user-content">
         <Navbar />
       
         {/*section for displaying saved events*/}
