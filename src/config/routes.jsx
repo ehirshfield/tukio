@@ -7,6 +7,7 @@ import Login from "../components/Login.jsx";
 import UserHomePage from "../components/UserHomePage.jsx";
 import UserProfile from "../components/UserProfile.jsx";
 import Profile from "../components/Profile.jsx";
+import Progress from "../components/ProgressPage.jsx";
 import authorize from "../validations/requireAuth.js";
 
 export default () => {
@@ -15,9 +16,9 @@ export default () => {
       <Route path="/home" component={Home} />
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
-      <Route path="/UserHomePage" component={UserHomePage} />
-      <Route path="/UserProfile" component={authorize(UserProfile)} />
-      <Route path="/profile" component={Profile} />
+      <Route path="/userhomepage" component={authorize(UserHomePage)} />
+      <Route path="/userprofile" component={authorize(UserProfile)} />
+      <Route path="/progress" component={authorize(Progress)} />
       <IndexRoute component={Home} />
     </Route>
   )
