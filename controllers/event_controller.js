@@ -80,29 +80,30 @@ router.put('/commit', (req, res) => {
     let userID = req.body.userID;
     let eventID = req.body.eventID;
 
-    db.User_Events.update({ hasCommited: true }, { where: { UserId: userID, EventId: eventID, hasCommited: false } })
-        .then((data) => {
-            if (data) {
-                db.Event.find({
-                    where: {
-                        id: eventID
-                    }
-                }).then((eventRow) => {
-                    if (eventRow) {
-                        console.log("Number of commits: " + eventRow.commits);
-                        let newCommitTotal = ((eventRow.commits) + 1);
-                        eventRow.update({
-                            commits: newCommitTotal
-                        }).then((response) => {
-                            res.send("Commits have been incremented!");
-                        });
-                    } else {
-                        res.send("Can't find it");
-                    }
-                })
 
-            }
-        });
+  db.User_Events.update({ hasCommited: true }, { where: { User_Id: userID, Event_Id: eventID, hasCommited: false } })
+    .then((data) => {
+      if (data) {
+          db.Event.find({
+              where: {
+                  id: eventID
+              }
+          }).then((eventRow) => {
+              if (eventRow) {
+                  console.log("Number of commits: " + eventRow.commits);
+                  let newCommitTotal = ((eventRow.commits) + 1);
+                  eventRow.update({
+                      commits: newCommitTotal
+                  }).then((response) => {
+                      res.send("Commits have been incremented!");
+                  });
+              } else {
+                  res.send("Can't find it");
+              }
+        })
+      }
+  });
+
 });
 
 //Set the number of total commits -- For an admin
@@ -127,6 +128,5 @@ router.put('/:event_id/set-commit-total/:new_goal', (req, res) => {
     });
 });
 
-
-
 module.exports = router;
+
