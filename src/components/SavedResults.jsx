@@ -5,11 +5,17 @@ import SaveEventButton from './SaveEventButton.jsx';
 import Commit from './Commit.jsx';
 
 
-// Results Component Declaration
-class Results extends React.Component {
+// SavedResults Component Declaration
+class SavedResults extends React.Component {
 
   constructor(props) {
       super(props);
+      this.state = {
+          userSavedEvents: []
+      }
+
+
+this.savedEvents = this.savedEvents.bind(this);
 
   }
 
@@ -27,8 +33,20 @@ class Results extends React.Component {
         }
   }
 
-  renderSearchResults(){
-    return this.props.searchResults.map(function(event, index) {
+savedEvents() {
+      let userID = this.props.auth.user.id;
+    helpers.getSavedEvents(userID).then((response) => {
+        this.setstate({userSavedEvents: response})
+        console.log("response from database:" +response);
+    });
+    
+}
+
+componentDidMount(){
+    this.renderSavedResults();
+}
+  renderSavedResults(){
+        return this.state.userSavedEvents.map(function(event, index) {
       // Each event reperesents a list group item with a known index
       return (
         <div key={index}>
@@ -71,13 +89,13 @@ class Results extends React.Component {
               <div className="panel-heading">
                 <h1 className="panel-title">
                   <strong>
-                    Results
+                    Your Saved Results
                   </strong>
                 </h1>
               </div>
               <div className="panel-body">
                 <ul className="list-group">
-                  {this.renderSearchResults()}
+                  {this.renderSavedResults()}
                 </ul>
               </div>
             </div>
@@ -89,12 +107,12 @@ class Results extends React.Component {
 
     // If we have no event, render this HTML
 
-        if (this.props.searchResults == []) {
+        if (this.props.userSavedEvents == []) {
       return (
         <li className="list-group-item">
           <h3>
             <span>
-              <em>Search some events...</em>
+              <em>Save some events...</em>
             </span>
           </h3>
         </li>
@@ -107,7 +125,7 @@ class Results extends React.Component {
 };
 
 
-Results.propTypes = {
+SavedResults.propTypes = {
     auth: React.PropTypes.object.isRequired,
 }
 
@@ -117,4 +135,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Results);
+export default connect(mapStateToProps)(SavedResults);
