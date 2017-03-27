@@ -1,6 +1,6 @@
 # Tukio!
 
-![N|Solid](https://github.com/ehirshfield/tukio/blob/master/assets/img/sublogo.png)
+![N|Solid](https://github.com/ehirshfield/tukio/blob/master/assets/img/logo.png)
 
 Tukio is an app that allows authenticated users to search event tickets through Eventful API, save events of their choice and commit to buy discounted tickets for those events. A progress bar dynamically updates as users commit to buy tickets for the events.
 
