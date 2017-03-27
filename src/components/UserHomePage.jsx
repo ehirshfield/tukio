@@ -44,12 +44,8 @@ class UserHomePage extends React.Component {
 
 
     return (
-      <div className="home-content">
+      <div className="userhome-content">
         <Navbar />
-        <Header />
-        <About />
-        <ImageHeader />
-        <SavedResults />
         <Search setSearchResults={this.setSearchResults} />    
   
             <div className="event-results">
