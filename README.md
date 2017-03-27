@@ -1,8 +1,8 @@
 # Tukio!
 
-![N|Solid](https://tukiotk.herokuapp.com/assets/img/logo.png)
+![N|Solid](https://github.com/omarhadary/tukio/blob/master/assets/img/logo.png)
 
-Tukio is an app that allows users to search, save and purchase discounted events tickets.
+Tukio is an app that allows authenticated users to search event tickets through Eventful API, save events of their choice and commit to buy dicounted tickets for those events.
 
   - Follows an MVC design pattern
   - Uses React to render HTML
@@ -15,7 +15,7 @@ Tukio is an app that allows users to search, save and purchase discounted events
 
 ### Heroku Deployment
 
-https://tukio.herokuapp.com/
+https://tukio-webapp.herokuapp.com/
 
 ### Tech
 
@@ -23,9 +23,9 @@ Tukio uses open source tools; mainly:
 
 * [node.js]
 * [npm express]
-* [react]
+* [React]
 * [webpack]
-* [passportjs]
+* [JSON Web Tokens]
 * [npm bcryptjs]
 * [npm mysql]
 * [npm sequelize]
@@ -44,11 +44,10 @@ $ npm run server
 
 [node.js]: <http://nodejs.org>
 [npm express]: <https://www.npmjs.com/package/express>
-[react]: <https://facebook.github.io/react/>
+[React]: <https://facebook.github.io/react/>
 [webpack]: <https://webpack.github.io/>
-[passportjs]: <http://passportjs.org/>
+[JSON Web Tokens]: <https://jwt.io/>
 [npm bcryptjs]: <https://www.npmjs.com/package/bcryptjs>
 [npm mysql]: <https://www.npmjs.com/package/mysql>
 [npm sequelize]: <http://docs.sequelizejs.com/en/v3/>
 [Bootstrap]: <http://getbootstrap.com/>
-[JQuery]: <http://api.jquery.com/getb>
