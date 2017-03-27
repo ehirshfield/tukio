@@ -7,6 +7,7 @@ import Checkbox from './Checkbox.jsx';
 import Map from './Map.jsx';
 import About from './About.jsx';
 import Header from './Header.jsx';
+import SavedResults from './SavedResults.jsx';
 import ImageHeader from './ImageHeader.jsx';
 import Results from './Results.jsx';
 import Search from './Search.jsx';

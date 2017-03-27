@@ -102,12 +102,6 @@ class Results extends React.Component {
     }
     // If we have events, return this.renderContainer() which in turn, returns all the events
     return this.renderContainer();
-    /*<div id="commitModal" className="modal">
-<div className="modal-content">
-<span className="close" onClick={this.closeModal}>&times;</span>
-<Commit />
-</div>
-</div>*/
   }
 
 };

@@ -30,10 +30,7 @@ onSubmit(e) {
 }
     render() {
         const { commitToBuyRequest } = this.props;
-        return (
-        // const { isAuthenticated } = this.props.auth;
-        // const user = this.props.auth.user.username;
-        // const userLinks = (        
+        return (      
             <div className="row">
                 <div className="input-container">
                     <span className="close" onClick={this.closeModal}>&times;</span>
@@ -50,21 +47,8 @@ onSubmit(e) {
                 </div>
             </div>
             );
-        // )
-        /*const guestLinks = (
-            <SignupForm userSignupRequest={userSignupRequest}/>
-        )
-        return (
-            <div>
-                {isAuthenticated ? userLinks : guestLinks}
-            </div>
-        );*/
     }
 };
-
-// Signup.propTypes = {
-//     userSignupRequest: React.PropTypes.func.isRequired,
-// }
 
 Commit.propTypes = {
   auth: React.PropTypes.object.isRequired

@@ -66,7 +66,6 @@ router.post('/event', (req, res) => {
             });
 
         }
-
     }).catch((error) => {
         console.log(error);
     });
@@ -81,7 +80,7 @@ router.put('/commit', (req, res) => {
     let eventID = req.body.eventID;
 
 
-  db.User_Events.update({ hasCommited: true }, { where: { User_Id: userID, Event_Id: eventID, hasCommited: false } })
+  db.User_Events.update({ hasCommited: true }, { where: { UserId: userID, EventId: eventID, hasCommited: false } })
     .then((data) => {
       if (data) {
           db.Event.find({
@@ -103,7 +102,6 @@ router.put('/commit', (req, res) => {
         })
       }
   });
-
 });
 
 //Set the number of total commits -- For an admin
