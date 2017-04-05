@@ -578,4 +578,6 @@ form {
 
 .panel-body {
     text-align: left;
+    max-height: 700px;
+    overflow: scroll;
 }
