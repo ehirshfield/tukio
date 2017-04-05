@@ -21,6 +21,7 @@
     "lodash": "^4.17.4",
     "mysql": "^2.13.0",
     "nodemon": "^1.11.0",
+    "rc-progress": "^2.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-google-maps": "^4.11.0",

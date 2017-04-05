@@ -5,36 +5,14 @@ import ReactTooltip from 'react-tooltip';
 
 class SaveEventButton extends React.Component {
   constructor(props) {
-      super(props);
-      this.state = {
-        disabled: false
-      }
-
-      this.handleClick = this.handleClick.bind(this);
-      this.checkIfAlreadySaved = this.checkIfAlreadySaved.bind(this);
-
+    super(props);
+    this.state = {
+      disabled: false
+    }
+    this.handleClick = this.handleClick.bind(this);
   }
-
-  checkIfAlreadySaved() {
-    let userID = this.props.auth.user.id;
-    helpers.getSavedEvents(userID).then((response) => {
-      console.log(response.length);
-      for (var i=0; i < response.length; i++){
-        if(response[i].Event.title === this.props.eventData.title){
-
-          console.log("This is already saved: " + response[i].Event.title);
-          return this.setState({disabled: true});
-        }
-        else{
-          console.log("checked: " + response[i].Event.title + "vs. " + this.props.eventData.title);
-        }
-      }
-    })
-  }
-
 
   handleClick() {
-
     let eventTitle = this.props.eventData.title;
     let eventDate = this.props.eventData.start_time;
     let eventAddress = this.props.eventData.venue_address;
@@ -48,28 +26,28 @@ class SaveEventButton extends React.Component {
       user_id: userID
     }
 
-    helpers.saveEvent(eventData).then((response) => {
-      console.log("WE DID IT");
-
-    });
-    //Update DOM?
-    this.setState({disabled: true});
+    if (this.props.auth.user.id) {
+      helpers.saveEvent(eventData).then((response) => {
+        // this.setState({ disabled: true })
+        return true;
+      });
+    }
+    else {
+      console.log("Please sign in to save events");
+    }
+    this.context.router.push('/progress')
 
   }
 
-
-componentWillMount() {
-  // this.setState({disabled: false});
-  this.checkIfAlreadySaved();
-}
-// componentDidUpdate() {
-//   this.checkIfAlreadySaved();
-// }
+  componentWillUnmount() {
+    location.reload();
+  }
 
 
-  render(){
-    if(this.state.disabled){
-      return(
+  render() {
+
+    if (this.state.disabled) {
+      return (
         <button className="btn btn-default" disabled={this.state.disabled} onClick={this.handleClick} >Saved!</button>
       )
     }
@@ -78,17 +56,23 @@ componentWillMount() {
         <button className="btn btn-default" data-tip="Please Sign In!" disabled={this.state.disabled} onClick={this.handleClick} >Save Event</button>
       )  
     }
+
   }
+
+
 }
 
 SaveEventButton.propTypes = {
-    auth: React.PropTypes.object.isRequired
+  auth: React.PropTypes.object.isRequired
 }
 
+SaveEventButton.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 function mapStateToProps(state) {
-    return {
-        auth: state.auth
-    }
+  return {
+    auth: state.auth
+  }
 }
 
 export default connect(mapStateToProps)(SaveEventButton);

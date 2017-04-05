@@ -87,7 +87,7 @@ class Home extends React.Component {
           {/*modal to commit to buy*/}
           <div id="commitModal" className="modal">
             <div className="modal-content">
-              <span className="close" onClick={this.closeModal}>&times;</span>
+              {/*<span className="close" onClick={this.closeModal}>&times;</span>*/}
               <Commit />
             </div>
           </div>
