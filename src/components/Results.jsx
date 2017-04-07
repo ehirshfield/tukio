@@ -46,7 +46,9 @@ class Results extends React.Component {
               </span>
               <span className="btn-group pull-right">
                 <a rel="noopener noreferrer">
+                  <ReactTooltip place="top" type="warning" effect="float" />
                   <SaveEventButton eventData={event} />
+                  
                 </a>
               </span>
             </h3>

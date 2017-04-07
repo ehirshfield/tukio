@@ -43,6 +43,7 @@ class SaveEventButton extends React.Component {
     location.reload();
   }
 
+
   render() {
 
     if (this.state.disabled) {
@@ -51,9 +52,9 @@ class SaveEventButton extends React.Component {
       )
     }
     else {
-      return (
+      return(
         <button className="btn btn-default" data-tip="Please Sign In!" disabled={this.state.disabled} onClick={this.handleClick} >Save Event</button>
-      )
+      )  
     }
 
   }
